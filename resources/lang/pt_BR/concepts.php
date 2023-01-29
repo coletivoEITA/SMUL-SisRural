@@ -23,4 +23,19 @@ return [
         'apply' => 'Aplicar Ficha de Visita',
         'edit' => 'Editar Ficha de Visita',
     ],
+    'unidade_produtiva' => [
+        'label' => 'Unidade Produtiva',
+        'plural' => 'Unidades Produtivas',
+        'edit' => 'Editar Unidade Produtiva',
+        'dashboard' => 'Dashboard da Unidade Produtiva',
+        'data' => 'Dados da Unidade Produtiva',
+    ],
+    'produtora' => [
+        'label' => 'Produtor/a',
+        'plural' => 'Produtores/as',
+        'add' => 'Adicionar Produtor/a',
+        'edit' => 'Editar Produtor/a',
+        'dashboard' => 'Dashboard do/a Produtor/a',
+        'data' => 'Dados do/a Produtor/a',
+    ]
 ];
