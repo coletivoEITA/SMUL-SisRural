@@ -39,12 +39,17 @@ class CadernoController extends Controller
     /**
      * Listagem principal do Caderno de Campo de acordo com o CadernoPermissionScope
      *
-     * @param  mixed $produtor
+     * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
      * @return void
      */
-    public function index(ProdutorModel $produtor)
+    public function index(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $datatableUrl = route('admin.core.cadernos.datatable', ['produtor' => @$produtor]);
+        if( !$unidadeProdutiva->id ){
+            $datatableUrl = route('admin.core.cadernos.datatable', ['produtor' => $produtor]);
+        } else {
+            $datatableUrl = route('admin.core.cadernos.datatable_unidade_produtiva', ['unidadeProdutiva' => $unidadeProdutiva]);
+        }        
 
         $showLinkExcluidos = true;
 
@@ -61,11 +66,15 @@ class CadernoController extends Controller
      * @param  ProdutorModel $produtor
      * @return mixed
      */
-    public function datatable(ProdutorModel $produtor)
+    public function datatable(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
+        // var_dump($unidadeProdutiva->id);
+        // exit;
+
         $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name'])->select("cadernos.*");
 
         $data = $produtor->id ? $model->where('produtor_id', $produtor->id) : $model;
+        $data = $unidadeProdutiva->id ? $model->where('unidade_produtiva_id', $unidadeProdutiva->id) : $model;
 
         return DataTables::of($data)
             ->editColumn('usuario.first_name', function ($row) {

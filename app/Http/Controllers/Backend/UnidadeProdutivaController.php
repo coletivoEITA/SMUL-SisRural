@@ -60,6 +60,17 @@ class UnidadeProdutivaController extends Controller
     }
 
     /**
+     * Dashboard da unidade produtiva
+     *
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
+     * @return void
+     */
+    public function dashboard(UnidadeProdutivaModel $unidadeProdutiva)
+    {
+        return view('backend.core.unidade_produtiva.dashboard', compact('unidadeProdutiva'));
+    }
+
+    /**
      * Listagem das unidades produtivas
      *
      * Caso seja passado o produtor, é filtrado apenas as unidades produtivas daquele produtor
@@ -89,11 +100,12 @@ class UnidadeProdutivaController extends Controller
             ->addColumn('produtores', function ($row) {
                 return join(", ", $row->produtores->pluck('nome')->toArray());
             })->addColumn('actions', function ($row) {
+                $dashUrl = route('admin.core.unidade_produtiva.dashboard', $row->id);
                 $editUrl = route('admin.core.unidade_produtiva.edit', $row->id);
                 $deleteUrl = route('admin.core.unidade_produtiva.destroy', $row->id);
                 $viewUrl = route('admin.core.unidade_produtiva.view', $row->id);
 
-                return view('backend.components.form-actions.index', compact('editUrl', 'deleteUrl', 'viewUrl', 'row'));
+                return view('backend.components.form-actions.index', compact('dashUrl', 'editUrl', 'deleteUrl', 'viewUrl', 'row'));
             })
             ->filterColumn('produtores', function ($query, $keyword) {
                 if ($keyword) {

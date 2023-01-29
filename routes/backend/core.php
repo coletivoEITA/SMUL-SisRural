@@ -106,6 +106,8 @@ Route::middleware(['permission_report_restrict'])->group(function () {
         Route::group(['prefix' => 'unidade_produtiva', 'as' => 'unidade_produtiva.'], function () {
             Route::get('/{unidadeProdutiva}/view', [UnidadeProdutivaController::class, 'view'])->middleware('permission:view menu productive units')->name('view');
 
+            Route::get('/{unidadeProdutiva}/dashboard', [UnidadeProdutivaController::class, 'dashboard'])->middleware('permission:view menu productive units')->name('dashboard');
+
             Route::get('produtor', [UnidadeProdutivaController::class, 'produtor'])->middleware('permission:view menu productive units')->name('produtor');
             Route::get('/datatableProdutor', [UnidadeProdutivaController::class, 'datatableProdutor'])->middleware('permission:view menu productive units')->name('datatableProdutor');
 
@@ -267,6 +269,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
 
             Route::get('/{caderno}/view', [CadernoController::class, 'view'])->middleware('can:view,caderno')->name('view');
             Route::get('/datatable/{produtor?}', [CadernoController::class, 'datatable'])->middleware('permission:view menu caderno')->name('datatable');
+            Route::get('/datatable/unidade_produtiva/{unidadeProdutiva?}', [CadernoController::class, 'datatable'])->middleware('permission:view menu caderno')->name('datatable_unidade_produtiva');
             Route::get('/create/{produtor}/{unidadeProdutiva}', [CadernoController::class, 'create'])->middleware('can:create,App\Models\Core\CadernoModel')->name('create');
             Route::get('/{caderno}/edit', [CadernoController::class, 'edit'])->middleware('can:update,caderno')->name('edit');
             Route::delete('/{caderno}', [CadernoController::class, 'destroy'])->middleware('can:delete,caderno')->name('destroy');
@@ -279,6 +282,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::delete('/forceDelete/{caderno}', [CadernoController::class, 'forceDelete'])->middleware('can:forceDelete,caderno')->name('forceDelete');
 
             Route::get('/{produtor?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index');
+            Route::get('/unidade_produtiva/{unidadeProdutiva?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index_unidade_produtiva');
 
             /**
              * Arquivos vinculados a cadernos aplicados
