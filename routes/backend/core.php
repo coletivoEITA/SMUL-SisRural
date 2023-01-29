@@ -458,6 +458,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/{checklistUnidadeProdutiva}/sendEmail', [ChecklistUnidadeProdutivaController::class, 'sendEmail'])->middleware('can:sendEmail,checklistUnidadeProdutiva')->name('sendEmail');
 
             Route::get('/datatable/{produtor?}', [ChecklistUnidadeProdutivaController::class, 'datatable'])->middleware('permission:view menu checklist_unidade_produtiva')->name('datatable');
+            Route::get('/datatable/unidade_produtiva/{unidadeProdutiva?}', [ChecklistUnidadeProdutivaController::class, 'datatable'])->middleware('permission:view menu checklist_unidade_produtiva')->name('datatable_unidade_produtiva');
 
             Route::get('/create/{checklist}/{produtor}/{unidadeProdutiva}', [ChecklistUnidadeProdutivaController::class, 'create'])->middleware('can:create,App\Models\Core\ChecklistUnidadeProdutivaModel')->name('create');
 
@@ -487,6 +488,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::post('/{checklistUnidadeProdutiva}/restore', [ChecklistUnidadeProdutivaController::class, 'restore'])->middleware('can:restore,checklistUnidadeProdutiva')->name('restore');
 
             Route::get('/{produtor?}', [ChecklistUnidadeProdutivaController::class, 'index'])->middleware('permission:view menu checklist_unidade_produtiva')->name('index');
+            Route::get('/unidade_produtiva/{unidadeProdutiva?}', [ChecklistUnidadeProdutivaController::class, 'index'])->middleware('permission:view menu checklist_unidade_produtiva')->name('index_unidade_produtiva');
 
             /**
              * Arquivos vinculados ao formulário aplicados

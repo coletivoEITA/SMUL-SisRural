@@ -37,5 +37,16 @@ return [
         'edit' => 'Editar Produtor/a',
         'dashboard' => 'Dashboard do/a Produtor/a',
         'data' => 'Dados do/a Produtor/a',
-    ]
+    ],
+    'formulario' => [
+        'label' => 'Formulário',
+        'plural' => 'Formulários',
+        'add' => 'Adicionar Formulário',
+        'edit' => 'Editar Formulário',
+        'list' => 'Listar Formulários',
+        'list_of' => 'Lista de Formulários',
+        'applied' => 'Formulários Aplicados',
+        'deleted' => 'Formulários Excluídos',
+        'apply' => 'Aplicar Formulários',        
+    ],
 ];

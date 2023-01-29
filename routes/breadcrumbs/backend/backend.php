@@ -438,6 +438,9 @@ Breadcrumbs::for('admin.core.checklist.view', function ($trail, $id) {
 Breadcrumbs::for('admin.core.checklist_unidade_produtiva.index', function ($trail) {
     $trail->push('Formulários', route('admin.core.checklist_unidade_produtiva.index'));
 });
+Breadcrumbs::for('admin.core.checklist_unidade_produtiva.index_unidade_produtiva', function ($trail, $unidadeProdutiva) {
+    $trail->push(__('concepts.formularios.plural') . ' - ' . $unidadeProdutiva->nome, route('admin.core.checklist_unidade_produtiva.index_unidade_produtiva'));
+});
 Breadcrumbs::for('admin.core.checklist_unidade_produtiva.excluidos', function ($trail) {
     $trail->push('Formulários', route('admin.core.checklist_unidade_produtiva.index'));
 });

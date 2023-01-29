@@ -111,7 +111,7 @@
                     $totalFormulariosAplicados = count($unidadeProdutiva->checklists);
                 @endphp
                 <div class="col-sm-6 col-md-4 col-lg-4">
-                    @cardaddview(['title'=>'Formulários Aplicados', 'total'=>$totalFormulariosAplicados, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>'Aplicar Formulário', 'linkAdd'=>route('admin.core.checklist_unidade_produtiva.template', ['unidadeProdutiva'=>$unidadeProdutiva]), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.checklist_unidade_produtiva.index', ['unidadeProdutiva'=>$unidadeProdutiva]), 'permissionView'=>'view menu checklist_unidade_produtiva', 'permissionAdd'=>'create checklist_unidade_produtiva'])
+                    @cardaddview(['title'=>__('concepts.formulario.applied'), 'total'=>$totalFormulariosAplicados, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>__('concepts.formulario.apply'), 'linkAdd'=>route('admin.core.checklist_unidade_produtiva.template', ['unidadeProdutiva'=>$unidadeProdutiva]), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.checklist_unidade_produtiva.index_unidade_produtiva', ['unidadeProdutiva'=>$unidadeProdutiva]), 'permissionView'=>'view menu checklist_unidade_produtiva', 'permissionAdd'=>'create checklist_unidade_produtiva'])
                     @endcardaddview
                 </div>
             @endcan
