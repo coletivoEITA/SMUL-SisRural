@@ -63,7 +63,7 @@ trait ReportUnidadeProdutivaInfraTrait
                     'Tipo',
                     'Descrição',
                     'Quantidade',
-                    'Área ('.env('UNIDADE_MEDIDA_AREA_SIGLA').')',
+                    'Área ('.config('app.unidade_medida_area_sigla').')',
                     'Observação',
                     'Localização',
                 ],
