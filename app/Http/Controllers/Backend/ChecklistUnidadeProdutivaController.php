@@ -439,14 +439,17 @@ class ChecklistUnidadeProdutivaController extends Controller
      * @param  FormBuilder $formBuilder
      * @return void
      */
-    public function edit(ChecklistUnidadeProdutivaModel $checklistUnidadeProdutiva, FormBuilder $formBuilder)
+    public function edit(ChecklistUnidadeProdutivaModel $checklistUnidadeProdutiva, FormBuilder $formBuilder, int $dadosComplementares = 0)
     {
-        //Se o formulário já estiver "finalizado", não permite editar
-        if ($checklistUnidadeProdutiva->status === ChecklistStatusEnum::Finalizado) {
-            return redirect()->route('admin.core.checklist_unidade_produtiva.index')->withFlashDanger('Não é possível editar um Formulário finalizado!');
-        } else if ($checklistUnidadeProdutiva->status === ChecklistStatusEnum::AguardandoAprovacao) {
-            //Se o formulário estiver "aguardando aprovação", não permite editar
-            return redirect()->route('admin.core.checklist_unidade_produtiva.index')->withFlashDanger('Não é possível editar um Formulário que esta em revisão!');
+
+        if(!$dadosComplementares){
+            //Se o formulário já estiver "finalizado", não permite editar
+            if ($checklistUnidadeProdutiva->status === ChecklistStatusEnum::Finalizado) {
+                return redirect()->route('admin.core.checklist_unidade_produtiva.index')->withFlashDanger('Não é possível editar um Formulário finalizado!');
+            } else if ($checklistUnidadeProdutiva->status === ChecklistStatusEnum::AguardandoAprovacao) {
+                //Se o formulário estiver "aguardando aprovação", não permite editar
+                return redirect()->route('admin.core.checklist_unidade_produtiva.index')->withFlashDanger('Não é possível editar um Formulário que esta em revisão!');
+            }
         }
 
         $checklist = $checklistUnidadeProdutiva->checklist;
@@ -470,7 +473,7 @@ class ChecklistUnidadeProdutivaController extends Controller
             'class' => 'needs-validation',
             'novalidate' => true,
             'model' => $checklistUnidadeProdutiva->toArray() + $unidProdutivaRespostas,
-            'data' => ['checklist' => $checklist, 'produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva, 'usuario' => $usuario, 'itensUltimoPda' => $itensUltimoPda]
+            'data' => ['checklist' => $checklist, 'produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva, 'usuario' => $usuario, 'itensUltimoPda' => $itensUltimoPda, 'dadosComplementares' => $dadosComplementares]
         ]);
 
         $title = 'Editar formulário';
@@ -478,9 +481,14 @@ class ChecklistUnidadeProdutivaController extends Controller
         //Iframe dos arquivos vinculados ao caderno (ver ChecklistUnidadeProdutivaArquivosTrait.php)
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.checklist_unidade_produtiva.arquivos.index', compact('checklistUnidadeProdutiva'));
-
+   
         $back = AppHelper::prevUrl(route('admin.core.checklist_unidade_produtiva.index'));
-        return view('backend.core.checklist_unidade_produtiva.create_update', compact('form', 'checklistUnidadeProdutiva', 'arquivosId', 'arquivosSrc', 'checklist', 'title', 'analises', 'back'));
+
+        if(!$dadosComplementares){            
+            return view('backend.core.checklist_unidade_produtiva.create_update', compact('form', 'checklistUnidadeProdutiva', 'arquivosId', 'arquivosSrc', 'checklist', 'title', 'analises', 'back'));
+        } else {            
+            return view('backend.core.checklist_unidade_produtiva.create_update_iframe', compact('form', 'checklistUnidadeProdutiva', 'arquivosId', 'arquivosSrc', 'checklist', 'title', 'analises', 'back'));
+        }
     }
 
     /**

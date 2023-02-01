@@ -18,57 +18,60 @@ class ChecklistUnidadeProdutivaForm extends Form
         $checklist = @$this->data['checklist'];
         $produtor = @$this->data['produtor'];
         $unidadeProdutiva = @$this->data['unidadeProdutiva'];
+        $dadosComplementares = @$this->data['dadosComplementares'];
 
         /**
          * Dados gerais, apenas para visualização
          */
-        if (@$produtor && @$unidadeProdutiva) {
-            $this->add('card-start', 'card-start', [
-                'title' => 'Informações do formulário',
-                'titleTag' => 'h1'
-            ])->add('checklist', 'static', [
-                'label' => 'Nome do formulário',
-                'tag' => 'b',
-                'value' => $checklist['nome']
-            ])->add('produtor', 'static', [
-                'label' => 'Produtor/a',
-                'tag' => 'b',
-                'value' => $produtor['nome']
-            ]);
+        if(!$dadosComplementares){
 
-            if (@$unidadeProdutiva['socios']) {
-                $this->add('socios', 'static', [
-                    'label' => 'Coproprietários/as',
+            if (@$produtor && @$unidadeProdutiva) {
+                $this->add('card-start', 'card-start', [
+                    'title' => 'Informações do formulário',
+                    'titleTag' => 'h1'
+                ])->add('checklist', 'static', [
+                    'label' => 'Nome do formulário',
                     'tag' => 'b',
-                    'value' => $unidadeProdutiva['socios']
+                    'value' => $checklist['nome']
+                ])->add('produtor', 'static', [
+                    'label' => 'Produtor/a',
+                    'tag' => 'b',
+                    'value' => $produtor['nome']
                 ]);
+
+                if (@$unidadeProdutiva['socios']) {
+                    $this->add('socios', 'static', [
+                        'label' => 'Coproprietários/as',
+                        'tag' => 'b',
+                        'value' => $unidadeProdutiva['socios']
+                    ]);
+                }
+
+                $this->add('unidadeProdutiva', 'static', [
+                    'label' => 'Unidade Produtiva',
+                    'tag' => 'b',
+                    'value' => $unidadeProdutiva['nome']
+                ])->add('tecnico', 'static', [
+                    'label' => 'Técnico/a',
+                    'tag' => 'b',
+                    'value' => @$this->data['usuario'] ? $this->data['usuario']->first_name . ' ' . $this->data['usuario']->last_name : auth()->user()->first_name . ' ' . auth()->user()->last_name
+                ])->add('instrucoes', 'static', [
+                    'label' => 'Instruções Gerais',
+                    'tag' => 'span',
+                    'value' => @$checklist['instrucoes'] ?  $checklist['instrucoes'] : 'Não há'
+                ])->add('card-end', 'card-end', []);
+            } else {
+                // utilizado no ChecklistController p/ visulizar o Template
+                $this->add('card-start', 'card-start', [
+                    'title' => 'Exemplo do Formulário Aplicado',
+                    'titleTag' => 'h2'
+                ])->add('checklist', 'static', [
+                    'label' => 'Formulário',
+                    'tag' => 'b',
+                    'value' => @$checklist['nome']
+                ])->add('card-end', 'card-end', []);
             }
-
-            $this->add('unidadeProdutiva', 'static', [
-                'label' => 'Unidade Produtiva',
-                'tag' => 'b',
-                'value' => $unidadeProdutiva['nome']
-            ])->add('tecnico', 'static', [
-                'label' => 'Técnico/a',
-                'tag' => 'b',
-                'value' => @$this->data['usuario'] ? $this->data['usuario']->first_name . ' ' . $this->data['usuario']->last_name : auth()->user()->first_name . ' ' . auth()->user()->last_name
-            ])->add('instrucoes', 'static', [
-                'label' => 'Instruções Gerais',
-                'tag' => 'span',
-                'value' => @$checklist['instrucoes'] ?  $checklist['instrucoes'] : 'Não há'
-            ])->add('card-end', 'card-end', []);
-        } else {
-            // utilizado no ChecklistController p/ visulizar o Template
-            $this->add('card-start', 'card-start', [
-                'title' => 'Exemplo do Formulário Aplicado',
-                'titleTag' => 'h2'
-            ])->add('checklist', 'static', [
-                'label' => 'Formulário',
-                'tag' => 'b',
-                'value' => @$checklist['nome']
-            ])->add('card-end', 'card-end', []);
         }
-
         /**
          * Caso seja uma edição ou o "segundo step" de uma aplicação de formulário, libera o bloco de "Categorias"
          *
@@ -279,34 +282,40 @@ class ChecklistUnidadeProdutivaForm extends Form
         /**
          * Bloco de Status
          */
-        $this->add('card-start-status', 'card-start', [
-            'title' => 'Detalhes',
-            'titleTag' => 'h2'
-        ])->add(
-            'status',
-            'select',
-            [
-                'label' => 'Status',
-                'choices' => $checklistStatusEnum,
-                'empty_value' => 'Selecione',
-                'rules' => 'required',
-                'error' => __('validation.required', ['attribute' => 'Status'])
-            ]
-        );
+
+        if(!$dadosComplementares){
+            $this->add('card-start-status', 'card-start', [
+                'title' => 'Detalhes',
+                'titleTag' => 'h2'
+            ])->add(
+                'status',
+                'select',
+                [
+                    'label' => 'Status',
+                    'choices' => $checklistStatusEnum,
+                    'empty_value' => 'Selecione',
+                    'rules' => 'required',
+                    'error' => __('validation.required', ['attribute' => 'Status'])
+                ]
+            );
+        }
 
         /**
          * Bloco de visualização p/ mostrar quando foi criado/atualizado
          */
-        if (@$this->model['created_at']) {
-            $this->add('created_at', 'static', [
-                'label' => 'Criado em',
-                'tag' => 'b',
-                'value' => \App\Helpers\General\AppHelper::formatDate($this->model['created_at'])
-            ])->add('updated_at', 'static', [
-                'label' => 'Atualizado em',
-                'tag' => 'b',
-                'value' =>  \App\Helpers\General\AppHelper::formatDate($this->model['updated_at'])
-            ]);
+
+        if(!$dadosComplementares){
+            if (@$this->model['created_at']) {
+                $this->add('created_at', 'static', [
+                    'label' => 'Criado em',
+                    'tag' => 'b',
+                    'value' => \App\Helpers\General\AppHelper::formatDate($this->model['created_at'])
+                ])->add('updated_at', 'static', [
+                    'label' => 'Atualizado em',
+                    'tag' => 'b',
+                    'value' =>  \App\Helpers\General\AppHelper::formatDate($this->model['updated_at'])
+                ]);
+            }
         }
 
         $this->add('card-end-status', 'card-end', []);

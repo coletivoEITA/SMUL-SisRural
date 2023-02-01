@@ -461,6 +461,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/datatableTemplate/{produtor?}', [ChecklistUnidadeProdutivaController::class, 'datatableTemplate'])->middleware('permission:view menu checklist_unidade_produtiva')->name('datatableTemplate');
 
             Route::get('/{checklistUnidadeProdutiva}/edit', [ChecklistUnidadeProdutivaController::class, 'edit'])->middleware('can:view,checklistUnidadeProdutiva')->name('edit');
+            Route::get('/{checklistUnidadeProdutiva}/iframe_edit/{dadosComplementares}', [ChecklistUnidadeProdutivaController::class, 'edit'])->middleware('can:view,checklistUnidadeProdutiva')->name('iframe_edit');
             Route::delete('/{checklistUnidadeProdutiva}', [ChecklistUnidadeProdutivaController::class, 'destroy'])->middleware('can:delete,checklistUnidadeProdutiva')->name('destroy');
 
             Route::delete('/forceDelete/{checklistUnidadeProdutiva}', [ChecklistUnidadeProdutivaController::class, 'forceDelete'])->middleware('can:forceDelete,checklistUnidadeProdutiva')->name('forceDelete');

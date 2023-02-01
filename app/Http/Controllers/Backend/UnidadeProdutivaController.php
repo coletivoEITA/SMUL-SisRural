@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCaracterizacoesTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaColaboradoresTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaInstalacoesTrait;
 use App\Http\Controllers\Controller;
+use App\Models\Core\ChecklistUnidadeProdutivaModel;
 use App\Models\Core\ProdutorModel;
 use App\Models\Core\UnidadeProdutivaModel;
 use App\Repositories\Backend\Core\UnidadeProdutivaArquivoRepository;
@@ -270,7 +271,13 @@ class UnidadeProdutivaController extends Controller
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.unidade_produtiva.arquivos.index', compact('unidadeProdutiva'));
 
-        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'instalacoesId', 'instalacoesSrc', 'caracterizacoesId', 'caracterizacoesSrc', 'arquivosId', 'arquivosSrc'));
+        //Iframe "Checklist" (ver UnidadeProdutivaChecklistTrait.php)
+        $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::all()->last();
+        $checklistId = 'iframeChecklist';
+        $dadosComplementares = 1;
+        $checklistSrc = route('admin.core.checklist_unidade_produtiva.iframe_edit', compact('checklistUnidadeProdutiva', 'dadosComplementares'));
+
+        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'instalacoesId', 'instalacoesSrc', 'caracterizacoesId', 'caracterizacoesSrc', 'arquivosId', 'arquivosSrc', 'checklistId', 'checklistSrc'));
     }
 
 
