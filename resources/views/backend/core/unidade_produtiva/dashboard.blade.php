@@ -47,7 +47,7 @@
             @cardater(['title'=>'Produtores/as'])
                 @slot('body')
                     @foreach ($unidadeProdutiva->produtores as $k=>$v)
-                        <a href={{route('admin.core.unidade_produtiva.view', ['unidadeProdutiva'=>$v])}} style='color:inherit; text-decoration:none;'>
+                        <a href={{route('admin.core.produtor.dashboard', ['produtor'=>$v])}} style='color:inherit; text-decoration:none;'>
                             <h5>{{$v->nome}}</h5>
                             <div>{{$v->telefone_1}} {{$v->bairro}}</div>
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
@@ -88,7 +88,7 @@
                 </div>
             @endcan
 
-            @can('view menu farmers')
+            {{-- @can('view menu farmers')
                 @php
                     $totalProdutores = count($unidadeProdutiva->produtores);
 
@@ -104,7 +104,7 @@
                     @cardaddview(['title'=>__('concepts.produtora.plural'), 'total'=>$totalProdutores, 'icon'=>'c-icon c-icon-lg cil-address-book', 'labelAdd'=>__('concepts.produtora.add'), 'linkAdd'=>route('admin.core.produtor.create', ['unidadeProdutiva'=>$unidadeProdutiva]), 'labelView'=>'Visualizar', 'linkView'=>$linkProdutores, 'permissionView'=>'view menu farmers', 'permissionAdd'=>'create same operational units productive units'])
                     @endcardaddview
                 </div>
-            @endcan
+            @endcan --}}
 
             @can('view menu checklist_unidade_produtiva')
                 @php
