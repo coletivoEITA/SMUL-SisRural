@@ -103,6 +103,7 @@
         @include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
         @include('backend.components.iframe.scripts', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$checklistId, "src"=>$checklistSrc])
     @endif
 
     @include('backend.core.unidade_produtiva.lat_lng.scripts', ['lat' => @$form->lat->getValue(), 'lng'=> @$form->lng->getValue()])

@@ -1,8 +1,8 @@
 @extends('backend.layouts.app-template', ['iframe' => True])
 
 @section('body')
-    <div class="card-ater">
-        <div class="card-body-ater">
+    <div class="card">
+        <div class="card-body">
 
             {!!form_start($form)!!}
 
@@ -24,7 +24,7 @@
             
         </div>
 
-        <div class="card-footer-ater">
+        <div class="card-footer">
             <div class="row">
                 <div class="col">
                     {{ form_cancel($back, __('buttons.general.cancel'), 'btn btn-danger px-4') }}
