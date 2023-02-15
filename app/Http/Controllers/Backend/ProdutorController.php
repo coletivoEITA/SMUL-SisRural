@@ -276,7 +276,7 @@ class ProdutorController extends Controller
      */
     public function datatableSemUnidade()
     {
-        return DataTables::of(ProdutorModel::withoutGlobalScopes()->doesntHave('unidadesProdutivasNS')->with([
+        return DataTables::of(ProdutorModel::withoutGlobalScopes(['ProdutorPermissionScope::class'])->doesntHave('unidadesProdutivasNS')->with([
             'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:socios'
         ])->select("produtores.*"))
             ->editColumn('cpf', function ($row) {
