@@ -26,10 +26,15 @@ Breadcrumbs::for('admin.core.novo_produtor_unidade_produtiva.unidade_produtiva_e
  * Unidade Produtiva
  */
 Breadcrumbs::for('admin.core.unidade_produtiva.index', function ($trail) {
-    $trail->push('Unidade Produtiva', route('admin.core.unidade_produtiva.index'));
+    $trail->push(__('concepts.unidade_produtiva.plural'), route('admin.core.unidade_produtiva.index'));
 });
 
 Breadcrumbs::for('admin.core.unidade_produtiva.view', function ($trail, $unidadeProdutiva) {
+    $trail->parent('admin.core.unidade_produtiva.index');
+    $trail->push($unidadeProdutiva->nome);
+});
+
+Breadcrumbs::for('admin.core.unidade_produtiva.dashboard', function ($trail, $unidadeProdutiva) {
     $trail->parent('admin.core.unidade_produtiva.index');
     $trail->push($unidadeProdutiva->nome);
 });
@@ -216,6 +221,9 @@ Breadcrumbs::for('admin.core.cadernos.index', function ($trail) {
 });
 Breadcrumbs::for('admin.core.cadernos.excluidos', function ($trail) {
     $trail->push(__('concepts.caderno_de_campo.label'), route('admin.core.cadernos.index'));
+});
+Breadcrumbs::for('admin.core.cadernos.index_unidade_produtiva', function ($trail, $unidadeProdutiva) {
+    $trail->push(__('concepts.caderno_de_campo.plural') . ' - ' . $unidadeProdutiva->nome, route('admin.core.cadernos.index_unidade_produtiva'));
 });
 Breadcrumbs::for('admin.core.cadernos.create', function ($trail) {
     $trail->parent('admin.core.cadernos.index');
@@ -429,6 +437,9 @@ Breadcrumbs::for('admin.core.checklist.view', function ($trail, $id) {
 
 Breadcrumbs::for('admin.core.checklist_unidade_produtiva.index', function ($trail) {
     $trail->push('Formulários', route('admin.core.checklist_unidade_produtiva.index'));
+});
+Breadcrumbs::for('admin.core.checklist_unidade_produtiva.index_unidade_produtiva', function ($trail, $unidadeProdutiva) {
+    $trail->push(__('concepts.formularios.plural') . ' - ' . $unidadeProdutiva->nome, route('admin.core.checklist_unidade_produtiva.index_unidade_produtiva'));
 });
 Breadcrumbs::for('admin.core.checklist_unidade_produtiva.excluidos', function ($trail) {
     $trail->push('Formulários', route('admin.core.checklist_unidade_produtiva.index'));

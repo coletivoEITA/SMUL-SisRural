@@ -231,9 +231,9 @@ class UnidadeProdutivaForm extends Form
         $this->add('card-solo-start', 'card-start', [
             'title' => 'Uso do Solo',
         ])->add('area_total_solo', 'number', [
-            'label' => 'Área total da propriedade (' . env('UNIDADE_MEDIDA_AREA_SIGLA') . ')',
+            'label' => 'Área total da propriedade (' . config('app.unidade_medida_area_sigla') . ')',
         ])->add('area_produtiva', 'number', [
-            'label' => 'Área produtiva (' . env('UNIDADE_MEDIDA_AREA_SIGLA') . ')',
+            'label' => 'Área produtiva (' . config('app.unidade_medida_area_sigla') . ')',
         ])->add('observacoes_sobre_area', 'text', [
             'label' => 'Observações sobre a área',                        
         ])->add('card-solo-end', 'card-end', []);
