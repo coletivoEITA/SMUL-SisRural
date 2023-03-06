@@ -123,6 +123,9 @@ Breadcrumbs::for('admin.core.produtor.edit-unidade-produtiva', $empty);
 Breadcrumbs::for('admin.core.produtor.index_sem_unidade', $empty);
 Breadcrumbs::for('admin.core.produtor.edit_sem_unidade', $empty);
 
+Breadcrumbs::for('admin.core.produtor.index_contato', $empty);
+Breadcrumbs::for('admin.core.produtor.edit_contato', $empty);
+
 /**
  * Unidade Operacional
  */

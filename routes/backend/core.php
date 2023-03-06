@@ -97,6 +97,12 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/datatable_sem_unidade', [ProdutorController::class, 'datatableSemUnidade'])->middleware('permission:view menu farmers')->name('datatable_sem_unidade');
             Route::get('/{produtorSemUnidade}/edit_sem_unidade', [ProdutorController::class, 'editSemUnidade'])->name('edit_sem_unidade');
             Route::patch('/{produtorSemUnidade}/update_sem_unidade', [ProdutorController::class, 'updateSemUnidade'])->name('update_sem_unidade');
+
+            Route::get('/contato', [ProdutorController::class, 'indexContato'])->middleware('permission:view menu farmers')->name('index_contato');
+            Route::get('/datatable_contato', [ProdutorController::class, 'datatableContato'])->middleware('permission:view menu farmers')->name('datatable_contato');
+            // Route::get('/{produtorSemUnidade}/edit_sem_unidade', [ProdutorController::class, 'editSemUnidade'])->name('edit_sem_unidade');
+            // Route::patch('/{produtorSemUnidade}/update_sem_unidade', [ProdutorController::class, 'updateSemUnidade'])->name('update_sem_unidade');
+
         });
 
 

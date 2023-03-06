@@ -300,6 +300,49 @@ class ProdutorController extends Controller
             ->make(true);
     }
 
+
+    /**
+     * Listagem dos produtores que estão no status de contato
+     *
+     * @return void
+     */
+    public function indexContato()
+    {
+        return view('backend.core.produtor.index_contato');
+    }
+
+    /**
+     * API Datatable "index()"
+     *
+     * @param  mixed $dashboard
+     * @return void
+     */
+    public function datatableContato()
+    {
+        return DataTables::of(ProdutorModel::withoutGlobalScopes(['ProdutorPermissionScope::class'])->doesntHave('unidadesProdutivasNS')->with([
+            'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:socios'
+        ])->select("produtores.*"))
+            ->editColumn('cpf', function ($row) {
+                return AppHelper::formatCpfCnpj($row->cpf ? $row->cpf : $row->cnpj);
+            })->addColumn('actions', function ($row) {
+                $editUrl = route('admin.core.produtor.edit_sem_unidade', $row->id);
+
+                return view('backend.components.form-actions.index', compact('editUrl', 'row'));
+            })->filterColumn('socios', function ($query, $keyword) {
+                if ($keyword) {
+                    $query->whereHas('unidadesProdutivas', function ($q) use ($keyword) {
+                        $q->where('unidade_produtivas.socios', 'like', '%' . $keyword . '%');
+                    });
+                }
+            })->orderColumn('socios', function ($query, $order) {
+                $query->whereHas('unidadesProdutivas', function ($q) use ($order) {
+                    $q->orderBy('unidade_produtivas.socios', $order);
+                });
+            })
+            ->rawColumns(['cpf'])
+            ->make(true);
+    }
+
     /**
      *
      * Edição - Sem unidade produtiva

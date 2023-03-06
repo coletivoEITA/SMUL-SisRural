@@ -26,6 +26,8 @@ return [
     'unidade_produtiva' => [
         'label' => 'Unidade Produtiva',
         'plural' => 'Unidades Produtivas',
+        'list' => 'Listar Unidades Produtivas',
+        'add' => 'Adicionar Unidade Produtiva',
         'edit' => 'Editar Unidade Produtiva',
         'dashboard' => 'Dashboard da Unidade Produtiva',
         'data' => 'Dados da Unidade Produtiva',
@@ -34,9 +36,18 @@ return [
         'label' => 'Produtor/a',
         'plural' => 'Produtores/as',
         'add' => 'Adicionar Produtor/a',
+        'list' => 'Listar Produtores/as',
         'edit' => 'Editar Produtor/a',
         'dashboard' => 'Dashboard do/a Produtor/a',
         'data' => 'Dados do/a Produtor/a',
+    ],
+    'contato' => [
+        'label' => 'Contato',
+        'plural' => 'Contatos',
+        'add' => 'Adicionar Contato',
+        'list' => 'Listar Contatos',
+        'list_of' => 'Lista de Contatos',
+        'edit' => 'Editar Contato',        
     ],
     'formulario' => [
         'label' => 'Formulário',
