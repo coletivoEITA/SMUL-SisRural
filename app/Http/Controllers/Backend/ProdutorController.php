@@ -317,17 +317,30 @@ class ProdutorController extends Controller
      * @param  mixed $dashboard
      * @return void
      */
-    public function datatableContato()
+    public function datatableContato(bool $dashboard = false)
     {
-        return DataTables::of(ProdutorModel::withoutGlobalScopes(['ProdutorPermissionScope::class'])->whereIn('status', ['agendar', 'tentativa', 'agendado'])->with([
-            'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:socios'
+        return DataTables::of(ProdutorModel::whereIn('status', ['agendar', 'tentativa', 'agendado'])->with([
+            'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:unidade_produtivas.id,socios,tags'
         ])->select("produtores.*"))
-            ->editColumn('status', function ($row) {
+            ->editColumn('tags', function ($row) {
+                return AppHelper::tableTags($row->tags);
+            })
+            ->editColumn('nome', function ($row) {
+                return "<a href='" . route('admin.core.produtor.dashboard', $row->id) . "' target='_self'>" . $row->nome . "</a>";
+            })->editColumn('status', function ($row) {
                 return \App\Enums\ProdutorStatusEnum::toSelectArray()[$row->status];
-            })->addColumn('actions', function ($row) {
-                $editUrl = route('admin.core.produtor.edit_sem_unidade', $row->id);
+            })->addColumn('actions', function ($row) use ($dashboard) {
+                if ($dashboard) {
+                    $dashUrl = route('admin.core.produtor.dashboard', $row->id);
+                    return view('backend.components.form-actions.index', compact('dashUrl'));
+                }
 
-                return view('backend.components.form-actions.index', compact('editUrl', 'row'));
+                $editUrl = route('admin.core.produtor.edit', $row->id);
+                $deleteUrl = route('admin.core.produtor.destroy', $row->id);
+                $viewUrl = route('admin.core.produtor.view', $row->id);
+                $dashUrl = route('admin.core.produtor.dashboard', $row->id);
+
+                return view('backend.components.form-actions.index', compact('editUrl', 'deleteUrl', 'viewUrl', 'dashUrl', 'row'));
             })->filterColumn('socios', function ($query, $keyword) {
                 if ($keyword) {
                     $query->whereHas('unidadesProdutivas', function ($q) use ($keyword) {
@@ -339,7 +352,7 @@ class ProdutorController extends Controller
                     $q->orderBy('unidade_produtivas.socios', $order);
                 });
             })
-            ->rawColumns(['cpf'])
+            ->rawColumns(['nome', 'tags'])
             ->make(true);
     }
 

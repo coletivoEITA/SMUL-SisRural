@@ -6,11 +6,28 @@
     <div class="card card-ater">
         <div class="card-header">
             <div class="row">
-                <div class="col-10">
+                <div class="col-6">
                     <h1 class="card-title mb-0 mt-1 h4">
                         {{ __('concepts.contato.list_of') }}
                     </h1>
                 </div>
+
+                @can('create same operational units farmers')
+                    <div class="col-6 pull-right">
+                        <div class="float-right">
+                            <a aria-label="Produtor/a sem unidade" href="{{ route('admin.core.produtor.index_sem_unidade') }}"
+                                class="btn btn-outline-primary px-5 mr-4">
+                                Produtor/a sem unidade
+                            </a>
+
+                            <a aria-label="Adicionar novo/a produtor/a"
+                                href="{{ route('admin.core.novo_produtor_unidade_produtiva.create') }}"
+                                class="btn btn-primary px-5">
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                @endcan
             </div>
         </div>
 
@@ -25,16 +42,11 @@
                         <th>Coproprietários/as</th>
                         <th>Município</th>
                         <th>Estado</th>
+                        <th>Palavras chave</th>
                         <th width="60">Ações</th>
                     </tr>
                 </thead>
             </table>
-        </div>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col">
-            {{ form_cancel(route('admin.core.produtor.index'), 'Voltar', 'btn btn-danger px-4') }}
         </div>
     </div>
 @endsection
@@ -73,6 +85,10 @@
                     },
                     {
                         "data": "estado.nome"
+                    },
+                    {
+                        "data": "tags",
+                        orderable: false
                     },
                     {
                         "data": "actions",
