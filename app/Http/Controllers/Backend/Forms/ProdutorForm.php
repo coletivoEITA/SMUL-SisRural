@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Forms;
 
 use App\Enums\CheckboxEnum;
-use App\Enums\ProdutorUnidadeProdutivaStatusEnum;
+use App\Enums\ProdutorStatusEnum;
 use Kris\LaravelFormBuilder\Form;
 
 /**
@@ -46,7 +46,7 @@ class ProdutorForm extends Form
             'select',
             [
                 'label' => 'Status',
-                'choices' => ProdutorUnidadeProdutivaStatusEnum::toSelectArray(),
+                'choices' => ProdutorStatusEnum::toSelectArray(),
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Status']),
