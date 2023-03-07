@@ -33,7 +33,7 @@ class UnidadeProdutivaForm extends Form
          */
         $produtor = @$this->data['produtor'];
         if (@$produtor) {
-            $this->add('card-start-1', 'card-start', [
+            $this->add('card-start-dados-do-produtor', 'card-start', [
                 'title' => 'Dados do/a Produtor/a',
                 'titleTag' => 'h1'
             ])->add('produtor', 'static', [
@@ -59,7 +59,7 @@ class UnidadeProdutivaForm extends Form
             )->add(
                 'fl_fora_da_abrangencia_app',
                 'hidden'
-            )->add('card-end-1', 'card-end', []);
+            )->add('card-end-dados-do-produtor', 'card-end', []);
         } else if (isset($this->data['produtores']) && isset($this->data['produtores'])) {
             $this->add('card-start-pr', 'card-start', ['title' => 'Informações Gerais']);
 

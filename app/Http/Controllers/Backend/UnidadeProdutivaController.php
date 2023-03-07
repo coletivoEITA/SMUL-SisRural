@@ -189,6 +189,13 @@ class UnidadeProdutivaController extends Controller
      */
     public function create(ProdutorModel $produtor, FormBuilder $formBuilder)
     {
+
+        // Definição do checklist de dados adicionais da UP
+        if(config('app.checklist_dados_adicionais_unidade_produtiva')){            
+            $checklist_id = config('app.checklist_dados_adicionais_unidade_produtiva');
+            $checklist = ChecklistModel::find($checklist_id);         
+        }
+
         $form = $formBuilder->create(UnidadeProdutivaForm::class, [
             'id' => 'form-builder',
             'method' => 'POST',
@@ -197,7 +204,7 @@ class UnidadeProdutivaController extends Controller
             'novalidate' => true,
             'enctype' => 'multipart/form-data',
             'model' => ['produtor_id' => $produtor->id],
-            'data' => ['produtor' => $produtor]
+            'data' => ['checklist' => $checklist, 'produtor' => $produtor],
         ]);
 
         $title = 'Criar Unidade Produtiva';
@@ -223,6 +230,33 @@ class UnidadeProdutivaController extends Controller
 
         try {
             $unidadeProdutiva = $this->repository->create($data);
+
+            if(config('app.checklist_dados_adicionais_unidade_produtiva')){
+                // Salvando dados das respostas do checklist. Para isso foi preciso longo caminho para
+                // instanciar o ChecklistUnidadeProdutivaRepository                
+                $planoAcaoItem = new PlanoAcaoItemModel();
+                $planoAcaoItemRepository = new PlanoAcaoItemRepository($planoAcaoItem);
+                $planoAcao = new PlanoAcaoModel();
+                $planoAcaoRepository = new PlanoAcaoRepository($planoAcao, $planoAcaoItemRepository);
+                $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::where('unidade_produtiva_id', $unidadeProdutiva->id)->where('checklist_id', config('app.checklist_dados_adicionais_unidade_produtiva'))->where('produtor_id', NULL)->first();
+
+                $data['status'] = "rascunho";
+
+                if($checklistUnidadeProdutiva){
+                    // checklist existe e só precisa ser atualizado
+                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);                   
+                    $checklistUnidadeProdutivaRepository->update($checklistUnidadeProdutiva, $data);
+                } else {
+                    // checklist a ser criado
+                    $checklistUnidadeProdutiva = new ChecklistUnidadeProdutivaModel();
+                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);
+                    $data['checklist_id'] = config('app.checklist_dados_adicionais_unidade_produtiva');
+                    $data['unidade_produtiva_id'] = $unidadeProdutiva->id;
+                    $checklistUnidadeProdutivaRepository->create($data);
+                }
+            }
+
+
         } catch (Exception $e) {
             return redirect()->back()->withErrors(__('validation.productive_unit_coverage_fails'))->withInput();
         }
