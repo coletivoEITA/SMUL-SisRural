@@ -37,8 +37,7 @@
                     <tr>
                         <th width="60">#</th>
                         <th>Nome</th>
-                        <th><abbr title="Cadastro de Pessoa Física / Cadastro Nacional de Pessoa Jurídica">CPF/CNPJ</abbr>
-                        </th>
+                        <th>Status</th>
                         <th>Telefone</th>
                         <th>Coproprietários/as</th>
                         <th>Município</th>
@@ -71,7 +70,7 @@
                         "data": "nome"
                     },
                     {
-                        "data": "cpf"
+                        "data": "status"
                     },
                     {
                         "data": "telefone_1"
