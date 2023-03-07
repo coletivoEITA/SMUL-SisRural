@@ -134,12 +134,19 @@ class ProdutorController extends Controller
      */
     public function create(FormBuilder $formBuilder)
     {
+        // Definição do checklist de dados adicionais da Produtora
+        if(config('app.checklist_dados_adicionais_produtora')){            
+            $checklist_id = config('app.checklist_dados_adicionais_produtora');
+            $checklist = ChecklistModel::find($checklist_id);            
+        }
+
         $form = $formBuilder->create(ProdutorForm::class, [
             'id' => 'form-builder',
             'method' => 'POST',
             'url' => route('admin.core.produtor.store'),
             'class' => 'needs-validation',
             'novalidate' => true,
+            'data' => ['checklist' => $checklist],
         ]);
 
         $title = 'Cadastrar Produtor';
@@ -174,9 +181,33 @@ class ProdutorController extends Controller
             return redirect()->back()->withErrors($form->getErrors())->withInput();
         }
 
-        $data = $request->all();
+        $data = $request->all();        
+        $produtorModel = $this->repository->create($data);        
 
-        $produtorModel = $this->repository->create($data);
+        if(config('app.checklist_dados_adicionais_produtora')){
+            // Salvando dados das respostas do checklist. Para isso foi preciso longo caminho para
+            // instanciar o ChecklistUnidadeProdutivaRepository                
+            $planoAcaoItem = new PlanoAcaoItemModel();
+            $planoAcaoItemRepository = new PlanoAcaoItemRepository($planoAcaoItem);
+            $planoAcao = new PlanoAcaoModel();
+            $planoAcaoRepository = new PlanoAcaoRepository($planoAcao, $planoAcaoItemRepository);
+            $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::where('produtor_id', $produtorModel->id)->where('checklist_id', config('app.checklist_dados_adicionais_produtora'))->first();
+
+            $data['status'] = "rascunho";
+
+            if($checklistUnidadeProdutiva){
+                // checklist existe e só precisa ser atualizado
+                $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);                   
+                $checklistUnidadeProdutivaRepository->update($checklistUnidadeProdutiva, $data);
+            } else {
+                // checklist a ser criado
+                $checklistUnidadeProdutiva = new ChecklistUnidadeProdutivaModel();
+                $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);
+                $data['checklist_id'] = config('app.checklist_dados_adicionais_produtora');
+                $data['produtor_id'] = $produtorModel->id;
+                $checklistUnidadeProdutivaRepository->create($data);
+            }
+        }
 
         /*Custom Redirect*/
         // Caso o usuário clique para adicionar unidades produtivas, vai para a tela de edição scrollando para a sessão
