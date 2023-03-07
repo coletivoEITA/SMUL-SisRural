@@ -52,7 +52,7 @@ class ProdutorForm extends Form
                 'error' => __('validation.required', ['attribute' => 'Status']),
             ]
         )->add('status_observacao', 'text', [
-            'label' => 'Status - Observação',
+            'label' => 'Descrição do status e próximo passo',
         ])->add('tags', 'text', [
             'label' => 'Palavras-chave',
             'attr' => [
