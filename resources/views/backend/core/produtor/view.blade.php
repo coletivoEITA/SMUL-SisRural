@@ -34,10 +34,10 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ $produtor->status }}</td>
+                <td>{{@App\Enums\ProdutorStatusEnum::toSelectArray()[$produtor->status]}}</td>
             </tr>
             <tr>
-                <th>Status - Observação</th>
+                <th>Descrição do status e próximo passo</th>
                 <td>{{ $produtor->status_observacao }}</td>
             </tr>
 

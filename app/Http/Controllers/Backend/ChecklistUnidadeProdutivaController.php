@@ -46,11 +46,16 @@ class ChecklistUnidadeProdutivaController extends Controller
      * É possível filtrar por produtor, retornando apenas os formulários do produtor selecionado (via dashboard do produtor)
      *
      * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
      * @return void
      */
-    public function index(ProdutorModel $produtor)
+    public function index(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $datatableUrl = route('admin.core.checklist_unidade_produtiva.datatable', ['produtor' => $produtor]);
+        if( !$unidadeProdutiva->id ){
+            $datatableUrl = route('admin.core.checklist_unidade_produtiva.datatable', ['produtor' => $produtor]);
+        } else {
+            $datatableUrl = route('admin.core.checklist_unidade_produtiva.datatable_unidade_produtiva', ['unidadeProdutiva' => $unidadeProdutiva]);
+        }        
         $aplicarUrl = route('admin.core.checklist_unidade_produtiva.template');
         if ($produtor->id) {
             $aplicarUrl = route('admin.core.checklist_unidade_produtiva.template', ['produtor' => $produtor]);
@@ -66,14 +71,16 @@ class ChecklistUnidadeProdutivaController extends Controller
      * API datatable "index()"
      *
      * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
      * @return void
      */
-    public function datatable(ProdutorModel $produtor)
+    public function datatable(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
         $data = ChecklistUnidadeProdutivaModel::with(['checklist:id,nome', 'produtor:id,nome', 'unidade_produtiva:id,nome,socios', 'usuario:id,first_name,last_name', 'plano_acao:id,checklist_unidade_produtiva_id,nome,created_at'])
             ->select("checklist_unidade_produtivas.*");
 
         $data = @$produtor->id ? $data->where('produtor_id', $produtor->id) : $data;
+        $data = @$unidadeProdutiva->id ? $data->where('unidade_produtiva_id', $unidadeProdutiva->id) : $data;
 
         // Impede a exibição dos checklists configurados como Dados Adicionais das páginas da Unidade Produtiva e Produtora. Estes só podem ser editados nos respectivos formulários.
         if(config('app.checklist_dados_adicionais_unidade_produtiva')){

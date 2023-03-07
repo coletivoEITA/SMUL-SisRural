@@ -97,6 +97,12 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/datatable_sem_unidade', [ProdutorController::class, 'datatableSemUnidade'])->middleware('permission:view menu farmers')->name('datatable_sem_unidade');
             Route::get('/{produtorSemUnidade}/edit_sem_unidade', [ProdutorController::class, 'editSemUnidade'])->name('edit_sem_unidade');
             Route::patch('/{produtorSemUnidade}/update_sem_unidade', [ProdutorController::class, 'updateSemUnidade'])->name('update_sem_unidade');
+
+            Route::get('/contato', [ProdutorController::class, 'indexContato'])->middleware('permission:view menu farmers')->name('index_contato');
+            Route::get('/datatable_contato', [ProdutorController::class, 'datatableContato'])->middleware('permission:view menu farmers')->name('datatable_contato');
+            // Route::get('/{produtorSemUnidade}/edit_sem_unidade', [ProdutorController::class, 'editSemUnidade'])->name('edit_sem_unidade');
+            // Route::patch('/{produtorSemUnidade}/update_sem_unidade', [ProdutorController::class, 'updateSemUnidade'])->name('update_sem_unidade');
+
         });
 
 
@@ -105,6 +111,8 @@ Route::middleware(['permission_report_restrict'])->group(function () {
          */
         Route::group(['prefix' => 'unidade_produtiva', 'as' => 'unidade_produtiva.'], function () {
             Route::get('/{unidadeProdutiva}/view', [UnidadeProdutivaController::class, 'view'])->middleware('permission:view menu productive units')->name('view');
+
+            Route::get('/{unidadeProdutiva}/dashboard', [UnidadeProdutivaController::class, 'dashboard'])->middleware('permission:view menu productive units')->name('dashboard');
 
             Route::get('produtor', [UnidadeProdutivaController::class, 'produtor'])->middleware('permission:view menu productive units')->name('produtor');
             Route::get('/datatableProdutor', [UnidadeProdutivaController::class, 'datatableProdutor'])->middleware('permission:view menu productive units')->name('datatableProdutor');
@@ -267,6 +275,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
 
             Route::get('/{caderno}/view', [CadernoController::class, 'view'])->middleware('can:view,caderno')->name('view');
             Route::get('/datatable/{produtor?}', [CadernoController::class, 'datatable'])->middleware('permission:view menu caderno')->name('datatable');
+            Route::get('/datatable/unidade_produtiva/{unidadeProdutiva?}', [CadernoController::class, 'datatable'])->middleware('permission:view menu caderno')->name('datatable_unidade_produtiva');
             Route::get('/create/{produtor}/{unidadeProdutiva}', [CadernoController::class, 'create'])->middleware('can:create,App\Models\Core\CadernoModel')->name('create');
             Route::get('/{caderno}/edit', [CadernoController::class, 'edit'])->middleware('can:update,caderno')->name('edit');
             Route::delete('/{caderno}', [CadernoController::class, 'destroy'])->middleware('can:delete,caderno')->name('destroy');
@@ -279,6 +288,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::delete('/forceDelete/{caderno}', [CadernoController::class, 'forceDelete'])->middleware('can:forceDelete,caderno')->name('forceDelete');
 
             Route::get('/{produtor?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index');
+            Route::get('/unidade_produtiva/{unidadeProdutiva?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index_unidade_produtiva');
 
             /**
              * Arquivos vinculados a cadernos aplicados
@@ -454,6 +464,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/{checklistUnidadeProdutiva}/sendEmail', [ChecklistUnidadeProdutivaController::class, 'sendEmail'])->middleware('can:sendEmail,checklistUnidadeProdutiva')->name('sendEmail');
 
             Route::get('/datatable/{produtor?}', [ChecklistUnidadeProdutivaController::class, 'datatable'])->middleware('permission:view menu checklist_unidade_produtiva')->name('datatable');
+            Route::get('/datatable/unidade_produtiva/{unidadeProdutiva?}', [ChecklistUnidadeProdutivaController::class, 'datatable'])->middleware('permission:view menu checklist_unidade_produtiva')->name('datatable_unidade_produtiva');
 
             Route::get('/create/{checklist}/{produtor}/{unidadeProdutiva}', [ChecklistUnidadeProdutivaController::class, 'create'])->middleware('can:create,App\Models\Core\ChecklistUnidadeProdutivaModel')->name('create');
 
@@ -483,6 +494,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::post('/{checklistUnidadeProdutiva}/restore', [ChecklistUnidadeProdutivaController::class, 'restore'])->middleware('can:restore,checklistUnidadeProdutiva')->name('restore');
 
             Route::get('/{produtor?}', [ChecklistUnidadeProdutivaController::class, 'index'])->middleware('permission:view menu checklist_unidade_produtiva')->name('index');
+            Route::get('/unidade_produtiva/{unidadeProdutiva?}', [ChecklistUnidadeProdutivaController::class, 'index'])->middleware('permission:view menu checklist_unidade_produtiva')->name('index_unidade_produtiva');
 
             /**
              * Arquivos vinculados ao formulário aplicados

@@ -48,7 +48,6 @@ body {
 .c-sidebar .c-sidebar-nav-dropdown-toggle .c-sidebar-nav-icon {
     color: #fff;
 }
-.c-sidebar .c-sidebar-nav-link.c-active,
 .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle,
 .c-sidebar-nav-dropdown-toggle.active {
     background: rgb(44, 46, 51);

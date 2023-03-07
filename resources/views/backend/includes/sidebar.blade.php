@@ -50,17 +50,41 @@
             @endcanany
 
             @can('view menu farmers')
-                <li class="c-sidebar-nav-dropdown {{ Route::is('admin.core.produtor.*') ? 'c-show' : '' }}">
+                <li class="c-sidebar-nav-dropdown {{ Route::is('admin.core.produtor.index_contato') ? 'c-show' : '' }}">
                     <a accesskey="p" class="c-sidebar-nav-dropdown-toggle {{ active_class(Route::is('admin.core.produtor.*')) }}" href="#">
                         <i class="c-sidebar-nav-icon c-icon cil-address-book"></i>
-                        Produtores/as
+                        {{ __('concepts.contato.plural') }}
+                    </a>
+
+                    <ul class="c-sidebar-nav-dropdown-items">
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.core.produtor.index_contato') }}">
+                                <i class="c-sidebar-nav-icon c-icon cil-columns"></i>
+                                {{ __('concepts.contato.list') }}
+                            </a>
+                        </li>
+
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.core.produtor.create') }}">
+                                <i class="c-sidebar-nav-icon c-icon cil-plus"></i>
+                                {{ __('concepts.contato.add') }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="c-sidebar-nav-dropdown {{ Route::is('admin.core.produtor.index') || Route::is('admin.core.produtor.create') ? 'c-show' : '' }}">
+                    <a accesskey="p" class="c-sidebar-nav-dropdown-toggle {{ active_class(Route::is('admin.core.produtor.*')) }}" href="#">
+                        <i class="c-sidebar-nav-icon c-icon cil-address-book"></i>
+                        {{ __('concepts.produtora.plural') }}
                     </a>
 
                     <ul class="c-sidebar-nav-dropdown-items">
                         <li class="c-sidebar-nav-item">
                             <a class="c-sidebar-nav-link" href="{{ route('admin.core.produtor.index') }}">
                                 <i class="c-sidebar-nav-icon c-icon cil-columns"></i>
-                                Listar Produtor/as
+                                {{ __('concepts.produtora.list') }}
                             </a>
                          </li>
 
@@ -74,7 +98,7 @@
                          <li class="c-sidebar-nav-item">
                             <a class="c-sidebar-nav-link" href="{{ route('admin.core.produtor.create') }}">
                                 <i class="c-sidebar-nav-icon c-icon cil-plus"></i>
-                                Adicionar Produtor/a
+                                {{ __('concepts.produtora.add') }}
                             </a>
                          </li>
                     </ul>
@@ -85,14 +109,14 @@
                 <li class="c-sidebar-nav-dropdown {{ Route::is('*core.unidade_produtiva*') ? 'c-show' : '' }}">
                     <a accesskey="u" class="c-sidebar-nav-dropdown-toggle {{ active_class(Route::is('*core.unidade_produtiva*'), 'c-active') }}" href="#">
                         <i class="c-sidebar-nav-icon c-icon cil-location-pin"></i>
-                        Unidades Produtivas
+                        {{ __('concepts.unidade_produtiva.plural') }}
                     </a>
 
                     <ul class="c-sidebar-nav-dropdown-items">
                         <li class="c-sidebar-nav-item">
                             <a class="c-sidebar-nav-link" href="{{ route('admin.core.unidade_produtiva.index') }}">
                                 <i class="c-sidebar-nav-icon c-icon cil-columns"></i>
-                                Listar Unidades Produtivas
+                                {{ __('concepts.unidade_produtiva.list') }}
                             </a>
                         </li>
 
@@ -115,7 +139,7 @@
                                     active_class(Route::is('admin.core.unidade_produtiva.create'), 'c-active')
                                 }}" href="{{ route('admin.core.unidade_produtiva.produtor') }}">
                                     <i class="c-sidebar-nav-icon c-icon cil-plus"></i>
-                                    Adicionar Unidade Produtiva
+                                    {{ __('concepts.unidade_produtiva.add') }}
                                 </a>
                             </li>
                         @endcan

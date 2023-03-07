@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            @if (@!$caderno)
+            @if (!@$caderno)
                 @include('backend.components.card-iframe-add.html', ["title"=>"Arquivos", "data"=>"a-arquivos", "label"=>"Cadastrar Arquivo"])
             @endif
         </div>

@@ -14,6 +14,7 @@ use App\Enums\PlanoAcaoPrioridadeEnum;
 use App\Enums\PlanoAcaoStatusEnum;
 use App\Enums\ProcessaProducaoEnum;
 use App\Enums\ProdutorUnidadeProdutivaStatusEnum;
+use App\Enums\ProdutorStatusEnum;
 use App\Enums\RolesEnum;
 use App\Enums\SituacaoEnum;
 use App\Enums\TipoPontuacaoEnum;
@@ -139,6 +140,15 @@ return [
     ProdutorUnidadeProdutivaStatusEnum::class => [
         ProdutorUnidadeProdutivaStatusEnum::Ativo => 'Ativo',
         ProdutorUnidadeProdutivaStatusEnum::Inativo => 'Inativo',
+    ],
+
+    ProdutorStatusEnum::class => [
+        ProdutorStatusEnum::Agendar => 'A agendar 1ª visita',
+        ProdutorStatusEnum::Tentativa => 'Tentativa de agendamento 1ª visita',
+        ProdutorStatusEnum::Agendado => 'Agendado 1ª visita',
+        ProdutorStatusEnum::Cadastro => 'Cadastro/1ª visita',
+        ProdutorStatusEnum::Acompanhamento => 'Acompanhamento',
+        ProdutorStatusEnum::Inativo => 'Inativo',                        
     ],
 
     CheckboxEnum::class => [
