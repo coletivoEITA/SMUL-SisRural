@@ -231,3 +231,8 @@ abbr {
 .c-sidebar.c-sidebar-fixed {
     z-index: 1035;
 }
+
+/* Datatables select */
+.custom-select {
+    padding: .375rem 1.75rem .375rem .75rem !important;
+}

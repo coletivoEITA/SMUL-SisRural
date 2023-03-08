@@ -58,7 +58,7 @@
                 "dom": '<"top table-top"f>rt<"row table-bottom"<"col-sm-12 col-md-5"il><"col-sm-12 col-md-7"p>><"clear">',
                 "processing": true,
                 "serverSide": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "ajax": '{{ route('admin.core.produtor.datatable_contato') }}',
                 "language": {
                     "url": '{{ asset('js/datatables-pt-br.json') }}'
