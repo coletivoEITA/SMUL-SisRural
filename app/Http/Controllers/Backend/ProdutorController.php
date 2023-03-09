@@ -52,7 +52,11 @@ class ProdutorController extends Controller
     {
         if(config('app.checklist_dados_adicionais_produtora')){            
             $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::where('produtor_id', $produtor->id)->where('checklist_id', config('app.checklist_dados_adicionais_produtora'))->first();
-            $categorias = $checklistUnidadeProdutiva->getCategoriasAndRespostasChecklist();
+            if($checklistUnidadeProdutiva){
+                $categorias = $checklistUnidadeProdutiva->getCategoriasAndRespostasChecklist();
+            } else {
+                $categorias = NULL;    
+            }            
         } else {
             $categorias = NULL;
         }

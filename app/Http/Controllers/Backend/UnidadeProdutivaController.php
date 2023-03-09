@@ -68,7 +68,12 @@ class UnidadeProdutivaController extends Controller
     {
         if(config('app.checklist_dados_adicionais_unidade_produtiva')){            
             $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::where('unidade_produtiva_id', $unidadeProdutiva->id)->where('checklist_id', config('app.checklist_dados_adicionais_unidade_produtiva'))->first();
-            $categorias = $checklistUnidadeProdutiva->getCategoriasAndRespostasChecklist();
+            if($checklistUnidadeProdutiva){
+                $categorias = $checklistUnidadeProdutiva->getCategoriasAndRespostasChecklist();
+            } else {
+                $categorias = NULL;    
+            }
+            
         } else {
             $categorias = NULL;
         }
