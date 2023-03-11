@@ -26,12 +26,12 @@ class TemplateModel extends Model
 
     public function perguntas()
     {
-        return $this->belongsToMany(TemplatePerguntaModel::class, 'template_pergunta_templates', 'template_id', 'template_pergunta_id')->whereNull('template_pergunta_templates.deleted_at')->withPivot('id', 'ordem')->withTimestamps();
+        return $this->belongsToMany(TemplatePerguntaModel::class, 'template_pergunta_templates', 'template_id', 'template_pergunta_id')->whereNull('template_pergunta_templates.deleted_at')->withPivot('id', 'ordem')->withTimestamps()->orderBy('ordem', 'ASC');
     }
 
     public function perguntasWithTrashed()
     {
-        return $this->belongsToMany(TemplatePerguntaModel::class, 'template_pergunta_templates', 'template_id', 'template_pergunta_id')->withTrashed()->withPivot('id', 'ordem')->withTimestamps();
+        return $this->belongsToMany(TemplatePerguntaModel::class, 'template_pergunta_templates', 'template_id', 'template_pergunta_id')->withTrashed()->withPivot('id', 'ordem')->withTimestamps()->orderBy('ordem', 'ASC');
     }
 
     /**
