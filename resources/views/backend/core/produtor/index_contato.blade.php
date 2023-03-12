@@ -37,14 +37,12 @@
                     <tr>
                         <th width="60">#</th>
                         <th>Nome</th>
-                        <th>Status</th>
-                        <th>Telefone</th>
-                        <th>Coproprietários/as</th>
-                        <!-- <th>Município</th>
-                        <th>Estado</th> -->
                         <th>Distrito</th>
-                        <th>Bairro</th>                        
-                        <th>Palavras chave</th>
+                        <th>Bairro</th>
+                        <th>Telefone</th>
+                        <th>Status</th>
+                        <!-- <th>Situação Atual</th> -->
+                        <th>Próximo Passo</th>
                         <th width="60">Ações</th>
                     </tr>
                 </thead>
@@ -54,63 +52,5 @@
 @endsection
 
 @push('after-scripts')
-    <script>
-        $(document).ready(function() {
-            $('#table').DataTable({
-                "dom": '<"top table-top"f>rt<"row table-bottom"<"col-sm-12 col-md-5"il><"col-sm-12 col-md-7"p>><"clear">',
-                "processing": true,
-                "serverSide": true,
-                "lengthChange": true,
-                "ajax": '{{ route('admin.core.produtor.datatable_contato') }}',
-                "language": {
-                    "url": '{{ asset('js/datatables-pt-br.json') }}'
-                },
-                "columns": [{
-                        "data": "uid"
-                    },
-                    {
-                        "data": "nome"
-                    },
-                    {
-                        "data": "status"
-                    },
-                    {
-                        "data": "telefone_1"
-                    },
-                    {
-                        "data": "unidades_produtivas[].socios",
-                        "name": "socios",
-                        orderable: false
-                    },
-                    // {
-                    //     "data": "cidade.nome"
-                    // },
-                    // {
-                    //     "data": "estado.nome"
-                    // },
-                    {"data": "subprefeitura"},
-                    {"data": "bairro"},
-                    {
-                        "data": "tags",
-                        orderable: false
-                    },
-                    {
-                        "data": "actions",
-                        "searchable": false,
-                        "orderable": false,
-                        render: function(data) {
-                            return htmlDecode(data);
-                        }
-                    }
-                ]
-            }).on('draw', function() {
-                initAutoLink($("#table"));
-            });
-
-            addAutoLink(function() {
-                debounceSearch('#table');
-            });
-        });
-
-    </script>
+    @include('backend.core.produtor.datatable', ['datatable_route' => 'admin.core.produtor.datatable_contato'])
 @endpush
