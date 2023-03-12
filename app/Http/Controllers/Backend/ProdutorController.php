@@ -103,6 +103,28 @@ class ProdutorController extends Controller
                 return "<a href='" . route('admin.core.produtor.dashboard', $row->id) . "' target='_self'>" . $row->nome . "</a>";
             })->editColumn('status', function ($row) {
                 return \App\Enums\ProdutorStatusEnum::toSelectArray()[$row->status];
+            })->editColumn('subprefeitura', function ($row) {
+                if(!$row->subprefeitura){
+                    $UPs = $row->unidadesProdutivasScoped()->get();
+                    $distritos = [];
+                    foreach($UPs as $UP){
+                        $distritos[] = $UP->subprefeitura;
+                    }
+                    return implode(", ", $distritos);
+                }else{
+                    return $row->subprefeitura;
+                }
+            })->editColumn('bairro', function ($row) {
+                if(!$row->bairro){
+                    $UPs = $row->unidadesProdutivasScoped()->get();
+                    $bairros = [];
+                    foreach($UPs as $UP){
+                        $bairros[] = $UP->bairro;
+                    }
+                    return implode(", ", $bairros);
+                }else{
+                    return $row->subprefeitura;
+                }                
             })->addColumn('actions', function ($row) use ($dashboard) {
                 if ($dashboard) {
                     $dashUrl = route('admin.core.produtor.dashboard', $row->id);

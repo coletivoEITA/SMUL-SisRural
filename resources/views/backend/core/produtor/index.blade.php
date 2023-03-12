@@ -40,8 +40,10 @@
                         <th>Status</th>
                         <th>Telefone</th>
                         <th>Coproprietários/as</th>
-                        <th>Município</th>
-                        <th>Estado</th>
+                        <!-- <th>Município</th>
+                        <th>Estado</th> -->
+                        <th>Distrito</th>
+                        <th>Bairro</th>
                         <th>Palavras chave</th>
                         <th width="60">Ações</th>
                     </tr>
@@ -80,12 +82,14 @@
                         "name": "socios",
                         orderable: false
                     },
-                    {
-                        "data": "cidade.nome"
-                    },
-                    {
-                        "data": "estado.nome"
-                    },
+                    // {
+                    //     "data": "cidade.nome"
+                    // },
+                    // {
+                    //     "data": "estado.nome"
+                    // },
+                    {"data": "subprefeitura"},
+                    {"data": "bairro"},
                     {
                         "data": "tags",
                         orderable: false
