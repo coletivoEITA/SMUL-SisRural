@@ -22,7 +22,11 @@
                             ),
                         });
 
-                        cidadesSelect2.val(values).trigger('change');
+                        if(cidadesSelect2.attr("municipio_selected")){
+                            cidadesSelect2.val(cidadesSelect2.attr("municipio_selected")).trigger('change');
+                        } else {
+                            cidadesSelect2.val(values).trigger('change');
+                        }
                     });
         }).change();
     })

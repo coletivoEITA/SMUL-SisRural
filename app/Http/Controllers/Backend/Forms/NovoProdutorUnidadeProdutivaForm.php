@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Forms;
 
+use Illuminate\Support\Facades\Auth;
 use App\Enums\ProdutorStatusEnum;
 use Kris\LaravelFormBuilder\Form;
 
@@ -105,7 +106,20 @@ class NovoProdutorUnidadeProdutivaForm extends Form
                 //Esse campo é obrigatório, mas é tratado via JS, porque depende da seleção do "fl_unidade_produtiva"
             ])->add('bairro', 'text', [
                 'label' => 'Bairro',
-            ])->add(
+            ]);
+
+            // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.
+            $selected_uf = [];
+            $selected_municipio = NULL;
+            if(!isset($this->model['estado_id'])){
+                $user = Auth::user();
+                if($uf = $user->getDefaultUF()){
+                    $selected_uf = ["selected" => $uf];
+                }
+                $selected_municipio = $user->getDefaultMunicipio();
+            }            
+
+            $this->add(
                 'estado_id',
                 'select',
                 [
@@ -113,7 +127,7 @@ class NovoProdutorUnidadeProdutivaForm extends Form
                     'empty_value' => 'Selecione',
                     'choices' => \App\Models\Core\EstadoModel::orderByRaw('FIELD(uf, "SP") DESC, nome')->pluck('nome', 'id')->toArray(),
                     'error' => __('validation.required', ['attribute' => 'Estado'])
-                ]
+                ] + $selected_uf
             )->add(
                 'cidade_id',
                 'select',
@@ -121,7 +135,8 @@ class NovoProdutorUnidadeProdutivaForm extends Form
                     'label' => 'Município',
                     'empty_value' => 'Selecione',
                     'choices' => @$this->model->estado_id ? \App\Models\Core\CidadeModel::where('estado_id', @$this->model->estado_id)->pluck('nome', 'id')->sortBy('nome')->   Array() : [],
-                    'error' => __('validation.required', ['attribute' => 'Município'])
+                    'error' => __('validation.required', ['attribute' => 'Município']),
+                    'attr' => ['municipio_selected' => $selected_municipio]
                 ]
             )->add('fieldset-unidade-produtiva-novo-end', 'fieldset-end')->add('card-unidade-produtiva-end', 'card-end');
 

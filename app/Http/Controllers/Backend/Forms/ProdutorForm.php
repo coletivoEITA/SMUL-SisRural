@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Forms;
 
+use Illuminate\Support\Facades\Auth;
 use App\Enums\CheckboxEnum;
 use App\Enums\ProdutorStatusEnum;
 use Kris\LaravelFormBuilder\Form;
@@ -361,6 +362,17 @@ class ProdutorForm extends Form
             'label' => 'Distrito',            
         ])->add('card-endereco-end', 'fieldset-end', []);
 
+        // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.
+        $selected_uf = [];
+        $selected_municipio = NULL;
+        if(!isset($this->model['estado_id'])){
+            $user = Auth::user();
+            if($uf = $user->getDefaultUF()){
+                $selected_uf = ["selected" => $uf];
+            }
+            $selected_municipio = $user->getDefaultMunicipio();
+        }
+
         $this->add(
             'estado_id',
             'select',
@@ -369,8 +381,9 @@ class ProdutorForm extends Form
                 'empty_value' => 'Selecione',
                 'choices' => \App\Models\Core\EstadoModel::orderByRaw('FIELD(uf, "SP") DESC, nome')->pluck('nome', 'id')->toArray(),
                 'rules' => 'required',
-                'error' => __('validation.required', ['attribute' => 'Estado'])
-        ])->add(
+                'error' => __('validation.required', ['attribute' => 'Estado']),                
+            ] + $selected_uf
+        )->add(
             'cidade_id',
             'select',
             [
@@ -378,7 +391,8 @@ class ProdutorForm extends Form
                 'empty_value' => 'Selecione',
                 'choices' => @$this->model['estado_id'] ? \App\Models\Core\CidadeModel::where('estado_id', @$this->model['estado_id'])->pluck('nome', 'id')->sortBy('nome')->toArray() : [],
                 'rules' => 'required',
-                'error' => __('validation.required', ['attribute' => 'Município'])
+                'error' => __('validation.required', ['attribute' => 'Município']),
+                'attr' => ['municipio_selected' => $selected_municipio]
         ])->add(
             'card-dados-end', 'card-end', [            
         ]);

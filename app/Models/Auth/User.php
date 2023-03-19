@@ -225,4 +225,53 @@ class User extends BaseUser
     {
         return $this->belongsToMany(CadernoModel::class)->withTimestamps();
     }
+
+    /**
+     * Retorna uma UF, caso usuário esteja associado a apenas uma UF via Unidade Operacional
+     *
+     * @return string
+     */
+    public function getDefaultUF()
+    {
+        $ufs = [];
+        $userUOs = $this->unidadesOperacionais()->get();
+        foreach($userUOs as $UO){
+            $UO_ufs = $UO->abrangenciaEstadual()->get();
+            foreach($UO_ufs as $UO_uf){
+                if(!in_array($UO_uf->pivot->estado_id, $ufs)){
+                    $ufs[] = $UO_uf->pivot->estado_id;
+                }
+            }
+        }
+        if(count($ufs) == 1){
+            return $ufs[0];
+        } else {
+            return NULL;
+        }
+    }
+
+    /**
+     * Retorna um Municipio, caso usuário esteja associado a apenas um Municipio via Unidade Operacional
+     *
+     * @return string
+     */
+    public function getDefaultMunicipio()
+    {
+        $municipios = [];
+        $userUOs = $this->unidadesOperacionais()->get();
+        foreach($userUOs as $UO){
+            $UO_municipios = $UO->abrangenciaMunicipal()->get();
+            foreach($UO_municipios as $UO_municipio){
+                if(!in_array($UO_municipio->pivot->cidade_id, $municipios)){
+                    $municipios[] = $UO_municipio->pivot->cidade_id;
+                }
+            }    
+        }
+        if(count($municipios) == 1){
+            return $municipios[0];
+        } else {
+            return NULL;
+        }
+    }    
+
 }
