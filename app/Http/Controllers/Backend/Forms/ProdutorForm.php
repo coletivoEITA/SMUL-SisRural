@@ -369,7 +369,9 @@ class ProdutorForm extends Form
             $user = Auth::user();
             if($uf = $user->getDefaultUF()){
                 $selected_uf = ["selected" => $uf];
-            }
+            }            
+        }
+        if(!isset($this->model['cidade_id'])){
             $selected_municipio = $user->getDefaultMunicipio();
         }
 
