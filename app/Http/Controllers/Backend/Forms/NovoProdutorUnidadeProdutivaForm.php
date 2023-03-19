@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Forms;
 
+use App\Enums\ProdutorStatusEnum;
 use Kris\LaravelFormBuilder\Form;
 
 /**
@@ -40,7 +41,17 @@ class NovoProdutorUnidadeProdutivaForm extends Form
             'attr' => [
                 '_mask' => '99 99999999?9',
             ],
-        ])->add('card-produtor-end', 'card-end', []);
+        ])->add(
+            'status',
+            'select',
+            [
+                'label' => 'Status',
+                'choices' => ProdutorStatusEnum::toSelectArray(),
+                'empty_value' => 'Selecione',
+                'rules' => 'required',
+                'error' => __('validation.required', ['attribute' => 'Status']),
+            ]            
+        )->add('card-produtor-end', 'card-end', []);
 
         /**
          * Bloco da Unidade Produtiva
