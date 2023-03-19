@@ -220,6 +220,7 @@ class DadosGeraisSeeder extends Seeder
             ['id' => 5, 'nome' => 'Realiza queima do lixo', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 6, 'nome' => 'Enterra o lixo', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 7, 'nome' => 'Descarta o lixo nos rios', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 8, 'nome' => 'Alimentação animal', 'created_at' => $createdAt, 'updated_at' => $createdAt],
         ]);
 
         \App\Models\Core\StatusAcompanhamentoModel::insert([
