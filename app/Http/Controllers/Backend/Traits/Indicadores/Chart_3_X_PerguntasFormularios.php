@@ -98,7 +98,7 @@ trait Chart_3_X_PerguntasFormularios
     {
         // $fromSub = $this->chartService->getFormularios($requestData, false)
         $fromSub = $this->chartService->getFormulariosComFiltroPergunta($requestData)
-            ->where('status', ChecklistStatusEnum::Finalizado)
+            // ->where('status', ChecklistStatusEnum::Finalizado)
             ->addSelect('checklist_unidade_produtivas.unidade_produtiva_id');
 
         //extrai o ultimo formulario aplicado dentro do período selecionado

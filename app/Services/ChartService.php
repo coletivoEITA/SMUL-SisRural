@@ -311,8 +311,8 @@ class ChartService
                 'unidade_produtiva:id,uid,nome,socios,lat,lng,cidade_id,estado_id',
             ]
         )
-            ->select('checklist_unidade_produtivas.id', 'checklist_unidade_produtivas.uid', 'checklist_unidade_produtivas.checklist_id', 'checklist_unidade_produtivas.produtor_id')
-            ->whereNotIn('checklist_unidade_produtivas.status', [ChecklistStatusEnum::Rascunho]);
+            ->select('checklist_unidade_produtivas.id', 'checklist_unidade_produtivas.uid', 'checklist_unidade_produtivas.checklist_id', 'checklist_unidade_produtivas.produtor_id');
+            // ->whereNotIn('checklist_unidade_produtivas.status', [ChecklistStatusEnum::Rascunho]);
 
         //Força um template p/ ser utilizado na listagem (DataTable)
         if (@$data['filter_checklist_id']) {
