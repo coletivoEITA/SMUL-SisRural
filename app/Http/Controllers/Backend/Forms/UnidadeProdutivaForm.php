@@ -82,11 +82,11 @@ class UnidadeProdutivaForm extends Form
             'label' => 'Nome da Unidade Produtiva',
             'rules' => 'required',
             'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
-        // ])->add('cep', 'text', [
-        //     'label' => 'CEP (Código de Endereçamento Postal)',            
-        //     'attr' => [
-        //         '_mask' => '99999-999',
-        //     ],
+        ])->add('cep', 'text', [
+            'label' => 'CEP (Código de Endereçamento Postal)',            
+            'attr' => [
+                '_mask' => '99999-999',
+            ],
         ])->add('endereco', 'text', [
             'label' => 'Endereço',
             'rules' => 'required',

@@ -18,10 +18,10 @@
                     <th width="20%">Nome da Unidade Produtiva</th>
                     <td>{{$unidadeProdutiva->nome}}</td>
                 </tr>
-                <!--<tr>
+                <tr>
                     <th><abbr title="Código de Endereçamento Postal">CEP</abbr></th>
                     <td>{{$unidadeProdutiva->cep}}</td>
-                </tr>-->
+                </tr>
                 <tr>
                     <th>Endereço</th>
                     <td>{{$unidadeProdutiva->endereco}}</td>

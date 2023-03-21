@@ -349,11 +349,11 @@ class ProdutorForm extends Form
         )->add('card-endereco-start', 'fieldset-start', [
             'id' => 'card-endereco',
             'title' => 'Endereço'
-        // ])->add('cep', 'text', [
-        //     'label' => 'CEP (Código de Endereçamento Postal)',
-        //     'attr' => [
-        //         '_mask' => '99999-999',
-        //     ],
+        ])->add('cep', 'text', [
+            'label' => 'CEP (Código de Endereçamento Postal)',
+            'attr' => [
+                '_mask' => '99999-999',
+            ],
         ])->add('endereco', 'text', [
             'label' => 'Endereço',
         ])->add('bairro', 'text', [
