@@ -22,6 +22,10 @@ return [
         'deleted' => 'Fichas de Visita Excluídas',
         'apply' => 'Aplicar Ficha de Visita',
         'edit' => 'Editar Ficha de Visita',
+        'import' => 'Importar Ficha de Visita',
+        'questions' => 'Perguntas para Ficha de Visita',
+        'base' => 'Ficha de Visita Base',
+
     ],
     'unidade_produtiva' => [
         'label' => 'Unidade Produtiva',

@@ -432,7 +432,7 @@
                             active_class(Route::is('admin.core.templates_caderno.*'), 'c-active')
                         }}" href="{{ route('admin.core.templates_caderno.index') }}">
                             <i class="c-sidebar-nav-icon c-icon cil-description"></i>
-                            Caderno de Campo Base
+                            {{ __('concepts.caderno_de_campo.base') }}
                             </a>
                     </li>
                 @endcan
@@ -442,7 +442,7 @@
                             active_class(Route::is('admin.core.template_perguntas.*'), 'c-active')
                         }}" href="{{ route('admin.core.template_perguntas.index') }}">
                             <i class="c-sidebar-nav-icon c-icon cil-speech"></i>
-                            Perguntas p/ Cad. de Campo
+                            {{ __('concepts.caderno_de_campo.questions') }}
                         </a>
                     </li>
                 @endcan
@@ -559,7 +559,7 @@
                         active_class(Route::is('admin.core.importador.createCaderno'), 'c-active')
                     }}" href="{{ route('admin.core.importador.createCaderno') }}">
                         <i class="c-sidebar-nav-icon c-icon cil-shield-alt"></i>
-                        Importar Caderno Campo
+                        {{ __('concepts.caderno_de_campo.import') }}
                     </a>
 
                     <a class="c-sidebar-nav-link {{
