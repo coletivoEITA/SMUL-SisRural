@@ -43,11 +43,9 @@
                 $("#sem-unidade-produtiva").removeClass('d-none');
                 $("#com-unidade-produtiva").addClass('d-none');
 
-                $("#nome_unidade_produtiva").attr("required", "required");
                 $("#estado_id").attr("required", "required");
                 $("#cidade_id").attr("required", "required");
                 $("#endereco").attr("required", "required");
-                $("#nome_unidade_produtiva").attr("required", "required");
                 $("#unidade_produtiva_id").removeAttr("required");
 
                 if ($(this).prop("checked")) {
@@ -55,16 +53,28 @@
                     $("#sem-unidade-produtiva").addClass('d-none');
                     $("#com-unidade-produtiva").removeClass('d-none');
 
-                    $("#nome_unidade_produtiva").removeAttr("required");
                     $("#estado_id").removeAttr("required");
                     $("#cidade_id").removeAttr("required");
                     $("#endereco").removeAttr("required");
-                    $("#nome_unidade_produtiva").removeAttr("required");
                     $("#unidade_produtiva_id").attr("required", "required");
                 }
             }).change();
             // selectAutoYesNo("#fl_exist_unidade_produtiva", '.card-exist-unidade-produtiva');
             // selectAutoYesNoNone("#fl_exist_unidade_produtiva", '.card-unidade-produtiva');
+
+            function processForm(e) {
+              if (e.preventDefault) e.preventDefault();
+              if(!$("#fl_unidade_produtiva").prop("checked") && !$("#nome_unidade_produtiva").val()) {
+                $("#nome_unidade_produtiva").val($("#nome_produtor").val());
+              }
+              $(this).submit();
+            }
+
+            var form = $("#form-builder");
+            if (form) {
+              form.one("submit", processForm);
+            }
+
         });
     </script>
 @endpush

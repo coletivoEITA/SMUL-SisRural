@@ -95,7 +95,6 @@ class NovoProdutorUnidadeProdutivaForm extends Form
         $this->add('fieldset-unidade-produtiva-novo-start', 'fieldset-start', ['id' => 'sem-unidade-produtiva'])
             ->add('nome_unidade_produtiva', 'text', [
                 'label' => 'Nome da Unidade Produtiva',
-                'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
             ])->add('cep', 'text', [
                 'label' => 'CEP (Código de Endereçamento Postal)',
                 'attr' => [
