@@ -70,7 +70,7 @@ class NovoProdutorUnidadeProdutivaController extends Controller
         }
 
         $data = $request->all();
-
+        
         //CPF único para "produtores"
         if (@$data['cpf']) {
             $request->validate([
@@ -92,6 +92,10 @@ class NovoProdutorUnidadeProdutivaController extends Controller
         //Sync das abrangencias da unidade produtiva cadastrada
         $this->service->syncAbrangencias($unidadeProdutiva);
 
-        return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
+        if ($data['submit_action'] == 'close_after') {
+            return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
+        } else {
+            return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
+        }
     }
 }

@@ -22,8 +22,10 @@
             </div>
 
             <div class="col text-right">
-                <button type="submit" class="btn btn-primary px-5" form="form-builder">Salvar</button>
+                <button id="close_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar e Fechar</button>
+                <button id="edit_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar</button>
             </div>
+
         </div>
     </div>
 </div>
@@ -62,18 +64,21 @@
             // selectAutoYesNo("#fl_exist_unidade_produtiva", '.card-exist-unidade-produtiva');
             // selectAutoYesNoNone("#fl_exist_unidade_produtiva", '.card-unidade-produtiva');
 
-            function processForm(e) {
-              if (e.preventDefault) e.preventDefault();
+            function submitProdUPForm(action) {
               if(!$("#fl_unidade_produtiva").prop("checked") && !$("#nome_unidade_produtiva").val()) {
                 $("#nome_unidade_produtiva").val($("#nome_produtor").val());
               }
-              $(this).submit();
+              $('<input>').attr({
+                    type: 'hidden',
+                    id: 'submit_action',
+                    name: 'submit_action',
+                    value: action,
+                }).appendTo('#form-builder');
+              $("#form-builder").submit();
             }
 
-            var form = $("#form-builder");
-            if (form) {
-              form.one("submit", processForm);
-            }
+            $("#close_after_btn").click(() => submitProdUPForm('close_after'));
+            $("#edit_after_btn").click(() => submitProdUPForm('edit_after'));
 
         });
     </script>
