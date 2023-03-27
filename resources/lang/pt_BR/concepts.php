@@ -35,6 +35,7 @@ return [
         'edit' => 'Editar Unidade Produtiva',
         'dashboard' => 'Dashboard da Unidade Produtiva',
         'data' => 'Dados da Unidade Produtiva',
+        'sanitation' => 'Saneamento',
     ],
     'produtora' => [
         'label' => 'Produtor/a',

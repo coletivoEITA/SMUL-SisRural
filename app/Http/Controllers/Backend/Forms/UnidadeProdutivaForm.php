@@ -345,7 +345,7 @@ class UnidadeProdutivaForm extends Form
          * Bloco - Saneamento Rural
          */
         $this->add('card-agua-start', 'card-start', [
-            'title' => 'Saneamento',
+            'title' => __('concepts.unidade_produtiva.sanitation'),
             'id' => 'card-saneamento',
         ])->add('outorga_id', 'select', [
             'label' => 'Possui Outorga?',

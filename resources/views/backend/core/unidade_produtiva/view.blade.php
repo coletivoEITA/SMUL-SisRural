@@ -246,7 +246,7 @@
         @endslot
     @endcardater
 
-    @cardater(['title'=>'Saneamento'])
+    @cardater(['title'=>__('conecpts.unidade_produtiva.sanitation')])
         @slot('body')
             <table class="table table-hover">
                 <tr>
