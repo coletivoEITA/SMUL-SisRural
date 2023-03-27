@@ -171,7 +171,11 @@
                 <tr>
                     <th width="20%">Observações sobre a área</th>
                     <td>{{$unidadeProdutiva->observacoes_sobre_area}}</td>
-                </tr>                                
+                </tr>   
+                <tr>
+                    <th width="20%">Observações sobre a área</th>
+                    <td>{{$unidadeProdutiva->area_disponivel_expansao}}</td>
+                </tr>                              
                 <tr>
                     <th>Processa a produção?</th>
                     <td>{{$unidadeProdutiva->fl_producao_processa ? App\Enums\ProcessaProducaoEnum::toSelectArray()[$unidadeProdutiva->fl_producao_processa] : 'Sem resposta'}}</td>

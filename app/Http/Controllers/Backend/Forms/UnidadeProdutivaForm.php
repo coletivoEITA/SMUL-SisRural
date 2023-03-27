@@ -262,6 +262,8 @@ class UnidadeProdutivaForm extends Form
             'label' => 'Área produtiva (' . config('app.area_sigla') . ')',
         ])->add('observacoes_sobre_area', 'text', [
             'label' => 'Observações sobre a área',                        
+        ])->add('area_disponivel_expansao', 'number', [
+            'label' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
         ])->add('card-solo-end', 'card-end', []);
 
         /**
