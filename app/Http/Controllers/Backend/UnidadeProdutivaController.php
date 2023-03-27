@@ -282,7 +282,10 @@ class UnidadeProdutivaController extends Controller
         }
 
         /*Custom Redirect*/
-        $redirect = route('admin.core.unidade_produtiva.index');
+        $redirect = route('admin.core.unidade_produtiva.index'); 
+        if (@$data['submit_action'] == 'edit_after') {
+            $redirect = route('admin.core.unidade_produtiva.edit', [$unidadeProdutiva->id]);
+        }
         //Redireciona para o dash caso tenha produtor na hora do cadastro inicial
         if (@$data['produtor_id'] && @$data['tipo_posse_id']) {
             $redirect = route('admin.core.produtor.dashboard', [$data['produtor_id']]);
@@ -430,6 +433,8 @@ class UnidadeProdutivaController extends Controller
         //Tratamento de redirect específico. Existem dois fluxos. a) Edição unidade produtiva b) Cadastro rápido de um produtor/unidade produtiva
         if (@$produtor->id) {
             return redirect()->route('admin.core.produtor.dashboard', ['produtor' => $produtor])->withFlashSuccess('Unidade Produtiva alterado com sucesso!');
+        } else if (@$data['submit_action'] == 'edit_after') {
+            return redirect(route('admin.core.unidade_produtiva.edit', [$unidadeProdutiva->id]))->withFlashSuccess('Unidade Produtiva alterada com sucesso!');
         } else {
             return redirect()->route('admin.core.unidade_produtiva.index')->withFlashSuccess('Unidade Produtiva alterada com sucesso!');
         }

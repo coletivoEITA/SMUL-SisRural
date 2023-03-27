@@ -236,8 +236,12 @@ class ProdutorController extends Controller
         }
 
         /*Custom Redirect*/
-        // Caso o usuário clique para adicionar unidades produtivas, vai para a tela de edição scrollando para a sessão
         $redirect = route('admin.core.produtor.index');
+        if (@$data['submit_action'] == 'edit_after') {
+            $redirect = route('admin.core.produtor.edit', [$produtorModel->id]);
+        }
+
+        // Caso o usuário clique para adicionar unidades produtivas, vai para a tela de edição scrollando para a sessão
         if (@$data['custom-redirect']) {
             $redirect = route('admin.core.produtor.edit', [$produtorModel->id, '#' . $data['custom-redirect']]);
         }
@@ -349,6 +353,8 @@ class ProdutorController extends Controller
         //Rota especial quando a edição vem do "cadastro rápido de um produtor/unidade produtiva" (NovoProdutorUnidadeProdutivaController)
         if (@$unidadeProdutiva->id) {
             return redirect()->route('admin.core.novo_produtor_unidade_produtiva.unidade_produtiva_edit', ['unidadeProdutiva' => $unidadeProdutiva, 'produtor' => $produtor])->withFlashSuccess('Produtor alterado com sucesso!');
+        } else if (@$data['submit_action'] == 'edit_after') {
+            return redirect(route('admin.core.produtor.edit', [$produtor->id]))->withFlashSuccess('Produtor alterado com sucesso!');
         } else {
             return redirect()->route('admin.core.produtor.index')->withFlashSuccess('Produtor alterado com sucesso!');
         }

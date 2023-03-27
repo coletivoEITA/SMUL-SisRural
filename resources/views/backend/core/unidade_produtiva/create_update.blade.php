@@ -81,7 +81,8 @@
                 </div>
 
                 <div class="col text-right">
-                    <button type="submit" class="btn btn-primary px-5" form="form-builder">Salvar</button>
+                    <button id="close_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar e Fechar</button>
+                    <button id="edit_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar</button>
                 </div>
             </div>
         </div>
@@ -122,6 +123,19 @@
             selectAutoComboSim('#fl_producao_processa', '#card-producao-processa');
 
             selectAutoYesNo("#solosCategoria input", '#card-outros-usos');
+
+            function submitProdutorForm(action) {
+                $('<input>').attr({
+                        type: 'hidden',
+                        id: 'submit_action',
+                        name: 'submit_action',
+                        value: action,
+                    }).appendTo('#form-builder');
+                $("#form-builder").submit();
+            }
+
+            $("#close_after_btn").click(() => submitProdutorForm('close_after'));
+            $("#edit_after_btn").click(() => submitProdutorForm('edit_after'));
 
         });
     </script>
