@@ -63,21 +63,13 @@
             // selectAutoYesNo("#fl_exist_unidade_produtiva", '.card-exist-unidade-produtiva');
             // selectAutoYesNoNone("#fl_exist_unidade_produtiva", '.card-unidade-produtiva');
 
-            function submitProdUPForm(action) {
-              if(!$("#fl_unidade_produtiva").prop("checked") && !$("#nome_unidade_produtiva").val()) {
-                $("#nome_unidade_produtiva").val($("#nome_produtor").val());
-              }
-              $('<input>').attr({
-                    type: 'hidden',
-                    id: 'submit_action',
-                    name: 'submit_action',
-                    value: action,
-                }).appendTo('#form-builder');
-              $("#form-builder").submit();
-            }
-
-            $("#close_after_btn").click(() => submitProdUPForm('close_after'));
-            $("#edit_after_btn").click(() => submitProdUPForm('edit_after'));
+            let edited_nome_unidade_produtiva = false;
+            $("#nome_unidade_produtiva").keyup(function() {edited_nome_unidade_produtiva = true});
+            $("#nome_produtor").keyup(function() {
+                if(!$("#fl_unidade_produtiva").prop("checked") && !edited_nome_unidade_produtiva) {
+                    $("#nome_unidade_produtiva").val($("#nome_produtor").val());
+                }
+            })
 
         });
     </script>
