@@ -92,10 +92,6 @@ class NovoProdutorUnidadeProdutivaController extends Controller
         //Sync das abrangencias da unidade produtiva cadastrada
         $this->service->syncAbrangencias($unidadeProdutiva);
 
-        if ($data['submit_action'] == 'close_after') {
-            return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
-        } else {
-            return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
-        }
+        return redirect(route('admin.core.novo_produtor_unidade_produtiva.produtor_edit', ['produtor' => $produtor, 'unidadeProdutiva' => $unidadeProdutiva]))->withFlashSuccess('Produtor/Unidade Produtiva cadastrado com sucesso!');
     }
 }

@@ -22,8 +22,7 @@
             </div>
 
             <div class="col text-right">
-                <button id="close_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar e Fechar</button>
-                <button id="edit_after_btn" class="btn btn-primary px-5" form="form-builder">Salvar</button>
+                <button type="submit" class="btn btn-primary px-5" form="form-builder">Salvar</button>
             </div>
 
         </div>
