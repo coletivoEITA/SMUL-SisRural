@@ -88,8 +88,15 @@
                 $("#form-builder").submit();
             }
 
+            function processForm(e) {
+                if (e.preventDefault) e.preventDefault();
+                submitProdutorForm('edit_after');
+            }
+
             $("#close_after_btn").click(() => submitProdutorForm('close_after'));
             $("#edit_after_btn").click(() => submitProdutorForm('edit_after'));
+            $("#form-builder").one("submit", processForm);
+            
         });
     </script>
 @endpush
