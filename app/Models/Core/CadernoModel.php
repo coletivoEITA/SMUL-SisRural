@@ -258,9 +258,9 @@ class CadernoModel extends Model
 
             if ($pergunta['tipo'] == TipoTemplatePerguntaEnum::Check || $pergunta['tipo'] == TipoTemplatePerguntaEnum::MultipleCheck) {
                 foreach ($resposta as $kk => $vv) {
-    			if(isset($vv['template_reposta']) && $vv['template_resposta']){
-				$value[] = $vv['template_resposta']['descricao'];
-			}
+                    if(isset($vv['template_reposta']) && $vv['template_resposta']){
+                        $value[] = $vv['template_resposta']['descricao'];
+                    }
                 }
             } else {
                 $value = [@$resposta[0]['resposta']];
