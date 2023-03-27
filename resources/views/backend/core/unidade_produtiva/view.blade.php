@@ -246,7 +246,7 @@
         @endslot
     @endcardater
 
-    @cardater(['title'=>'Saneamento Rural'])
+    @cardater(['title'=>'Saneamento'])
         @slot('body')
             <table class="table table-hover">
                 <tr>
