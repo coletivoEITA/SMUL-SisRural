@@ -255,7 +255,7 @@ class UnidadeProdutivaForm extends Form
          * Bloco Uso do Solo - dados gerais
          */
         $this->add('card-solo-start', 'card-start', [
-            'title' => 'Uso do Solo',
+            'title' => 'Áreas',
         ])->add('area_total_solo_lado1', 'number', [
             'label' => 'Área total da propriedade - Lado 1',
         ])->add('area_total_solo_lado2', 'number', [
