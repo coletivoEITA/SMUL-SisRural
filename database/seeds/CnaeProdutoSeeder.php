@@ -1,6 +1,6 @@
 <?php
 
-use App\CnaeProduto;
+use App\Models\Core\CnaeProduto;
 use Illuminate\Database\Seeder;
 
 class CnaeProdutoSeeder extends Seeder
