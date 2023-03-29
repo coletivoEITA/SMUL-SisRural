@@ -143,6 +143,29 @@
             $("#edit_after_btn").click(() => submitProdutorForm('edit_after'));
             $("#form-builder").one("submit", processForm);
 
+            function setAreaTotalSolo() {
+                if ($("#area_total_solo_lado1").val() && $("#area_total_solo_lado2").val()) {
+                    $("#area_total_solo").val($("#area_total_solo_lado1").val()*$("#area_total_solo_lado2").val());
+                }
+            }
+            function setAreaDisponivelExpansao() {
+                if ($("#area_disponivel_expansao_lado1").val() && $("#area_disponivel_expansao_lado2").val()) {
+                    $("#area_disponivel_expansao").val($("#area_disponivel_expansao_lado1").val()*$("#area_disponivel_expansao_lado2").val());
+                }
+            }
+            function setAreaProdutiva() {
+                if ($("#area_produtiva_lado1").val() && $("#area_produtiva_lado2").val()) {
+                    $("#area_produtiva").val($("#area_produtiva_lado1").val()*$("#area_produtiva_lado2").val());
+                }
+            }
+
+            $("#area_total_solo_lado1").keyup(() => setAreaTotalSolo())
+            $("#area_total_solo_lado2").keyup(() => setAreaTotalSolo())
+            $("#area_disponivel_expansao_lado1").keyup(() => setAreaDisponivelExpansao())
+            $("#area_disponivel_expansao_lado2").keyup(() => setAreaDisponivelExpansao())
+            $("#area_produtiva_lado1").keyup(() => setAreaProdutiva())
+            $("#area_produtiva_lado2").keyup(() => setAreaProdutiva())
+
         });
     </script>
 @endpush

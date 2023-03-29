@@ -14,7 +14,7 @@ class AddAreaDisponivelExpansao extends Migration
     public function up()
     {
         Schema::table('unidade_produtivas', function (Blueprint $table) {
-            $table->bigInteger('area_disponivel_expansao')->nullable();
+            $table->decimal('area_disponivel_expansao', 8, 2)->nullable();
         });
     }
 

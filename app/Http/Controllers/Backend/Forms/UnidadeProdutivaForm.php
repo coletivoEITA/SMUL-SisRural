@@ -256,14 +256,26 @@ class UnidadeProdutivaForm extends Form
          */
         $this->add('card-solo-start', 'card-start', [
             'title' => 'Uso do Solo',
+        ])->add('area_total_solo_lado1', 'number', [
+            'label' => 'Área total da propriedade - Lado 1',
+        ])->add('area_total_solo_lado2', 'number', [
+            'label' => 'Área total da propriedade - Lado 2',
         ])->add('area_total_solo', 'number', [
             'label' => 'Área total da propriedade (' . config('app.area_sigla') . ')',
+        ])->add('area_produtiva_lado1', 'number', [
+            'label' => 'Área produtiva - Lado 1',
+        ])->add('area_produtiva_lado2', 'number', [
+            'label' => 'Área produtiva - Lado 2',
         ])->add('area_produtiva', 'number', [
             'label' => 'Área produtiva (' . config('app.area_sigla') . ')',
-        ])->add('observacoes_sobre_area', 'text', [
-            'label' => 'Observações sobre a área',                        
+        ])->add('area_disponivel_expansao_lado1', 'number', [
+            'label' => 'Área disponível para expansão produtiva - Lado 1',
+        ])->add('area_disponivel_expansao_lado2', 'number', [
+            'label' => 'Área disponível para expansão produtiva - Lado 2',
         ])->add('area_disponivel_expansao', 'number', [
             'label' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
+        ])->add('observacoes_sobre_area', 'text', [
+            'label' => 'Observações sobre a área',                        
         ])->add('card-solo-end', 'card-end', []);
 
         /**
