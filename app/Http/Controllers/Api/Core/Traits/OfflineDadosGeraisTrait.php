@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Core\Traits;
 use App\Models\Auth\User;
 use App\Models\Core\AssistenciaTecnicaTipoModel;
 use App\Models\Core\CanalComercializacaoModel;
+use App\Models\Core\DestinacaoProducaoModel;
 use App\Models\Core\CertificacaoModel;
 use App\Models\Core\DedicacaoModel;
 use App\Models\Core\DominioModel;
@@ -62,6 +63,8 @@ trait OfflineDadosGeraisTrait
         $data['tipo_posses'] = TipoPosseModel::withTrashed()->whereUpdatedAt($request->input('updated_at_tipo_posses'))->get()->toArray();
 
         $data['canal_comercializacoes'] = CanalComercializacaoModel::withTrashed()->whereUpdatedAt($request->input('updated_at_canal_comercializacoes'))->get()->toArray();
+
+        $data['destinacao_producao'] = DestinacaoProducaoModel::withTrashed()->whereUpdatedAt($request->input('updated_at_destinacao_producao'))->get()->toArray();
 
         $data['solo_categorias'] = SoloCategoriaModel::withTrashed()->whereUpdatedAt($request->input('updated_at_solo_categorias'))->get()->toArray();
 

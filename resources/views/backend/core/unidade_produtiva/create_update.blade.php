@@ -112,17 +112,20 @@
             $("select[name='pressaoSociais[]']").select2();
             $("select[name='residuoSolidos[]']").select2();
             $("select[name='esgotamentoSanitarios[]']").select2();
+            $("select[name='destinacaoProd[]']").select2();
 
             selectAutoComboSim('#fl_car', '#card-car');
 
             selectAutoYesNo("#fl_risco_contaminacao", '.card-risco-contaminacao');
             selectAutoYesNo("#fl_certificacoes", '#card-certificacoes');
-            selectAutoYesNo("#fl_comercializacao", '#card-comercializacao');
             selectAutoYesNo("#fl_pressao_social", '#card-pressao-social');
-
+            
             selectAutoComboSim('#fl_producao_processa', '#card-producao-processa');
-
+            
             selectAutoYesNo("#solosCategoria input", '#card-outros-usos');
+            
+            multiSelectAuto("select[name='destinacaoProd[]']", "Comercialização", ".card-comercializacao")
+            selectAutoYesNo("#fl_comprova_origem_comercializacao", '#card-forma-comprova-comerc');
 
             function submitProdutorForm(action) {
                 $('<input>').attr({

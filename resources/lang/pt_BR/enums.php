@@ -19,6 +19,7 @@ use App\Enums\RolesEnum;
 use App\Enums\SituacaoEnum;
 use App\Enums\TipoPontuacaoEnum;
 use App\Enums\UnidadeProdutivaCarEnum;
+use App\Enums\FrequenciaComercializacaoEnum;
 
 return [
 
@@ -168,5 +169,13 @@ return [
         ProcessaProducaoEnum::Sim => 'Sim',
         ProcessaProducaoEnum::Nao => 'Não',
         ProcessaProducaoEnum::NaoTemInteresse => 'Não tem interesse'
+    ],
+
+    FrequenciaComercializacaoEnum::class => [
+        FrequenciaComercializacaoEnum::Diario => 'Diário',
+        FrequenciaComercializacaoEnum::Semanal => 'Semanal',
+        FrequenciaComercializacaoEnum::Mensal => 'Mensal',
+        FrequenciaComercializacaoEnum::Anual => 'Anual',
+        FrequenciaComercializacaoEnum::Esporadico => 'Esporádico'
     ]
 ];

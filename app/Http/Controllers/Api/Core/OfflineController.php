@@ -35,6 +35,7 @@ use App\Models\Core\ProdutorModel;
 use App\Models\Core\ProdutorUnidadeProdutivaModel;
 use App\Models\Core\UnidadeProdutivaArquivoModel;
 use App\Models\Core\UnidadeProdutivaCanalComercializacaoModel;
+use App\Models\Core\UnidadeProdutivaDestinacaoProducaoModel;
 use App\Models\Core\UnidadeProdutivaCaracterizacaoModel;
 use App\Models\Core\UnidadeProdutivaCertificacaoModel;
 use App\Models\Core\UnidadeProdutivaEsgotamentoSanitarioModel;
@@ -219,6 +220,8 @@ class OfflineController extends Controller
         $return['unidade_produtiva_pressao_sociais'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_pressao_sociais, $unidadesProdutivasIdsAppIds, UnidadeProdutivaPressaoSocialModel::class);
 
         $return['unidade_produtiva_canal_comercializacoes'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_canal_comercializacoes, $unidadesProdutivasIdsAppIds, UnidadeProdutivaCanalComercializacaoModel::class);
+
+        $return['unidade_produtiva_destinacao_producao'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_destinacao_producao, $unidadesProdutivasIdsAppIds, UnidadeProdutivaDestinacaoProducaoModel::class);
 
         $return['unidade_produtiva_tipo_fonte_aguas'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_tipo_fonte_aguas, $unidadesProdutivasIdsAppIds, UnidadeProdutivaTipoFonteAguaModel::class);
 
