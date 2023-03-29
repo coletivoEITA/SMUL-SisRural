@@ -283,6 +283,15 @@ class UnidadeProdutivaForm extends Form
          */
 
         /**
+         * Bloco Características do Solo - dados gerais
+         */
+        $this->add('card-area-carac-start', 'card-start', [
+            'title' => 'Características do solo',
+        ])->add('caracteristica_solo', 'textarea', [
+            'label' => 'Características do solo',                        
+        ])->add('card-carac-solo-end', 'card-end', []);
+
+        /**
          * Bloco Uso do Solo - dados gerais
          */
         $this->add('card-solo-outros-start', 'card-start', [
