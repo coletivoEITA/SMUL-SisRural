@@ -283,10 +283,6 @@ class UnidadeProdutivaForm extends Form
         ])->add('card-solo-end', 'card-end', []);
 
         /**
-         * Bloco Uso do Solo - Iframe (adicionado via JS)
-         */
-
-        /**
          * Bloco Características do Solo - dados gerais
          */
         $this->add('card-area-carac-start', 'card-start', [
@@ -296,33 +292,37 @@ class UnidadeProdutivaForm extends Form
         ])->add('card-carac-solo-end', 'card-end', []);
 
         /**
+         * Bloco Culturas/Produção - Iframe (adicionado via JS)
+         */
+
+        /**
          * Bloco Uso do Solo - dados gerais
          */
-        $this->add('card-solo-outros-start', 'card-start', [
-            'title' => 'Uso do Solo',
-            'id' => 'card-outros-usos',
-        ])->add('solosCategoria', 'select', [
-            'label' => 'Outros Usos',
-            'choices' => SoloCategoriaModel::where('tipo', 'outros')->pluck('nome', 'id')->sortBy('nome')->toArray(),
-            'attr' => [
-                'multiple' => 'multiple',
-            ],
-        ])->add('outros_usos_descricao', 'textarea', [
-            'label' => 'Outros Usos - Descrição',
-            'attr' => [
-                'rows' => 2
-            ],
-            'wrapper' => [
-                'id' => 'card-outros-usos',
-            ]
-        ])->add('card-solo-outros-end', 'card-end', []);
+        // $this->add('card-solo-outros-start', 'card-start', [
+        //     'title' => 'Uso do Solo',
+        //     'id' => 'card-outros-usos',
+        // ])->add('solosCategoria', 'select', [
+        //     'label' => 'Outros Usos',
+        //     'choices' => SoloCategoriaModel::where('tipo', 'outros')->pluck('nome', 'id')->sortBy('nome')->toArray(),
+        //     'attr' => [
+        //         'multiple' => 'multiple',
+        //     ],
+        // ])->add('outros_usos_descricao', 'textarea', [
+        //     'label' => 'Outros Usos - Descrição',
+        //     'attr' => [
+        //         'rows' => 2
+        //     ],
+        //     'wrapper' => [
+        //         'id' => 'card-outros-usos',
+        //     ]
+        // ])->add('card-solo-outros-end', 'card-end', []);
 
-        
+      
         /**
          * Bloco - Comercialização
          */
         $this->add('card-comercializacao-start', 'card-start', [
-            'title' => 'Área e Produção',
+            'title' => 'Destinação da Produção',
             'id' => 'card-destinacao-producao',
         ])->add('destinacaoProducao', 'select', [
             'label' => 'Destinação da produção',
@@ -372,11 +372,6 @@ class UnidadeProdutivaForm extends Form
             'wrapper' => [
                 'id' => 'card-forma-comprova-comerc',
             ],
-        ])->add('gargalos', 'text', [
-            'label' => 'Gargalos',
-            'attr' => [
-                'placeholder' => 'Gargalos da produção, processamento e comercialização'
-            ]
         ])->add('card-comercializacao-end', 'card-end', []);
 
         /**
@@ -410,6 +405,21 @@ class UnidadeProdutivaForm extends Form
             ]
         ])->add('card-processa-end', 'card-end', []);
 
+        
+        /**
+         * Bloco - Gargalos
+         */
+
+        $this->add('card-gargalos-start', 'card-start', [            
+            'title' => 'Gargalos',
+            'id' => 'card-gargalos',            
+        ])->add('gargalos', 'text', [
+            'label' => 'Gargalos',
+            'attr' => [
+                'placeholder' => 'Gargalos da produção, processamento e comercialização'
+            ]
+        ])->add('card-gargalos-end', 'card-end', []); 
+       
 
         /**
          * Bloco - Saneamento Rural
