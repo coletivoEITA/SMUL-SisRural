@@ -112,7 +112,7 @@
             $("select[name='pressaoSociais[]']").select2();
             $("select[name='residuoSolidos[]']").select2();
             $("select[name='esgotamentoSanitarios[]']").select2();
-            $("select[name='destinacaoProd[]']").select2();
+            $("select[name='destinacaoProducao[]']").select2();
 
             selectAutoComboSim('#fl_car', '#card-car');
 
@@ -124,7 +124,7 @@
             
             selectAutoYesNo("#solosCategoria input", '#card-outros-usos');
             
-            multiSelectAuto("select[name='destinacaoProd[]']", "Comercialização", ".card-comercializacao")
+            multiSelectAuto("select[name='destinacaoProducao[]']", "Comercialização", ".card-comercializacao")
             selectAutoYesNo("#fl_comprova_origem_comercializacao", '#card-forma-comprova-comerc');
 
             function submitProdutorForm(action) {

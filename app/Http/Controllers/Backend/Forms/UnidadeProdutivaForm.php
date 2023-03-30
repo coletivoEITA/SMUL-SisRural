@@ -342,7 +342,7 @@ class UnidadeProdutivaForm extends Form
         $this->add('card-comercializacao-start', 'card-start', [
             'title' => 'Área e Produção',
             'id' => 'card-destinacao-producao',
-        ])->add('destinacaoProd', 'select', [
+        ])->add('destinacaoProducao', 'select', [
             'label' => 'Destinação da produção',
             'choices' => DestinacaoProducaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
             'attr' => [
