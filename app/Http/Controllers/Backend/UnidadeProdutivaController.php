@@ -320,15 +320,19 @@ class UnidadeProdutivaController extends Controller
             $checklist_id = config('app.checklist_dados_adicionais_unidade_produtiva');
             $checklist = ChecklistModel::find($checklist_id);
             $unidProdutivaRespostas = ChecklistUnidadeProdutivaController::getRespostas($checklist, NULL, $unidadeProdutiva);
-            $model = $unidadeProdutiva->toArray() + $unidProdutivaRespostas; // envia dados da UP e dados do checklist serializado
+            // inclui dados do checklist no objeto da UP
+            foreach($unidProdutivaRespostas as $k => $v){
+                $unidadeProdutiva->$k = $v;
+            }
+            $model = $unidadeProdutiva; 
         } else {
             $unidProdutivaRespostas = NULL;
             $checklist = NULL;
-            $model = $unidadeProdutiva->toArray();
+            $model = $unidadeProdutiva;
         }
 
         $produtores = $unidadeProdutiva->produtores();
-
+        
         $form = $formBuilder->create(UnidadeProdutivaForm::class, [
             'id' => 'form-builder',
             'method' => 'PATCH',

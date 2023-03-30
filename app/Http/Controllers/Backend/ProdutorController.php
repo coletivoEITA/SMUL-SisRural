@@ -274,11 +274,15 @@ class ProdutorController extends Controller
             $checklist_id = config('app.checklist_dados_adicionais_produtora');
             $checklist = ChecklistModel::find($checklist_id);
             $checklistRespostas = ChecklistUnidadeProdutivaController::getRespostas($checklist, $produtor, NULL);
-            $model = $produtor->toArray() + $unidadeProdutiva->toArray() + $checklistRespostas; // envia dados da produtora e dados do checklist serializado
+            // inclui dados do checklist no objeto da Produtora
+            foreach($checklistRespostas as $k => $v){
+                $produtor->$k = $v;
+            }            
+            $model = $produtor;
         } else {
             $unidProdutivaRespostas = NULL;
             $checklist = NULL;
-            $model = $produtor->toArray();
+            $model = $produtor;
         }
 
         $form = $formBuilder->create(ProdutorForm::class, [
