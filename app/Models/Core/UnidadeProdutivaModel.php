@@ -318,6 +318,26 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaResiduoSolidoModel::class, 'unidade_produtiva_id')->withTrashed();
     }
 
+    public function residuoOrganicos()
+    {
+        return $this->belongsToMany(ResiduoOrganicoModel::class, 'unidade_produtiva_residuo_organicos', 'unidade_produtiva_id', 'residuo_organico_id')->whereNull('unidade_produtiva_residuo_organicos.deleted_at')->using(UnidadeProdutivaResiduoOrganicoModel::class)->withPivot('id')->withTimestamps();
+    }
+    /**
+     * Utilizado pelo método "syncSoftDelete"
+     */
+    public function residuoOrganicosWithTrashed()
+    {
+        return $this->belongsToMany(ResiduoOrganicoModel::class, 'unidade_produtiva_residuo_organicos', 'unidade_produtiva_id', 'residuo_organico_id')->using(UnidadeProdutivaResiduoOrganicoModel::class)->withPivot('id')->withTimestamps();
+    }
+
+    /**
+     * Métodos "offline" utilizados p/ o download de dados do APP
+     */
+    public function residuoOrganicosOffline()
+    {
+        return $this->hasMany(UnidadeProdutivaResiduoOrganicoModel::class, 'unidade_produtiva_id')->withTrashed();
+    }
+
 
     public function esgotamentoSanitarios()
     {

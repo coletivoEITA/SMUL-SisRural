@@ -117,6 +117,7 @@
             $("select[name='certificacoes[]']").select2();
             $("select[name='pressaoSociais[]']").select2();
             $("select[name='residuoSolidos[]']").select2();
+            $("select[name='residuoOrganicos[]']").select2();
             $("select[name='esgotamentoSanitarios[]']").select2();
             $("select[name='destinacaoProducao[]']").select2();
 

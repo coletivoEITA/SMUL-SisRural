@@ -16,6 +16,7 @@ use App\Models\Core\EsgotamentoSanitarioModel;
 use App\Models\Core\OutorgaModel;
 use App\Models\Core\PressaoSocialModel;
 use App\Models\Core\ResiduoSolidoModel;
+use App\Models\Core\ResiduoOrganicoModel;
 use App\Models\Core\RiscoContaminacaoAguaModel;
 use App\Models\Core\SoloCategoriaModel;
 use App\Models\Core\TipoFonteAguaModel;
@@ -447,8 +448,14 @@ class UnidadeProdutivaForm extends Form
                 'class' => 'form-group row card-risco-contaminacao',
             ]
         ])->add('residuoSolidos', 'select', [
-            'label' => 'Destinação de resíduos sólidos',
+            'label' => 'Destinação de resíduos sólidos não orgânicos',
             'choices' => ResiduoSolidoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'attr' => [
+                'multiple' => 'multiple',
+            ],
+        ])->add('residuoOrganicos', 'select', [
+            'label' => 'Destinação de resíduos orgânicos',
+            'choices' => ResiduoOrganicoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],

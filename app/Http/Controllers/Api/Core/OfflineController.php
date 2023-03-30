@@ -233,6 +233,8 @@ class OfflineController extends Controller
 
         $return['unidade_produtiva_residuo_solidos'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_residuo_solidos, $unidadesProdutivasIdsAppIds, UnidadeProdutivaResiduoSolidoModel::class);
 
+        $return['unidade_produtiva_residuo_organicos'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_residuo_organicos, $unidadesProdutivasIdsAppIds, UnidadeProdutivaResiduoOrganicoModel::class);
+
         $return['unidade_produtiva_esgotamento_sanitarios'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_esgotamento_sanitarios, $unidadesProdutivasIdsAppIds, UnidadeProdutivaEsgotamentoSanitarioModel::class);
 
         $return['colaboradores'] = $this->saveRelatedUnidadeProdutiva($request->colaboradores, $unidadesProdutivasIdsAppIds, ColaboradorModel::class);

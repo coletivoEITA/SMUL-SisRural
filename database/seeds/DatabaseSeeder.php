@@ -129,6 +129,7 @@ class DatabaseSeeder extends Seeder
             SyncMvp2Seeder::class,
             DadosSampaRuralSeeder::class,
             SyncMvp4Seeder::class,
+            ResiduoOrganicoSeeder::class,
         ]);
 
         Model::reguard();
