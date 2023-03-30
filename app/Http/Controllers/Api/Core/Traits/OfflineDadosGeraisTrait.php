@@ -20,6 +20,7 @@ use App\Models\Core\RelacaoModel;
 use App\Models\Core\RendaAgriculturaModel;
 use App\Models\Core\RendimentoComercializacaoModel;
 use App\Models\Core\ResiduoSolidoModel;
+use App\Models\Core\FormaProcessamento;
 use App\Models\Core\ResiduoOrganicoModel;
 use App\Models\Core\RiscoContaminacaoAguaModel;
 use App\Models\Core\SoloCategoriaModel;
@@ -94,6 +95,8 @@ trait OfflineDadosGeraisTrait
         $data['esgotamento_sanitarios'] = EsgotamentoSanitarioModel::withTrashed()->whereUpdatedAt($request->input('updated_at_esgotamento_sanitarios'))->get()->toArray();
 
         $data['residuo_solidos'] = ResiduoSolidoModel::withTrashed()->whereUpdatedAt($request->input('updated_at_residuo_solidos'))->get()->toArray();
+
+        $data['residuo_solidos'] = FormaProcessamentoModel::withTrashed()->whereUpdatedAt($request->input('updated_at_residuo_solidos'))->get()->toArray();
 
         $data['residuo_organicos'] = ResiduoOrganicoModel::withTrashed()->whereUpdatedAt($request->input('updated_at_residuo_organicos'))->get()->toArray();
 

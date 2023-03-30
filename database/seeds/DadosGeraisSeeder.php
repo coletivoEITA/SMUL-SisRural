@@ -229,6 +229,14 @@ class DadosGeraisSeeder extends Seeder
             ['id' => 8, 'nome' => 'Alimentação animal', 'created_at' => $createdAt, 'updated_at' => $createdAt],
         ]);
 
+        \App\Models\Core\FormaProcessamentoModel::insert([
+            ['id' => 1, 'nome' => 'Compotas, geléias, pastas e conservas', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 2, 'nome' => 'Desidratados e moídos', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 3, 'nome' => 'Minimamente processados (lava, corta e embala)', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 4, 'nome' => 'Congelados', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 5, 'nome' => 'Panificados', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+        ]);
+
         \App\Models\Core\ResiduoOrganicoModel::insert([
             ['id' => 1, 'nome' => 'Compostagem', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 2, 'nome' => 'Coleta municipal', 'created_at' => $createdAt, 'updated_at' => $createdAt],

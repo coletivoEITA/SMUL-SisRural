@@ -120,6 +120,7 @@
             $("select[name='residuoOrganicos[]']").select2();
             $("select[name='esgotamentoSanitarios[]']").select2();
             $("select[name='destinacaoProducao[]']").select2();
+            $("select[name='formaProcessamento[]']").select2();
 
             selectAutoComboSim('#fl_car', '#card-car');
 
@@ -127,7 +128,7 @@
             selectAutoYesNo("#fl_certificacoes", '#card-certificacoes');
             selectAutoYesNo("#fl_pressao_social", '#card-pressao-social');
             
-            selectAutoComboSim('#fl_producao_processa', '#card-producao-processa');
+            selectAutoComboSim('#fl_producao_processa', '.card-producao-processa');
             
             selectAutoYesNo("#solosCategoria input", '#card-outros-usos');
             

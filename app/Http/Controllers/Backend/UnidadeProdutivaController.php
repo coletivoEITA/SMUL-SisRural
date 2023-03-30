@@ -278,6 +278,7 @@ class UnidadeProdutivaController extends Controller
         $unidadeProdutiva->pressaoSociais()->sync(@$data['pressaoSociais']);
         $unidadeProdutiva->residuoSolidos()->sync(@$data['residuoSolidos']);
         $unidadeProdutiva->residuoOrganicos()->sync(@$data['residuoOrganicos']);
+        $unidadeProdutiva->formaProcessamento()->sync(@$data['formaProcessamento']);
         $unidadeProdutiva->esgotamentoSanitarios()->sync(@$data['esgotamentoSanitarios']);
 
         //Upload do arquivo "croqui", caso tenha sido passado
@@ -438,6 +439,8 @@ class UnidadeProdutivaController extends Controller
         SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->residuoSolidosWithTrashed(), $unidadeProdutiva->id, @$data['residuoSolidos']);
 
         SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->residuoOrganicosWithTrashed(), $unidadeProdutiva->id, @$data['residuoOrganicos']);
+
+        SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->formaProcessamentoWithTrashed(), $unidadeProdutiva->id, @$data['formaProcessamento']);
 
         SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->esgotamentoSanitariosWithTrashed(), $unidadeProdutiva->id, @$data['esgotamentoSanitarios']);
 

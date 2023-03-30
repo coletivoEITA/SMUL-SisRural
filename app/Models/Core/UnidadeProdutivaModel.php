@@ -338,6 +338,26 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaResiduoOrganicoModel::class, 'unidade_produtiva_id')->withTrashed();
     }
 
+    public function formaProcessamento()
+    {
+        return $this->belongsToMany(FormaProcessamentoModel::class, 'unidade_produtiva_forma_processamento', 'unidade_produtiva_id', 'forma_processamento_id')->whereNull('unidade_produtiva_forma_processamento.deleted_at')->using(UnidadeProdutivaFormaProcessamentoModel::class)->withPivot('id')->withTimestamps();
+    }
+    /**
+     * Utilizado pelo método "syncSoftDelete"
+     */
+    public function formaProcessamentoWithTrashed()
+    {
+        return $this->belongsToMany(FormaProcessamentoModel::class, 'unidade_produtiva_forma_processamento', 'unidade_produtiva_id', 'forma_processamento_id')->using(UnidadeProdutivaFormaProcessamentoModel::class)->withPivot('id')->withTimestamps();
+    }
+
+    /**
+     * Métodos "offline" utilizados p/ o download de dados do APP
+     */
+    public function formaProcessamentoOffline()
+    {
+        return $this->hasMany(UnidadeProdutivaFormaProcessamentoModel::class, 'unidade_produtiva_id')->withTrashed();
+    }
+
 
     public function esgotamentoSanitarios()
     {

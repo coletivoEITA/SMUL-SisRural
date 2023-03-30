@@ -41,7 +41,9 @@ use App\Models\Core\UnidadeProdutivaCertificacaoModel;
 use App\Models\Core\UnidadeProdutivaEsgotamentoSanitarioModel;
 use App\Models\Core\UnidadeProdutivaModel;
 use App\Models\Core\UnidadeProdutivaPressaoSocialModel;
+use App\Models\Core\UnidadeProdutivaResiduoOrganicoModel;
 use App\Models\Core\UnidadeProdutivaResiduoSolidoModel;
+use App\Models\Core\UnidadeProdutivaFormaProcessamentoModel;
 use App\Models\Core\UnidadeProdutivaRespostaArquivoModel;
 use App\Models\Core\UnidadeProdutivaRespostaModel;
 use App\Models\Core\UnidadeProdutivaRiscoContaminacaoAguaModel;
@@ -234,6 +236,8 @@ class OfflineController extends Controller
         $return['unidade_produtiva_residuo_solidos'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_residuo_solidos, $unidadesProdutivasIdsAppIds, UnidadeProdutivaResiduoSolidoModel::class);
 
         $return['unidade_produtiva_residuo_organicos'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_residuo_organicos, $unidadesProdutivasIdsAppIds, UnidadeProdutivaResiduoOrganicoModel::class);
+        
+        $return['unidade_produtiva_forma_processamento'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_forma_processamento, $unidadesProdutivasIdsAppIds, UnidadeProdutivaFormaProcessamentoModel::class);
 
         $return['unidade_produtiva_esgotamento_sanitarios'] = $this->saveRelatedUnidadeProdutiva($request->unidade_produtiva_esgotamento_sanitarios, $unidadesProdutivasIdsAppIds, UnidadeProdutivaEsgotamentoSanitarioModel::class);
 

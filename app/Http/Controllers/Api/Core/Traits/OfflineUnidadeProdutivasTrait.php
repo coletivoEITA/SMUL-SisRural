@@ -53,6 +53,8 @@ trait OfflineUnidadeProdutivasTrait
                 $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_residuo_solidos'));
             }])->with(['residuoOrganicosOffline' => function ($query) use ($request) {
                 $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_residuo_organicos'));
+            }])->with(['formaProcessamentoOffline' => function ($query) use ($request) {
+                $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_forma_processamento'));
             }])->with(['esgotamentoSanitariosOffline' => function ($query) use ($request) {
                 $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_esgotamento_sanitarios'));
             }])->get()->toArray();

@@ -16,6 +16,7 @@ use App\Models\Core\EsgotamentoSanitarioModel;
 use App\Models\Core\OutorgaModel;
 use App\Models\Core\PressaoSocialModel;
 use App\Models\Core\ResiduoSolidoModel;
+use App\Models\Core\FormaProcessamentoModel;
 use App\Models\Core\ResiduoOrganicoModel;
 use App\Models\Core\RiscoContaminacaoAguaModel;
 use App\Models\Core\SoloCategoriaModel;
@@ -316,26 +317,6 @@ class UnidadeProdutivaForm extends Form
             ]
         ])->add('card-solo-outros-end', 'card-end', []);
 
-        /**
-         * Bloco - Processa Produção
-         */
-        $this->add('card-processa-start', 'card-start', [            
-            'title' => 'Processa Produção',
-            'id' => 'card-processamento',
-        ])->add('fl_producao_processa', 'select', [
-            'choices' => ProcessaProducaoEnum::toSelectArray(),
-            'empty_value' => 'Selecione',
-            'label' => 'Processa a produção?',
-        ])->add('producao_processa_descricao', 'textarea', [
-            'label' => 'Descreva o processamento da produção',
-            'attr' => [
-                'rows' => 2,
-            ],
-            'wrapper' => [
-                'id' => 'card-producao-processa',
-            ]
-        ])->add('card-processa-end', 'card-end', []);
-
         
         /**
          * Bloco - Comercialização
@@ -397,6 +378,37 @@ class UnidadeProdutivaForm extends Form
                 'placeholder' => 'Gargalos da produção, processamento e comercialização'
             ]
         ])->add('card-comercializacao-end', 'card-end', []);
+
+        /**
+         * Bloco - Processa Produção
+         */
+        $this->add('card-processa-start', 'card-start', [            
+            'title' => 'Processa Produção',
+            'id' => 'card-processamento',
+        ])->add('fl_producao_processa', 'select', [
+            'choices' => ProcessaProducaoEnum::toSelectArray(),
+            'empty_value' => 'Selecione',
+            'label' => 'Processa a produção?',
+        ])
+        ->add('formaProcessamento', 'select', [
+            'label' => 'Forma de processamento',
+            'choices' => FormaProcessamentoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'attr' => [
+                'multiple' => 'multiple',
+            ],
+            'wrapper' => [
+                'class' => 'form-group row card-producao-processa',
+            ]
+        ])
+        ->add('producao_processa_descricao', 'textarea', [
+            'label' => 'Descreva o processamento da produção',
+            'attr' => [
+                'rows' => 2,
+            ],
+            'wrapper' => [
+                'class' => 'form-group row card-producao-processa',
+            ]
+        ])->add('card-processa-end', 'card-end', []);
 
 
         /**
