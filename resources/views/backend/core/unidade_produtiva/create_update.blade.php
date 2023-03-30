@@ -31,7 +31,7 @@
 
             @include('backend.core.unidade_produtiva.lat_lng.index', ['lat' => @$form->lat->getValue(), 'lng'=> @$form->lng->getValue()])
 
-            {!!form_until($form, 'card-solo-end')!!}
+            {!!form_until($form, 'card-carac-solo-end')!!}
 
             @if (@$unidadeProdutiva)
                 <!-- <div class="mt-5">
@@ -44,8 +44,8 @@
                         @include('backend.components.iframe.html', ["id"=>$produtosId, "src"=>$produtosSrc])
                     </div>
                 </div>                
-            @else
-                @include('backend.components.card-iframe-add.html', ["title"=>"Uso do Solo", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Uso do Solo"])
+            <!-- @//else -->
+                <!-- @//include('backend.components.card-iframe-add.html', ["title"=>"Uso do Solo", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Uso do Solo"]) -->
             @endif
 
             {!!form_until($form, 'card-agua-end')!!}

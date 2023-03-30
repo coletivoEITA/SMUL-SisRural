@@ -21,7 +21,7 @@ trait UnidadeProdutivaCnaeProdutosTrait
      */
     public function produtosIndex(UnidadeProdutivaModel $unidadeProdutiva, Request $request)
     {
-        $title = 'Culturas';
+        $title = 'Culturas existentes';
         $addUrl = route('admin.core.unidade_produtiva.produtos.create', ["unidadeProdutiva" => $unidadeProdutiva]);
         $urlDatatable = route('admin.core.unidade_produtiva.produtos.datatable', ["unidadeProdutiva" => $unidadeProdutiva]);
         $labelAdd = 'Adicionar Cultura';
