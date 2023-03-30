@@ -135,6 +135,19 @@ function selectAutoComboSim(idSelect, idCard) {
         .change();
 }
 
+function multiSelectAuto(idSelect, value, idCard) {
+    $(idSelect)
+        .change(function() {
+            $(idCard).addClass("d-none");
+            $(this).select2('data').forEach(selected => {
+                if (selected.text.includes(value)) {
+                    $(idCard).removeClass("d-none");
+                }
+            })
+        })
+        .change();
+}
+
 /**
  * AutoLink - Ajax Refresh
  */

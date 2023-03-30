@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAreaDisponivelExpansao extends Migration
+class AddCaracteristicaSolo extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAreaDisponivelExpansao extends Migration
     public function up()
     {
         Schema::table('unidade_produtivas', function (Blueprint $table) {
-            $table->decimal('area_disponivel_expansao', 8, 2)->nullable();
+            $table->text('caracteristica_solo')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddAreaDisponivelExpansao extends Migration
     public function down()
     {
         Schema::table('unidade_produtivas', function (Blueprint $table) {
-            $table->dropColumn('area_disponivel_expansao');
+            $table->dropColumn('caracteristica_solo');
         });
     }
 }

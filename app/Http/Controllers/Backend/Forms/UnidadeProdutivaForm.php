@@ -10,6 +10,7 @@ use App\Enums\ProdutorUnidadeProdutivaStatusEnum;
 use App\Enums\UnidadeProdutivaCarEnum;
 use App\Helpers\General\AppHelper;
 use App\Models\Core\CanalComercializacaoModel;
+use App\Models\Core\DestinacaoProducaoModel;
 use App\Models\Core\CertificacaoModel;
 use App\Models\Core\EsgotamentoSanitarioModel;
 use App\Models\Core\OutorgaModel;
@@ -20,6 +21,7 @@ use App\Models\Core\SoloCategoriaModel;
 use App\Models\Core\TipoFonteAguaModel;
 use Kris\LaravelFormBuilder\Form;
 use App\Enums\TipoPerguntaEnum;
+use App\Enums\FrequenciaComercializacaoEnum;
 use App\Http\Controllers\Backend\ChecklistUnidadeProdutivaController;
 
 /**
@@ -255,20 +257,41 @@ class UnidadeProdutivaForm extends Form
          * Bloco Uso do Solo - dados gerais
          */
         $this->add('card-solo-start', 'card-start', [
-            'title' => 'Uso do Solo',
+            'title' => 'Áreas',
+        ])->add('area_total_solo_lado1', 'number', [
+            'label' => 'Área total da propriedade - Lado 1',
+        ])->add('area_total_solo_lado2', 'number', [
+            'label' => 'Área total da propriedade - Lado 2',
         ])->add('area_total_solo', 'number', [
             'label' => 'Área total da propriedade (' . config('app.area_sigla') . ')',
+        ])->add('area_produtiva_lado1', 'number', [
+            'label' => 'Área produtiva - Lado 1',
+        ])->add('area_produtiva_lado2', 'number', [
+            'label' => 'Área produtiva - Lado 2',
         ])->add('area_produtiva', 'number', [
             'label' => 'Área produtiva (' . config('app.area_sigla') . ')',
-        ])->add('observacoes_sobre_area', 'text', [
-            'label' => 'Observações sobre a área',                        
+        ])->add('area_disponivel_expansao_lado1', 'number', [
+            'label' => 'Área disponível para expansão produtiva - Lado 1',
+        ])->add('area_disponivel_expansao_lado2', 'number', [
+            'label' => 'Área disponível para expansão produtiva - Lado 2',
         ])->add('area_disponivel_expansao', 'number', [
             'label' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
+        ])->add('observacoes_sobre_area', 'text', [
+            'label' => 'Observações sobre a área',                        
         ])->add('card-solo-end', 'card-end', []);
 
         /**
          * Bloco Uso do Solo - Iframe (adicionado via JS)
          */
+
+        /**
+         * Bloco Características do Solo - dados gerais
+         */
+        $this->add('card-area-carac-start', 'card-start', [
+            'title' => 'Características do solo',
+        ])->add('caracteristica_solo', 'textarea', [
+            'label' => 'Características do solo',                        
+        ])->add('card-carac-solo-end', 'card-end', []);
 
         /**
          * Bloco Uso do Solo - dados gerais
@@ -311,29 +334,61 @@ class UnidadeProdutivaForm extends Form
                 'id' => 'card-producao-processa',
             ]
         ])->add('card-processa-end', 'card-end', []);
-        
 
+        
         /**
          * Bloco - Comercialização
          */
         $this->add('card-comercializacao-start', 'card-start', [
-            'title' => 'Comercialização',
-            'id' => 'card-realiza-comercializacao',
-        ])->add(
-            'fl_comercializacao',
-            'select',
-            [
-                'label' => 'Comercializa a Produção?',
-                'choices' => CheckboxEnum::toSelectArray()
-            ]
-        )->add('canaisComercializacao', 'select', [
+            'title' => 'Área e Produção',
+            'id' => 'card-destinacao-producao',
+        ])->add('destinacaoProd', 'select', [
+            'label' => 'Destinação da produção',
+            'choices' => DestinacaoProducaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'attr' => [
+                'multiple' => 'multiple',
+            ],
+        ])->add('canaisComercializacao', 'select', [
             'label' => 'Canais de Comercialização',
             'choices' => CanalComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
             'wrapper' => [
-                'id' => 'card-comercializacao'
+                'class' => 'form-group row card-comercializacao'
+            ],
+        ])->add('frequencia_comercializacao', 'select', [
+            'label' => ' Frequência da Comercialização',
+            'choices' => FrequenciaComercializacaoEnum::toSelectArray(),
+            'empty_value' => 'Selecione',
+            'wrapper' => [
+                'class' => 'form-group row card-comercializacao'
+            ],
+        ])->add(
+            'rendimento_comercializacao_id',
+            'select',
+            [
+                'label' => 'Rendimento da comercialização',
+                'empty_value' => 'Selecione',
+                'choices' => \App\Models\Core\RendimentoComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+                'wrapper' => [
+                    'class' => 'form-group row card-comercializacao'
+                ],
+            ]
+        )->add(
+            'fl_comprova_origem_comercializacao',
+            'select',
+            [
+                'label' => 'Comprova a origem da produção para a comercialização?',
+                'choices' => CheckboxEnum::toSelectArray(),
+                'wrapper' => [
+                    'class' => 'form-group row card-comercializacao',
+                ],
+            ]
+        )->add('forma_comprova_comercializacao', 'text', [
+            'label' => 'Forma de comprovação',
+            'wrapper' => [
+                'id' => 'card-forma-comprova-comerc',
             ],
         ])->add('gargalos', 'text', [
             'label' => 'Gargalos',

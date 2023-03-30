@@ -310,15 +310,18 @@ class ProdutorForm extends Form
                 'empty_value' => 'Selecione',
                 'choices' => \App\Models\Core\RendaAgriculturaModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
             ]
-        )->add(
-            'rendimento_comercializacao_id',
-            'select',
-            [
-                'label' => 'Rendimento da comercialização',
-                'empty_value' => 'Selecione',
-                'choices' => \App\Models\Core\RendimentoComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
-            ]
-        )->add('outras_fontes_renda', 'textarea', [
+        )
+        // ->add(
+        //     'rendimento_comercializacao_id',
+        //     'select',
+        //     [
+        //         'label' => 'Rendimento da comercialização',
+        //         'empty_value' => 'Selecione',
+        //         'choices' => \App\Models\Core\RendimentoComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+        //     ],
+            
+        // )
+        ->add('outras_fontes_renda', 'textarea', [
             'label' => 'Outras fontes de renda',
             'error' => __('validation.required', ['attribute' => 'Outras fontes de renda']),
             'attr' => [

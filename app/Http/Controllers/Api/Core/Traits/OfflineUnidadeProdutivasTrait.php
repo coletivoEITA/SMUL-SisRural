@@ -29,6 +29,8 @@ trait OfflineUnidadeProdutivasTrait
             ->select('id') //Otimização
             ->with(['canaisComercializacaoOffline' => function ($query) use ($request) {
                 $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_canal_comercializacoes'));
+            }])->with(['destinacaoProducaoOffline' => function ($query) use ($request) {
+                $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_destinacao_producao'));
             }])->with(['caracterizacoesOffline' => function ($query) use ($request) {
                 $query->whereUpdatedAt($request->input('updated_at_unidade_produtiva_caracterizacoes'));
             }])->with(['riscosContaminacaoAguaOffline' => function ($query) use ($request) {

@@ -135,6 +135,12 @@ class DadosGeraisSeeder extends Seeder
             ['nome' => 'Outros', 'created_at' => $createdAt, 'updated_at' => $createdAt],
         ]);
 
+        \App\Models\Core\DestinacaoProducaoModel::insert([
+            ['nome' => 'Autoconsumo', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['nome' => 'Comercialização', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['nome' => 'Trocas e doações', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+        ]);
+
         \App\Models\Core\RiscoContaminacaoAguaModel::insert([
             ['nome' => 'Pulverização da Área', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['nome' => 'Rio contaminado por propriedades vizinhas', 'created_at' => $createdAt, 'updated_at' => $createdAt],

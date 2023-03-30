@@ -268,6 +268,7 @@ class UnidadeProdutivaController extends Controller
 
         //Sync dos dados multiplos (relacionamento com outras tabelas)
         $unidadeProdutiva->canaisComercializacao()->sync(@$data['canaisComercializacao']);
+        $unidadeProdutiva->destinacaoProducao()->sync(@$data['destinacaoProducao']);
         $unidadeProdutiva->riscosContaminacaoAgua()->sync(@$data['riscosContaminacaoAgua']);
         $unidadeProdutiva->tiposFonteAgua()->sync(@$data['tiposFonteAgua']);
         $unidadeProdutiva->solosCategoria()->sync(@$data['solosCategoria']);
@@ -410,6 +411,8 @@ class UnidadeProdutivaController extends Controller
 
         //Sync custom, porque relacionamentos "belongsToMany" o "SoftDelete" não funciona ... foi criado uma função p/ esse tratamento especifico.
         SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->canaisComercializacaoWithTrashed(), $unidadeProdutiva->id, @$data['canaisComercializacao']);
+
+        SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->destinacaoProducaoWithTrashed(), $unidadeProdutiva->id, @$data['destinacaoProducao']);
 
         SoftDeleteHelper::syncSoftDelete($unidadeProdutiva->riscosContaminacaoAguaWithTrashed(), $unidadeProdutiva->id, @$data['riscosContaminacaoAgua']);
 
