@@ -6,6 +6,7 @@ use App\Helpers\General\AppHelper;
 use App\Helpers\General\SoftDeleteHelper;
 use App\Http\Controllers\Backend\Forms\UnidadeProdutivaForm;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaArquivosTrait;
+use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCnaeProdutosTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCaracterizacoesTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaColaboradoresTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaInstalacoesTrait;
@@ -36,6 +37,7 @@ class UnidadeProdutivaController extends Controller
     use FormBuilderTrait;
     use UnidadeProdutivaColaboradoresTrait;
     use UnidadeProdutivaInstalacoesTrait;
+    use UnidadeProdutivaCnaeProdutosTrait;
     use UnidadeProdutivaCaracterizacoesTrait;
     use UnidadeProdutivaArquivosTrait;
 
@@ -354,15 +356,19 @@ class UnidadeProdutivaController extends Controller
         $instalacoesId = 'iframeInstalacoes';
         $instalacoesSrc = route('admin.core.unidade_produtiva.instalacoes.index', compact('unidadeProdutiva'));
 
-        //Iframe "Uso do Solo" (ver UnidadeProdutivaCaracterizacoesTrait.php)
-        $caracterizacoesId = 'iframeCaracterizacoes';
-        $caracterizacoesSrc = route('admin.core.unidade_produtiva.caracterizacoes.index', compact('unidadeProdutiva'));
+        //Iframe "Culturas" (ver UnidadeProdutivaCnaeProdutosTrait.php)
+        $produtosId = 'iframeProdutos';
+        $produtosSrc = route('admin.core.unidade_produtiva.produtos.index', compact('unidadeProdutiva'));
+
+        // Iframe "Uso do Solo" (ver UnidadeProdutivaCaracterizacoesTrait.php)
+        // $caracterizacoesId = 'iframeCaracterizacoes';
+        // $caracterizacoesSrc = route('admin.core.unidade_produtiva.caracterizacoes.index', compact('unidadeProdutiva'));
 
         //Iframe "Arquivos" (ver UnidadeProdutivaArquivosTrait.php)
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.unidade_produtiva.arquivos.index', compact('unidadeProdutiva'));
 
-        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'instalacoesId', 'instalacoesSrc', 'caracterizacoesId', 'caracterizacoesSrc', 'arquivosId', 'arquivosSrc'));
+        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'instalacoesId', 'instalacoesSrc', 'produtosId', 'produtosSrc', /*'caracterizacoesId', 'caracterizacoesSrc', */'arquivosId', 'arquivosSrc'));
     }
 
 

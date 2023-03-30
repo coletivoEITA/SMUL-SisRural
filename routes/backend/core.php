@@ -172,6 +172,20 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             });
 
             /**
+             * Produtos CNAE/Culturas vinculadas a Unid. Prod.
+             */
+            Route::group(['prefix' => '/{unidadeProdutiva}/produtos', 'as' => 'produtos.'], function () {
+                Route::get('/', [UnidadeProdutivaController::class, 'produtosIndex'])->name('index');
+                Route::get('/datatable', [UnidadeProdutivaController::class, 'produtosDatatable'])->name('datatable');
+                Route::get('/create', [UnidadeProdutivaController::class, 'produtosCreate'])->name('create');
+                Route::get('/edit/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosEdit'])->name('edit');
+
+                Route::post('/store', [UnidadeProdutivaController::class, 'produtosStore'])->name('store');
+                Route::post('/update/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosUpdate'])->name('update');
+                Route::delete('/delete/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosDestroy'])->name('destroy');
+            });
+
+            /**
              * Arquivos vinculados a Unid. Prod.
              */
             Route::group(['prefix' => '/{unidadeProdutiva}/arquivos', 'as' => 'arquivos.'], function () {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Core\CnaeProduto;
+use App\Models\Core\CnaeProdutoModel;
 use Illuminate\Database\Seeder;
 
 class CnaeProdutoSeeder extends Seeder
@@ -33,7 +33,7 @@ class CnaeProdutoSeeder extends Seeder
             $unidade_de_medida = $sheet->getCell("C" . $i)->getValue();
             $nome_cientifico = $sheet->getCell("F" . $i)->getValue();
             
-            $produto = new CnaeProduto();
+            $produto = new CnaeProdutoModel();
             $produto->nome = $nome;
             $produto->nome_cientifico = $nome_cientifico;
             $produto->unidade_de_medida = $unidade_de_medida;

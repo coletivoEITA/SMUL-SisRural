@@ -157,6 +157,11 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaCaracterizacaoModel::class, 'unidade_produtiva_id');
     }
 
+    public function produtos()
+    {
+        return $this->hasMany(UnidadeProdutivaCnaeProdutoModel::class, 'unidade_produtiva_id');
+    }    
+
     /**
      * Métodos "offline" utilizados p/ o download de dados do APP
      */
