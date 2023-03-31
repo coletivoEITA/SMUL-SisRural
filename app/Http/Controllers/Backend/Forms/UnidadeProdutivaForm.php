@@ -258,29 +258,48 @@ class UnidadeProdutivaForm extends Form
         /**
          * Bloco Uso do Solo - dados gerais
          */
-        $this->add('card-solo-start', 'card-start', [
-            'title' => 'Áreas',
+        $this->add('card-areatotal-start', 'card-start', [
+            'id' => 'card-areatotal',
+            'title' => 'Área total da propriedade (' . config('app.area_sigla') . ')',            
         ])->add('area_total_solo_lado1', 'number', [
-            'label' => 'Área total da propriedade - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_total_solo_lado2', 'number', [
-            'label' => 'Área total da propriedade - Lado 2',
+            'label' => 'Lado 2',            
         ])->add('area_total_solo', 'number', [
-            'label' => 'Área total da propriedade (' . config('app.area_sigla') . ')',
+            'label' => 'Área total da propriedade',
+        ])->add('card-areatotal-end', 'card-end', []);
+            
+        $this->add('card-areaprodutiva-start', 'card-start', [
+            'title' => 'Área produtiva (' . config('app.area_sigla') . ')',
+            'id' => 'card-areaprodutiva',
         ])->add('area_produtiva_lado1', 'number', [
-            'label' => 'Área produtiva - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_produtiva_lado2', 'number', [
-            'label' => 'Área produtiva - Lado 2',
+            'label' => 'Lado 2',
         ])->add('area_produtiva', 'number', [
-            'label' => 'Área produtiva (' . config('app.area_sigla') . ')',
+            'label' => 'Área produtiva',
+        ])->add('card-areaprodutiva-end', 'card-end', []);
+
+        $this->add('card-areaexpansao-start', 'card-start', [
+            'title' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
+            'id' => 'card-areaprodutiva',        
         ])->add('area_disponivel_expansao_lado1', 'number', [
-            'label' => 'Área disponível para expansão produtiva - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_disponivel_expansao_lado2', 'number', [
-            'label' => 'Área disponível para expansão produtiva - Lado 2',
+            'label' => 'Lado 2',
         ])->add('area_disponivel_expansao', 'number', [
-            'label' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
-        ])->add('observacoes_sobre_area', 'text', [
-            'label' => 'Observações sobre a área',                        
-        ])->add('card-solo-end', 'card-end', []);
+            'label' => 'Área disponível para expansão produtiva',
+        ])->add('card-areaexpansao-end', 'card-end', []);
+
+        $this->add('card-observacoesarea-start', 'card-start', [
+            'title' => 'Observações sobre a área',
+            'id' => 'card-observacoesarea',        
+        ])->add('observacoes_sobre_area', 'textarea', [
+            'label' => 'Observações sobre a área',
+            'attr' => [
+                'rows' => 3
+            ],                                           
+        ])->add('card-observacoesarea-end', 'card-end', []);
 
         /**
          * Bloco Características do Solo - dados gerais
@@ -288,7 +307,10 @@ class UnidadeProdutivaForm extends Form
         $this->add('card-area-carac-start', 'card-start', [
             'title' => 'Características do solo',
         ])->add('caracteristica_solo', 'textarea', [
-            'label' => 'Características do solo',                        
+            'label' => 'Características do solo',
+            'attr' => [
+                'rows' => 3
+            ],                               
         ])->add('card-carac-solo-end', 'card-end', []);
 
         /**

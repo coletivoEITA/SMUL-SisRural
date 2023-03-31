@@ -243,6 +243,14 @@ body .select2-container--bootstrap.select2-container--open .select2-selection {
     z-index: 1000;
 }
 
+#card-areatotal .card-body,
+#card-areaprodutiva .card-body,
+#card-areaexpansao .card-body{
+    display: grid;
+    grid-template-columns: 100px 100px 400px;
+    column-gap: 20px;
+}
+
 #card-sente-pressoes-sociais, #bloco-assistencia-tecnica {
     display: none;
 }
