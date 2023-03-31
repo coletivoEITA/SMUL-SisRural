@@ -50,7 +50,7 @@ class UnidadeProdutivaForm extends Form
                 'select',
                 [
                     'label' => 'Tipo de Relação',
-                    'choices' => \App\Models\Core\TipoPosseModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+                    'choices' => \App\Models\Core\TipoPosseModel::pluck('nome', 'id')->sort()->toArray(),
                     'empty_value' => 'Selecione',
                     'rules' => 'required',
                     'error' => __('validation.required', ['attribute' => 'Tipo de Relação'])
@@ -157,7 +157,7 @@ class UnidadeProdutivaForm extends Form
             'select',
             [
                 'label' => 'Status do Acompanhamento',
-                'choices' => StatusAcompanhamentoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+                'choices' => StatusAcompanhamentoModel::pluck('nome', 'id')->sort()->toArray(),
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Status']),
@@ -212,7 +212,7 @@ class UnidadeProdutivaForm extends Form
             'title' => 'Certificações'
         ])->add('certificacoes', 'select', [
             'label' => 'Certificações',
-            'choices' => CertificacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => CertificacaoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -258,29 +258,48 @@ class UnidadeProdutivaForm extends Form
         /**
          * Bloco Uso do Solo - dados gerais
          */
-        $this->add('card-solo-start', 'card-start', [
-            'title' => 'Áreas',
+        $this->add('card-areatotal-start', 'card-start', [
+            'id' => 'card-areatotal',
+            'title' => 'Área total da propriedade (' . config('app.area_sigla') . ')',            
         ])->add('area_total_solo_lado1', 'number', [
-            'label' => 'Área total da propriedade - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_total_solo_lado2', 'number', [
-            'label' => 'Área total da propriedade - Lado 2',
+            'label' => 'Lado 2',            
         ])->add('area_total_solo', 'number', [
-            'label' => 'Área total da propriedade (' . config('app.area_sigla') . ')',
+            'label' => 'Área total da propriedade',
+        ])->add('card-areatotal-end', 'card-end', []);
+            
+        $this->add('card-areaprodutiva-start', 'card-start', [
+            'title' => 'Área produtiva (' . config('app.area_sigla') . ')',
+            'id' => 'card-areaprodutiva',
         ])->add('area_produtiva_lado1', 'number', [
-            'label' => 'Área produtiva - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_produtiva_lado2', 'number', [
-            'label' => 'Área produtiva - Lado 2',
+            'label' => 'Lado 2',
         ])->add('area_produtiva', 'number', [
-            'label' => 'Área produtiva (' . config('app.area_sigla') . ')',
+            'label' => 'Área produtiva',
+        ])->add('card-areaprodutiva-end', 'card-end', []);
+
+        $this->add('card-areaexpansao-start', 'card-start', [
+            'title' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
+            'id' => 'card-areaprodutiva',        
         ])->add('area_disponivel_expansao_lado1', 'number', [
-            'label' => 'Área disponível para expansão produtiva - Lado 1',
+            'label' => 'Lado 1',
         ])->add('area_disponivel_expansao_lado2', 'number', [
-            'label' => 'Área disponível para expansão produtiva - Lado 2',
+            'label' => 'Lado 2',
         ])->add('area_disponivel_expansao', 'number', [
-            'label' => 'Área disponível para expansão produtiva (' . config('app.area_sigla') . ')',
-        ])->add('observacoes_sobre_area', 'text', [
-            'label' => 'Observações sobre a área',                        
-        ])->add('card-solo-end', 'card-end', []);
+            'label' => 'Área disponível para expansão produtiva',
+        ])->add('card-areaexpansao-end', 'card-end', []);
+
+        $this->add('card-observacoesarea-start', 'card-start', [
+            'title' => 'Observações sobre a área',
+            'id' => 'card-observacoesarea',        
+        ])->add('observacoes_sobre_area', 'textarea', [
+            'label' => 'Observações sobre a área',
+            'attr' => [
+                'rows' => 3
+            ],                                           
+        ])->add('card-observacoesarea-end', 'card-end', []);
 
         /**
          * Bloco Características do Solo - dados gerais
@@ -288,7 +307,10 @@ class UnidadeProdutivaForm extends Form
         $this->add('card-area-carac-start', 'card-start', [
             'title' => 'Características do solo',
         ])->add('caracteristica_solo', 'textarea', [
-            'label' => 'Características do solo',                        
+            'label' => 'Características do solo',
+            'attr' => [
+                'rows' => 3
+            ],                               
         ])->add('card-carac-solo-end', 'card-end', []);
 
         /**
@@ -298,24 +320,24 @@ class UnidadeProdutivaForm extends Form
         /**
          * Bloco Uso do Solo - dados gerais
          */
-        // $this->add('card-solo-outros-start', 'card-start', [
-        //     'title' => 'Uso do Solo',
-        //     'id' => 'card-outros-usos',
-        // ])->add('solosCategoria', 'select', [
-        //     'label' => 'Outros Usos',
-        //     'choices' => SoloCategoriaModel::where('tipo', 'outros')->pluck('nome', 'id')->sortBy('nome')->toArray(),
-        //     'attr' => [
-        //         'multiple' => 'multiple',
-        //     ],
-        // ])->add('outros_usos_descricao', 'textarea', [
-        //     'label' => 'Outros Usos - Descrição',
-        //     'attr' => [
-        //         'rows' => 2
-        //     ],
-        //     'wrapper' => [
-        //         'id' => 'card-outros-usos',
-        //     ]
-        // ])->add('card-solo-outros-end', 'card-end', []);
+        $this->add('card-solo-outros-start', 'card-start', [
+            'title' => 'Outros Usos do Solo',
+            'id' => 'card-outros-usos',
+        ])->add('solosCategoria', 'select', [
+            'label' => 'Outros Usos',
+            'choices' => SoloCategoriaModel::where('tipo', 'outros')->pluck('nome', 'id')->sort()->toArray(),
+            'attr' => [
+                'multiple' => 'multiple',
+            ],
+        ])->add('outros_usos_descricao', 'textarea', [
+            'label' => 'Outros Usos - Descrição',
+            'attr' => [
+                'rows' => 2
+            ],
+            'wrapper' => [
+                'id' => 'card-outros-usos',
+            ]
+        ])->add('card-solo-outros-end', 'card-end', []);
 
       
         /**
@@ -326,13 +348,13 @@ class UnidadeProdutivaForm extends Form
             'id' => 'card-destinacao-producao',
         ])->add('destinacaoProducao', 'select', [
             'label' => 'Destinação da produção',
-            'choices' => DestinacaoProducaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => DestinacaoProducaoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
         ])->add('canaisComercializacao', 'select', [
             'label' => 'Canais de Comercialização',
-            'choices' => CanalComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => CanalComercializacaoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -352,7 +374,7 @@ class UnidadeProdutivaForm extends Form
             [
                 'label' => 'Rendimento da comercialização',
                 'empty_value' => 'Selecione',
-                'choices' => \App\Models\Core\RendimentoComercializacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+                'choices' => \App\Models\Core\RendimentoComercializacaoModel::pluck('nome', 'id')->sort()->toArray(),
                 'wrapper' => [
                     'class' => 'form-group row card-comercializacao'
                 ],
@@ -387,7 +409,7 @@ class UnidadeProdutivaForm extends Form
         ])
         ->add('formaProcessamento', 'select', [
             'label' => 'Forma de processamento',
-            'choices' => FormaProcessamentoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => FormaProcessamentoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -430,11 +452,11 @@ class UnidadeProdutivaForm extends Form
         ])->add('outorga_id', 'select', [
             'label' => 'Possui Outorga?',
             'empty_value' => 'Selecione',
-            'choices' => OutorgaModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => OutorgaModel::pluck('nome', 'id')->sort()->toArray(),
         ])->add('tiposFonteAgua', 'select', [
             'label' => 'Fontes de uso de Água',
             // 'empty_value' => 'Selecione',
-            'choices' => TipoFonteAguaModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => TipoFonteAguaModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -454,7 +476,7 @@ class UnidadeProdutivaForm extends Form
             'choices' => CheckboxEnum::toSelectArray()
         ])->add('riscosContaminacaoAgua', 'select', [
             'label' => 'Selecione os Tipos de Contaminação',
-            'choices' => RiscoContaminacaoAguaModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => RiscoContaminacaoAguaModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -471,19 +493,19 @@ class UnidadeProdutivaForm extends Form
             ]
         ])->add('residuoSolidos', 'select', [
             'label' => 'Destinação de resíduos sólidos não orgânicos',
-            'choices' => ResiduoSolidoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => ResiduoSolidoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
         ])->add('residuoOrganicos', 'select', [
             'label' => 'Destinação de resíduos orgânicos',
-            'choices' => ResiduoOrganicoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => ResiduoOrganicoModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
         ])->add('esgotamentoSanitarios', 'select', [
             'label' => 'Esgotamento Sanitário',
-            'choices' => EsgotamentoSanitarioModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => EsgotamentoSanitarioModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],
@@ -516,7 +538,7 @@ class UnidadeProdutivaForm extends Form
         ])->add('pressaoSociais', 'select', [
             'label' => 'Pressões Sociais',
             // 'empty_value' => 'Selecione',
-            'choices' => PressaoSocialModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
+            'choices' => PressaoSocialModel::pluck('nome', 'id')->sort()->toArray(),
             'attr' => [
                 'multiple' => 'multiple',
             ],

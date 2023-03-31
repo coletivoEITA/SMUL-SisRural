@@ -44,8 +44,8 @@
                         @include('backend.components.iframe.html', ["id"=>$produtosId, "src"=>$produtosSrc])
                     </div>
                 </div>                
-            <!-- @//else -->
-                <!-- @//include('backend.components.card-iframe-add.html', ["title"=>"Uso do Solo", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Uso do Solo"]) -->
+            @else
+                @include('backend.components.card-iframe-add.html', ["title"=>"Culturas existentes", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Cultura Existente"])
             @endif
 
             {!!form_until($form, 'card-agua-end')!!}
