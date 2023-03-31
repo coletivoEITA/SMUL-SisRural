@@ -26,7 +26,7 @@
                 <tr>                    
                     <th>Cultura</th>                    
                     <th>Quantidade</th>
-                    <th>Observações</th>                    
+                    <th>Situação produtiva e observações</th>
                     <th width="60">Ações</th>
                 </tr>
                 </thead>

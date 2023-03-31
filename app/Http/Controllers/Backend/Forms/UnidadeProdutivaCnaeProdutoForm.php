@@ -29,7 +29,7 @@ class UnidadeProdutivaCnaeProdutoForm extends Form
             'label' => 'Quantidade (unidades)',            
             'wrapper' => ['class' => 'form-group row todos']
         ])->add('observacao', 'text', [
-            'label' => 'Observação',            
+            'label' => 'Situação produtiva e observações',
             'wrapper' => ['class' => 'form-group row todos']
         ]);
     }
