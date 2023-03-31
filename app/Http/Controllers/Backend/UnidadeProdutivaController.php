@@ -202,6 +202,14 @@ class UnidadeProdutivaController extends Controller
             $checklist_id = config('app.checklist_dados_adicionais_unidade_produtiva');
             $checklist = ChecklistModel::find($checklist_id);         
         }
+        // dd()
+        $model['produtor_id'] = $produtor->id;
+        if ($produtor->fl_reside_unidade_produtiva) {
+            $model['cep'] = $produtor->cep;
+            $model['endereco'] = $produtor->endereco;
+            $model['bairro'] = $produtor->bairro;
+            $model['subprefeitura'] = $produtor->subprefeitura;
+        }
 
         $form = $formBuilder->create(UnidadeProdutivaForm::class, [
             'id' => 'form-builder',
@@ -210,7 +218,7 @@ class UnidadeProdutivaController extends Controller
             'class' => 'needs-validation',
             'novalidate' => true,
             'enctype' => 'multipart/form-data',
-            'model' => ['produtor_id' => $produtor->id],
+            'model' => $model,
             'data' => ['checklist' => $checklist, 'produtor' => $produtor],
         ]);
 
