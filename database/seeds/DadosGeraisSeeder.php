@@ -104,6 +104,8 @@ class DadosGeraisSeeder extends Seeder
             ['id' => 43, 'tipo' => 'outros', 'tipo_form' => null, 'nome' => 'Extrativismo', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 44, 'tipo' => 'outros', 'tipo_form' => null, 'nome' => 'Mineração', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 45, 'tipo' => 'outros', 'tipo_form' => null, 'nome' => 'Outros', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 46, 'tipo' => 'outros', 'tipo_form' => null, 'nome' => 'Escola', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 47, 'tipo' => 'outros', 'tipo_form' => null, 'nome' => 'Unidade de Saúde', 'created_at' => $createdAt, 'updated_at' => $createdAt],
         ]);
 
         \App\Models\Core\TipoPosseModel::insert([
