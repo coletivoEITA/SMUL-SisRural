@@ -116,6 +116,10 @@ class DadosGeraisSeeder extends Seeder
             ['id' => 7, 'nome' => 'Outro', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 8, 'nome' => 'Funcionário/a', 'created_at' => $createdAt, 'updated_at' => $createdAt],
             ['id' => 9, 'nome' => 'Sem informação', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 10, 'nome' => 'Aluguel', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 11, 'nome' => 'Permissionário/a', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 12, 'nome' => 'Sócio/a', 'created_at' => $createdAt, 'updated_at' => $createdAt],
+            ['id' => 13, 'nome' => 'Ocupação', 'created_at' => $createdAt, 'updated_at' => $createdAt],
         ]);
 
         \App\Models\Core\CanalComercializacaoModel::insert([
