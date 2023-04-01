@@ -75,8 +75,10 @@
             selectAutoYesNo("#fl_tipo_parceria", '#card-tipo-parceria');
             selectAutoYesNo("#fl_cnpj", '#card-cnpj');
             selectAutoYesNo("#fl_nota_fiscal_produtor", '#card-nota-fiscal-produtor');
-
-            selectAutoNoYes("#fl_reside_unidade_produtiva", '#card-endereco');
+               
+            if($("input[name='quant_unidade_produtiva']").val() > 0) {
+                selectAutoNoYes("#fl_reside_unidade_produtiva", '#card-endereco');
+            }
 
             function submitProdutorForm(action) {
                 $('<input>').attr({

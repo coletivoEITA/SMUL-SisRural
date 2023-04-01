@@ -285,6 +285,8 @@ class ProdutorController extends Controller
             $model = $produtor;
         }
 
+        $model['quant_unidade_produtiva'] = sizeof($produtor->unidadesProdutivas()->get());
+
         $form = $formBuilder->create(ProdutorForm::class, [
             'id' => 'form-builder',
             'method' => 'PATCH',

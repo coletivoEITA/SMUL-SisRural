@@ -413,6 +413,7 @@ class ProdutorForm extends Form
         $this->add('custom-redirect', 'hidden');
         $this->add('checklist_id', 'hidden')
         ->add('unidade_produtiva_id', 'hidden')
-        ->add('produtor_id', 'hidden');
+        ->add('produtor_id', 'hidden')
+        ->add('quant_unidade_produtiva', 'hidden');
     }
 }
