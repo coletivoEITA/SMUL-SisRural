@@ -20,7 +20,7 @@ class UnidadeProdutivaCulturaForm extends Form
             'select',
             [
                 'label' => 'Cultura',
-                'choices' => \App\Models\Core\CulturaModel::all()->pluck('nome', 'id')->sortBy('nome')->toArray(),
+                'choices' => \App\Models\Core\CulturaModel::all()->pluck('nome', 'id')->sort()->toArray(),
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Cultura'])
