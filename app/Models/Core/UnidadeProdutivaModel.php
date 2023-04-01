@@ -157,9 +157,9 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaCaracterizacaoModel::class, 'unidade_produtiva_id');
     }
 
-    public function produtos()
+    public function culturas()
     {
-        return $this->hasMany(UnidadeProdutivaCnaeProdutoModel::class, 'unidade_produtiva_id');
+        return $this->hasMany(UnidadeProdutivaCulturaModel::class, 'unidade_produtiva_id');
     }    
 
     /**

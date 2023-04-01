@@ -25,7 +25,7 @@
 @push('after-scripts')
     <script>
         $(function () {
-            $("select[name='cnae_produto_id']").select2();
+            $("select[name='cultura_id']").select2();
         });
     </script>
 @endpush

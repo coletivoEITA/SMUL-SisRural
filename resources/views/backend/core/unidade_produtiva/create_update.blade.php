@@ -41,7 +41,7 @@
                 </div> -->
                 <div class="mt-5">
                     <div id="a-culturas">
-                        @include('backend.components.iframe.html', ["id"=>$produtosId, "src"=>$produtosSrc])
+                        @include('backend.components.iframe.html', ["id"=>$culturasId, "src"=>$culturasSrc])
                     </div>
                 </div>                
             @else
@@ -99,7 +99,7 @@
     @if (@$unidadeProdutiva)
         @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
         @include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
-        @include('backend.components.iframe.scripts', ["id"=>$produtosId, "src"=>$produtosSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$culturasId, "src"=>$culturasSrc])
         @//include('backend.components.iframe.scripts', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
     @endif

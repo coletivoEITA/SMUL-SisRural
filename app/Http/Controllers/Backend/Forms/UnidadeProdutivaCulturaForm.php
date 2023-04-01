@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend\Forms;
 use Kris\LaravelFormBuilder\Form;
 
 /**
- * Formulário para cadastro de Culturas - Produtos com Base no CNAE - Unidade Produtiva
+ * Formulário para cadastro de Culturas - Unidade Produtiva
  */
-class UnidadeProdutivaCnaeProdutoForm extends Form
+class UnidadeProdutivaCulturaForm extends Form
 {
     public function buildForm()
     {
@@ -16,11 +16,11 @@ class UnidadeProdutivaCnaeProdutoForm extends Form
             'hidden',
             ['label' => 'Unidade Produtiva']
         )->add(
-            'cnae_produto_id',
+            'cultura_id',
             'select',
             [
                 'label' => 'Cultura',
-                'choices' => \App\Models\Core\CnaeProdutoModel::all()->pluck('nome', 'id')->sortBy('nome')->toArray(),
+                'choices' => \App\Models\Core\CulturaModel::all()->pluck('nome', 'id')->sortBy('nome')->toArray(),
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Cultura'])

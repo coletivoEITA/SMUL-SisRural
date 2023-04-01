@@ -4,7 +4,7 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CnaeProdutoModel extends Model
+class CulturaModel extends Model
 {
-    protected $table = 'cnae_produtos';
+    protected $table = 'culturas';
 }

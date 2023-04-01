@@ -172,17 +172,17 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             });
 
             /**
-             * Produtos CNAE/Culturas vinculadas a Unid. Prod.
+             * Culturas vinculadas a Unid. Prod.
              */
-            Route::group(['prefix' => '/{unidadeProdutiva}/produtos', 'as' => 'produtos.'], function () {
-                Route::get('/', [UnidadeProdutivaController::class, 'produtosIndex'])->name('index');
-                Route::get('/datatable', [UnidadeProdutivaController::class, 'produtosDatatable'])->name('datatable');
-                Route::get('/create', [UnidadeProdutivaController::class, 'produtosCreate'])->name('create');
-                Route::get('/edit/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosEdit'])->name('edit');
+            Route::group(['prefix' => '/{unidadeProdutiva}/culturas', 'as' => 'culturas.'], function () {
+                Route::get('/', [UnidadeProdutivaController::class, 'culturasIndex'])->name('index');
+                Route::get('/datatable', [UnidadeProdutivaController::class, 'culturasDatatable'])->name('datatable');
+                Route::get('/create', [UnidadeProdutivaController::class, 'culturasCreate'])->name('create');
+                Route::get('/edit/{unidadeProdutivaCultura}', [UnidadeProdutivaController::class, 'culturasEdit'])->name('edit');
 
-                Route::post('/store', [UnidadeProdutivaController::class, 'produtosStore'])->name('store');
-                Route::post('/update/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosUpdate'])->name('update');
-                Route::delete('/delete/{unidadeProdutivaCnaeProduto}', [UnidadeProdutivaController::class, 'produtosDestroy'])->name('destroy');
+                Route::post('/store', [UnidadeProdutivaController::class, 'culturasStore'])->name('store');
+                Route::post('/update/{unidadeProdutivaCultura}', [UnidadeProdutivaController::class, 'culturasUpdate'])->name('update');
+                Route::delete('/delete/{unidadeProdutivaCultura}', [UnidadeProdutivaController::class, 'culturasDestroy'])->name('destroy');
             });
 
             /**
