@@ -82,6 +82,8 @@ class ProdutorModel extends Model
         'renda_agricultura_id',
         'rendimento_comercializacao_id',
         'outras_fontes_renda',
+        'fl_possui_ocupacao_principal',
+        'ocupacao_principal',
         'grau_instrucao_id',
         'situacao_social_id',
 

@@ -326,7 +326,19 @@ class ProdutorForm extends Form
             'error' => __('validation.required', ['attribute' => 'Outras fontes de renda']),
             'attr' => [
                 'rows' => 2
-            ],
+            ],            
+        ])->add(
+            'fl_possui_ocupacao_principal',
+            'select', [
+                'label' => 'Possui ocupação princial que não a agricultura?',
+                'choices' => CheckboxEnum::toSelectArray()
+        ])->add(
+            'ocupacao_principal',
+            'text', [
+                'label' => 'Qual?', 
+                'wrapper' => [
+                    'id' => 'card-ocupacao-principal'
+                ],           
         ])->add(
             'grau_instrucao_id',
             'select',
