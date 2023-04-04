@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\SituacaoInfraFerramentaEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +23,7 @@ class CreateUnidadeProdutivaInfraFerramentasTable extends Migration
             $table->foreign('infra_ferramenta_id')->references('id')
             ->on('infra_ferramentas')->onDelete('cascade');
             $table->integer('quantidade')->nullable();
-            $table->enum('situacao', ['Bom estado', 'Mediano', 'Desgastada'])->nullable();
+            $table->enum("situacao", SituacaoInfraFerramentaEnum::getValues())->nullable()->default(null);            
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

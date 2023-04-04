@@ -34,11 +34,6 @@
             {!!form_until($form, 'card-carac-solo-end')!!}
 
             @if (@$unidadeProdutiva)
-                <!-- <div class="mt-5">
-                    <div id="a-uso-do-solo">
-                        @//include('backend.components.iframe.html', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
-                    </div>
-                </div> -->
                 <div class="mt-5">
                     <div id="a-culturas">
                         @include('backend.components.iframe.html', ["id"=>$culturasId, "src"=>$culturasSrc])
@@ -97,11 +92,9 @@
 
 @push('after-scripts')
     @if (@$unidadeProdutiva)
-        @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
-        @//include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])        
         @include('backend.components.iframe.scripts', ["id"=>$culturasId, "src"=>$culturasSrc])
-        @include('backend.components.iframe.scripts', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])
-        @//include('backend.components.iframe.scripts', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])        
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
     @endif
 

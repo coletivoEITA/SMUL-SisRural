@@ -38,8 +38,8 @@ trait UnidadeProdutivaInfraFerramentasTrait
     public function infraFerramentasDatatable(UnidadeProdutivaModel $unidadeProdutiva)
     {
         return DataTables::of($unidadeProdutiva->infraFerramentas()->get())
-            ->addColumn('infra_ferramenta', function ($row) {
-                return $row->infra_ferramenta->nome;            
+            ->addColumn('nome', function ($row) {
+                return $row->infraFerramenta->nome;
             })->addColumn('actions', function ($row) use ($unidadeProdutiva) {
                 $params = ['unidadeProdutiva' => $row->unidade_produtiva_id, 'unidadeProdutivaInfraFerramenta' => $row->id];
                 $editUrl = route('admin.core.unidade_produtiva.infra_ferramentas.edit', $params);

@@ -20,6 +20,7 @@ use App\Enums\SituacaoEnum;
 use App\Enums\TipoPontuacaoEnum;
 use App\Enums\UnidadeProdutivaCarEnum;
 use App\Enums\FrequenciaComercializacaoEnum;
+use App\Enums\SituacaoInfraFerramentaEnum;
 
 return [
 
@@ -177,5 +178,11 @@ return [
         FrequenciaComercializacaoEnum::Mensal => 'Mensal',
         FrequenciaComercializacaoEnum::Anual => 'Anual',
         FrequenciaComercializacaoEnum::Esporadico => 'Esporádico'
-    ]
+    ],
+
+    SituacaoInfraFerramentaEnum::class => [
+        SituacaoInfraFerramentaEnum::BomEstado => 'Bom Estado',
+        SituacaoInfraFerramentaEnum::Mediano => 'Mediano',
+        SituacaoInfraFerramentaEnum::Desgastada => 'Desgastada',
+    ]    
 ];

@@ -24,8 +24,8 @@
 
 @push('after-scripts')
     <script>
-        $(function () {
-            $("select[name='infra_ferramenta_id']").select2();
-        });
+        // $(function () {
+        //     $("select[name='infra_ferramenta_id']").select2();
+        // });
     </script>
 @endpush
