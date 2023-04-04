@@ -96,9 +96,9 @@ class CadernoPolicy extends CachedPolicy
             return true;
         }
 
-        if ($caderno->status == CadernoStatusEnum::Finalizado) {
-            return false;
-        }
+        // if ($caderno->status == CadernoStatusEnum::Finalizado) {
+        //     return false;
+        // }
 
         //Verifica se o usuário tem permissão para acessar o template do caderno
         //A chamada é feita através do template()->first() p/ não retornar o template na listagem, piora performance.
