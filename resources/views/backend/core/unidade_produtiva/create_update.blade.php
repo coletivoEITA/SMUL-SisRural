@@ -45,7 +45,7 @@
                     </div>
                 </div>                
             @else
-                @include('backend.components.card-iframe-add.html', ["title"=>"Culturas existentes", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Cultura Existente"])
+                @include('backend.components.card-iframe-add.html', ["title"=>"Culturas existentes", "data"=>"a-culturas", "label"=>"Cadastrar Cultura Existente"])
             @endif
 
             {!!form_until($form, 'card-agua-end')!!}
@@ -56,14 +56,14 @@
                         @include('backend.components.iframe.html', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
                     </div>
 
-                    <div id="a-infra-estrutura">
-                        @include('backend.components.iframe.html', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
+                    <div id="a-infra-ferramentas">
+                        @include('backend.components.iframe.html', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])
                     </div>
                 </div>
             @else
                 @include('backend.components.card-iframe-add.html', ["title"=>"Pessoas", "data"=>"a-pessoas", "label"=>"Cadastrar Pessoa"])
 
-                @include('backend.components.card-iframe-add.html', ["title"=>"Infra-estrutura", "data"=>"a-infra-estrutura", "label"=>"Cadastrar Infra-estrutura"])
+                @include('backend.components.card-iframe-add.html', ["title"=>"Infra-estrutura e ferramentas", "data"=>"a-infra-ferramentas", "label"=>"Cadastrar Infra-estrutura e ferramentas"])
             @endif
 
             {!!form_rest($form)!!}
@@ -98,8 +98,9 @@
 @push('after-scripts')
     @if (@$unidadeProdutiva)
         @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
-        @include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
+        @//include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
         @include('backend.components.iframe.scripts', ["id"=>$culturasId, "src"=>$culturasSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])
         @//include('backend.components.iframe.scripts', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
     @endif
