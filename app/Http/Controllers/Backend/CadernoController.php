@@ -321,9 +321,9 @@ class CadernoController extends Controller
     public function edit(CadernoModel $caderno, FormBuilder $formBuilder)
     {
         //Não permite a edição de um formulário já finalizado (através do Policy o botão de editar nem aparece mais)
-        if ($caderno->status === CadernoStatusEnum::Finalizado) {
-            return redirect()->route('admin.core.cadernos.index')->withFlashDanger('Não é possível editar um Caderno de Campo finalizado!');
-        }
+        // if ($caderno->status === CadernoStatusEnum::Finalizado) {
+        //     return redirect()->route('admin.core.cadernos.index')->withFlashDanger('Não é possível editar um Caderno de Campo finalizado!');
+        // }
 
         //Retorna as respostas do caderno selecionado
         $respostas = $this->getRespostas($caderno);
