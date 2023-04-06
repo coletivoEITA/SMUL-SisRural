@@ -34,6 +34,7 @@ Route::group(['prefix' => 'auth'], function () {
  */
 Route::group(['prefix' => 'unidades_produtivas', 'as' => 'unidades_produtivas.'], function () {
     Route::get('/soloCategorias', [UnidadeProdutivaController::class, 'soloCategorias'])->name('soloCategorias');
+    Route::get('/verificaNome', [UnidadeProdutivaController::class, 'verificaNomeExiste'])->name('verificaNomeExiste');
 });
 
 /**

@@ -20,12 +20,6 @@ class ProdutorController extends Controller
      */
     public function verificaNomeExiste(Request $request)
     {
-        $request->validate([
-            'nome_produtor' => 'unique:produtores',
-        ], [
-            'O CPF informado já encontra-se utilizado pelo produtor/a "' . @ProdutorModel::withoutGlobalScopes()->where("cpf", $request->cpf)->first()->nome . '".'
-        ]);
-
         $data = $request->only(
             'nome'
         );

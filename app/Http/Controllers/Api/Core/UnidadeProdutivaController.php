@@ -86,4 +86,22 @@ class UnidadeProdutivaController extends Controller
             'regioes' => $data
         ]);
     }
+
+    /**
+     * Checa se o nome da unidade produtiva já existe
+     *
+     * Utilizado no momento de criar/editar um produtor
+     *
+     * @return void
+     */
+    public function verificaNomeExiste(Request $request)
+    {
+        $data = $request->only(
+            'nome'
+        );
+
+        $up = UnidadeProdutivaModel::where('nome', $data['nome'])->first();
+        
+        return $up ? 'true' : 'false';
+    }
 }

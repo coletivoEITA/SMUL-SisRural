@@ -171,6 +171,28 @@
             $("#area_produtiva_lado1").keyup(() => setAreaProdutiva())
             $("#area_produtiva_lado2").keyup(() => setAreaProdutiva())
 
+
+            $("#nome").change(function() {
+                $.ajax({
+                    url:base_url+'api/unidades_produtivas/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome ~ .invalid-feedback").remove();
+                    $("#nome").css("border-color", "");
+                    $("#nome").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block">Esse nome de Unidade Produtiva já existe</div>');
+                        $("#nome").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
+
         });
     </script>
 @endpush

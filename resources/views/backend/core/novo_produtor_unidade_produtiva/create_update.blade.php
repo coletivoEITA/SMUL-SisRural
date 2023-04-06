@@ -84,10 +84,31 @@
                     $("#nome_produtor").css("box-shadow", "");
 
                     if (response === 'true') {
-                        $("#nome_produtor")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block">Esse nome de produtor já existe</div>');
+                        $("#nome_produtor")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block">Esse nome de Produtor já existe</div>');
                         $("#nome_produtor").css("border-color", "#e55353");
                         //era pra ser só no focus
                         $("#nome_produtor").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
+
+            $("#nome_unidade_produtiva").change(function() {
+                $.ajax({
+                    url:base_url+'api/unidades_produtivas/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome_unidade_produtiva ~ .invalid-feedback").remove();
+                    $("#nome_unidade_produtiva").css("border-color", "");
+                    $("#nome_unidade_produtiva").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome_unidade_produtiva")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block">Esse nome de Unidade Produtiva já existe</div>');
+                        $("#nome_unidade_produtiva").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome_unidade_produtiva").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
                     }
                 });
             });
