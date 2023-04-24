@@ -162,6 +162,11 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaCulturaModel::class, 'unidade_produtiva_id');
     }    
 
+    public function infraFerramentas()
+    {
+        return $this->hasMany(UnidadeProdutivaInfraFerramentaModel::class, 'unidade_produtiva_id');
+    }    
+
     /**
      * Métodos "offline" utilizados p/ o download de dados do APP
      */

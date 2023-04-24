@@ -34,18 +34,13 @@
             {!!form_until($form, 'card-carac-solo-end')!!}
 
             @if (@$unidadeProdutiva)
-                <!-- <div class="mt-5">
-                    <div id="a-uso-do-solo">
-                        @//include('backend.components.iframe.html', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
-                    </div>
-                </div> -->
                 <div class="mt-5">
                     <div id="a-culturas">
                         @include('backend.components.iframe.html', ["id"=>$culturasId, "src"=>$culturasSrc])
                     </div>
                 </div>                
             @else
-                @include('backend.components.card-iframe-add.html', ["title"=>"Culturas existentes", "data"=>"a-uso-do-solo", "label"=>"Cadastrar Cultura Existente"])
+                @include('backend.components.card-iframe-add.html', ["title"=>"Culturas existentes", "data"=>"a-culturas", "label"=>"Cadastrar Cultura Existente"])
             @endif
 
             {!!form_until($form, 'card-agua-end')!!}
@@ -56,14 +51,14 @@
                         @include('backend.components.iframe.html', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
                     </div>
 
-                    <div id="a-infra-estrutura">
-                        @include('backend.components.iframe.html', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
+                    <div id="a-infra-ferramentas">
+                        @include('backend.components.iframe.html', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])
                     </div>
                 </div>
             @else
                 @include('backend.components.card-iframe-add.html', ["title"=>"Pessoas", "data"=>"a-pessoas", "label"=>"Cadastrar Pessoa"])
 
-                @include('backend.components.card-iframe-add.html', ["title"=>"Infra-estrutura", "data"=>"a-infra-estrutura", "label"=>"Cadastrar Infra-estrutura"])
+                @include('backend.components.card-iframe-add.html', ["title"=>"Infra-estrutura e ferramentas", "data"=>"a-infra-ferramentas", "label"=>"Cadastrar Infra-estrutura e ferramentas"])
             @endif
 
             {!!form_rest($form)!!}
@@ -97,10 +92,9 @@
 
 @push('after-scripts')
     @if (@$unidadeProdutiva)
-        @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])
-        @include('backend.components.iframe.scripts', ["id"=>$instalacoesId, "src"=>$instalacoesSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$colaboradoresId, "src"=>$colaboradoresSrc])        
         @include('backend.components.iframe.scripts', ["id"=>$culturasId, "src"=>$culturasSrc])
-        @//include('backend.components.iframe.scripts', ["id"=>$caracterizacoesId, "src"=>$caracterizacoesSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])        
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
     @endif
 
@@ -176,6 +170,28 @@
             $("#area_disponivel_expansao_lado2").keyup(() => setAreaDisponivelExpansao())
             $("#area_produtiva_lado1").keyup(() => setAreaProdutiva())
             $("#area_produtiva_lado2").keyup(() => setAreaProdutiva())
+
+
+            $("#nome").change(function() {
+                $.ajax({
+                    url:base_url+'api/unidades_produtivas/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome ~ .invalid-feedback").remove();
+                    $("#nome").css("border-color", "");
+                    $("#nome").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block"> {{ __('concepts.unidade_produtiva.name_exists') }} </div>');
+                        $("#nome").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
 
         });
     </script>

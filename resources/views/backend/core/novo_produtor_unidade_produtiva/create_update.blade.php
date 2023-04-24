@@ -71,6 +71,48 @@
                 }
             })
 
+            $("#nome_produtor").change(function() {
+                $.ajax({
+                    url:base_url+'api/produtor/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome_produtor ~ .invalid-feedback").remove();
+                    $("#nome_produtor").css("border-color", "");
+                    $("#nome_produtor").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome_produtor")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block"> {{ __('concepts.produtora.name_exists') }} </div>');
+                        $("#nome_produtor").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome_produtor").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
+
+            $("#nome_unidade_produtiva").change(function() {
+                $.ajax({
+                    url:base_url+'api/unidades_produtivas/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome_unidade_produtiva ~ .invalid-feedback").remove();
+                    $("#nome_unidade_produtiva").css("border-color", "");
+                    $("#nome_unidade_produtiva").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome_unidade_produtiva")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block"> {{ __('concepts.unidade_produtiva.name_exists') }} </div>');
+                        $("#nome_unidade_produtiva").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome_unidade_produtiva").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
+
         });
     </script>
 @endpush

@@ -25,6 +25,7 @@ use Kris\LaravelFormBuilder\Form;
 use App\Enums\TipoPerguntaEnum;
 use App\Enums\FrequenciaComercializacaoEnum;
 use App\Http\Controllers\Backend\ChecklistUnidadeProdutivaController;
+use App\Rules\NameExists;
 
 /**
  * Formulário - Unidade Produtiva
@@ -84,7 +85,12 @@ class UnidadeProdutivaForm extends Form
             'title' => 'Dados Básicos',
         ])->add('nome', 'text', [
             'label' => 'Nome da Unidade Produtiva',
-            'rules' => 'required',
+            'rules' => [
+                'required',
+                function( $nome ){
+                    return new NameExists( 'UnidadeProdutiva' );
+                }
+            ],
             'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
         ])->add('cep', 'text', [
             'label' => 'CEP (Código de Endereçamento Postal)',            
