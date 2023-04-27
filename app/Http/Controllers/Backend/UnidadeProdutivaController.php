@@ -7,9 +7,8 @@ use App\Helpers\General\SoftDeleteHelper;
 use App\Http\Controllers\Backend\Forms\UnidadeProdutivaForm;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaArquivosTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCulturasTrait;
-use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCaracterizacoesTrait;
+use App\Http\Controllers\Backend\Traits\UnidadeProdutivaInfraFerramentasTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaColaboradoresTrait;
-use App\Http\Controllers\Backend\Traits\UnidadeProdutivaInstalacoesTrait;
 use App\Http\Controllers\Controller;
 use App\Models\Core\ProdutorModel;
 use App\Models\Core\UnidadeProdutivaModel;
@@ -36,10 +35,9 @@ class UnidadeProdutivaController extends Controller
 {
     use FormBuilderTrait;
     use UnidadeProdutivaColaboradoresTrait;
-    use UnidadeProdutivaInstalacoesTrait;
     use UnidadeProdutivaCulturasTrait;
-    use UnidadeProdutivaCaracterizacoesTrait;
     use UnidadeProdutivaArquivosTrait;
+    use UnidadeProdutivaInfraFerramentasTrait;
 
     /**
      * @var UnidadeProdutivaRepository
@@ -363,12 +361,16 @@ class UnidadeProdutivaController extends Controller
         $colaboradoresSrc = route('admin.core.unidade_produtiva.colaboradores.index', compact('unidadeProdutiva'));
 
         //Iframe "Infra-estrutura" (ver UnidadeProdutivaInstalacoesTrait.php)
-        $instalacoesId = 'iframeInstalacoes';
-        $instalacoesSrc = route('admin.core.unidade_produtiva.instalacoes.index', compact('unidadeProdutiva'));
+        // $instalacoesId = 'iframeInstalacoes';
+        // $instalacoesSrc = route('admin.core.unidade_produtiva.instalacoes.index', compact('unidadeProdutiva'));
 
         //Iframe "Culturas" (ver UnidadeProdutivaCulturasTrait.php)
         $culturasId = 'iframeCulturas';
         $culturasSrc = route('admin.core.unidade_produtiva.culturas.index', compact('unidadeProdutiva'));
+
+        //Iframe "Infra e Ferramentas" (ver UnidadeProdutivaInfraFerramentasTrait.php)
+        $infraFerramentasId = 'iframeInfraFerramentas';
+        $infraFerramentasSrc = route('admin.core.unidade_produtiva.infra_ferramentas.index', compact('unidadeProdutiva'));        
 
         // Iframe "Uso do Solo" (ver UnidadeProdutivaCaracterizacoesTrait.php)
         // $caracterizacoesId = 'iframeCaracterizacoes';
@@ -378,7 +380,7 @@ class UnidadeProdutivaController extends Controller
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.unidade_produtiva.arquivos.index', compact('unidadeProdutiva'));
 
-        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'instalacoesId', 'instalacoesSrc', 'culturasId', 'culturasSrc', /*'caracterizacoesId', 'caracterizacoesSrc', */'arquivosId', 'arquivosSrc'));
+        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'infraFerramentasId', 'infraFerramentasSrc', 'culturasId', 'culturasSrc', 'arquivosId', 'arquivosSrc'));
     }
 
 

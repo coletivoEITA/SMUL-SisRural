@@ -49,8 +49,8 @@ class ColaboradorForm extends Form
                 'label' => 'Dedicação',
                 'choices' => \App\Models\Core\DedicacaoModel::pluck('nome', 'id')->sortBy('nome')->toArray(),
                 'empty_value' => 'Selecione',
-                'rules' => 'required',
-                'error' => __('validation.required', ['attribute' => 'Dedicação'])
+                // 'rules' => 'required',
+                // 'error' => __('validation.required', ['attribute' => 'Dedicação'])
             ]
         );
     }

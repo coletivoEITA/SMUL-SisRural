@@ -186,6 +186,20 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             });
 
             /**
+             * Infra e ferramentas vinculadas a Unid. Prod.
+             */
+            Route::group(['prefix' => '/{unidadeProdutiva}/infra_ferramentas', 'as' => 'infra_ferramentas.'], function () {
+                Route::get('/', [UnidadeProdutivaController::class, 'infraFerramentasIndex'])->name('index');
+                Route::get('/datatable', [UnidadeProdutivaController::class, 'infraFerramentasDatatable'])->name('datatable');
+                Route::get('/create', [UnidadeProdutivaController::class, 'infraFerramentasCreate'])->name('create');
+                Route::get('/edit/{unidadeProdutivaInfraFerramenta}', [UnidadeProdutivaController::class, 'infraFerramentasEdit'])->name('edit');
+
+                Route::post('/store', [UnidadeProdutivaController::class, 'infraFerramentasStore'])->name('store');
+                Route::post('/update/{unidadeProdutivaInfraFerramenta}', [UnidadeProdutivaController::class, 'infraFerramentasUpdate'])->name('update');
+                Route::delete('/delete/{unidadeProdutivaInfraFerramenta}', [UnidadeProdutivaController::class, 'infraFerramentasDestroy'])->name('destroy');
+            });
+
+            /**
              * Arquivos vinculados a Unid. Prod.
              */
             Route::group(['prefix' => '/{unidadeProdutiva}/arquivos', 'as' => 'arquivos.'], function () {

@@ -100,6 +100,28 @@
             $("#close_after_btn").click(() => submitProdutorForm('close_after'));
             $("#edit_after_btn").click(() => submitProdutorForm('edit_after'));
             $("#form-builder").one("submit", processForm);
+
+
+            $("#nome").change(function() {
+                $.ajax({
+                    url:base_url+'api/produtor/verificaNome',
+                    method:"GET",
+                    data:{
+                        nome: $(this).val(),
+                    }
+                }).done((response)=>{
+                    $("#nome ~ .invalid-feedback").remove();
+                    $("#nome").css("border-color", "");
+                    $("#nome").css("box-shadow", "");
+
+                    if (response === 'true') {
+                        $("#nome")[0].insertAdjacentHTML("afterend", '<div class="invalid-feedback" style="display:block"> {{ __('concepts.produtora.name_exists') }} </div>');
+                        $("#nome").css("border-color", "#e55353");
+                        //era pra ser só no focus
+                        $("#nome").css("box-shadow", "0 0 0 0.2rem rgb(229 83 83 / 25%)");
+                    }
+                });
+            });
             
         });
     </script>

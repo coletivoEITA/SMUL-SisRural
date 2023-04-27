@@ -7,6 +7,7 @@ use App\Enums\CheckboxEnum;
 use App\Enums\ProdutorStatusEnum;
 use Kris\LaravelFormBuilder\Form;
 use App\Http\Controllers\Backend\ChecklistUnidadeProdutivaController;
+use App\Rules\NameExists;
 
 /**
  * Formulário do Produtor
@@ -24,8 +25,13 @@ class ProdutorForm extends Form
             'titleTag' => 'h1'
         ])->add('nome', 'text', [
             'label' => 'Nome Completo',
-            'rules' => 'required',
-            'error' => __('validation.required', ['attribute' => 'Nome'])
+            'rules' => [
+                'required',
+                function( $nome ){
+                    return new NameExists( 'Produtor' );
+                }
+            ],
+            'error' => __('validation.required', ['attribute' => 'Nome Completo'])
         ])->add('cpf', 'text', [
             'label' => 'CPF (Cadastro de Pessoa Física)',
             'attr' => [
@@ -330,7 +336,7 @@ class ProdutorForm extends Form
         ])->add(
             'fl_possui_ocupacao_principal',
             'select', [
-                'label' => 'Possui ocupação princial que não a agricultura?',
+                'label' => 'Possui ocupação principal que não a agricultura?',
                 'choices' => CheckboxEnum::toSelectArray()
         ])->add(
             'ocupacao_principal',

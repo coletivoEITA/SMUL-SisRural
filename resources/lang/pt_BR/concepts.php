@@ -36,6 +36,7 @@ return [
         'dashboard' => 'Dashboard da Unidade Produtiva',
         'data' => 'Dados da Unidade Produtiva',
         'sanitation' => 'Saneamento',
+        'name_exists' => 'Uma Unidade Produtiva com este nome já está cadastrada. Escolha outro nome.',
     ],
     'produtora' => [
         'label' => 'Produtor/a',
@@ -45,6 +46,7 @@ return [
         'edit' => 'Editar Produtor/a',
         'dashboard' => 'Dashboard do/a Produtor/a',
         'data' => 'Dados do/a Produtor/a',
+        'name_exists' => 'Um/a produtor/a com este nome já está cadastrado. Escolha outro nome.',
     ],
     'contato' => [
         'label' => 'Contato',
