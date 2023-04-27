@@ -30,14 +30,7 @@ class UnidadeProdutivaInfraFerramentaForm extends Form
             'label' => 'Quantidade (unidades)',            
             'wrapper' => ['class' => 'form-group row todos']
         ])->add(
-            'situacao', 
-            'select',
-            [
-                'label' => 'Situação',
-                'choices' => SituacaoInfraFerramentaEnum::toSelectArray(),
-                'empty_value' => 'Selecione',
-                'rules' => 'required',
-                'error' => __('validation.required', ['attribute' => 'Nome'])        
-        ]);
+            'situacao',            
+        );
     }
 }
