@@ -105,6 +105,10 @@ class NovoProdutorUnidadeProdutivaForm extends Form
                 //Esse campo é obrigatório, mas é tratado via JS, porque depende da seleção do "fl_unidade_produtiva"
             ])->add('bairro', 'text', [
                 'label' => 'Bairro',
+            ])->add('subprefeitura', 'select', [
+                'label' => 'Distrito',
+                'empty_value' => 'Selecione',
+                'choices' => ['Maricá' => 'Maricá', 'Ponta Negra' => 'Ponta Negra', 'Inoã' => 'Inoã', 'Itaipuaçu' => 'Itaipuaçu'],
             ]);
 
             // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.

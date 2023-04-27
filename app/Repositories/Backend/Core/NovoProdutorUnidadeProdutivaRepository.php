@@ -45,7 +45,7 @@ class NovoProdutorUnidadeProdutivaRepository extends BaseRepository
         return DB::transaction(function () use ($data) {
             $produtorData = array('nome' => $data['nome_produtor'], 'cpf' => $data['cpf'], 'telefone_1' => $data['telefone_1'], 'telefone_2' => $data['telefone_2']);
 
-            $enderecoData = array('cep' => $data['cep'], 'bairro' => $data['bairro'], 'endereco' => $data['endereco'], 'cidade_id' => @$data['cidade_id'], 'estado_id' => $data['estado_id']);
+            $enderecoData = array('cep' => $data['cep'], 'bairro' => $data['bairro'], 'endereco' => $data['endereco'], 'cidade_id' => @$data['cidade_id'], 'estado_id' => $data['estado_id'], 'subprefeitura' => $data['subprefeitura']);
 
             $produtor = $this->produtorRepository->create($produtorData);
 
