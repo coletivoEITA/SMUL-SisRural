@@ -336,7 +336,7 @@ class ProdutorForm extends Form
         ])->add(
             'fl_possui_ocupacao_principal',
             'select', [
-                'label' => 'Possui ocupação princial que não a agricultura?',
+                'label' => 'Possui ocupação principal que não a agricultura?',
                 'choices' => CheckboxEnum::toSelectArray()
         ])->add(
             'ocupacao_principal',
