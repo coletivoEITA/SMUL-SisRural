@@ -16,7 +16,7 @@
                     <div class="col-6 pull-right">
                         <div class="float-right">
                             <a aria-label="Adicionar novo/a produtor/a"
-                                href="{{ route('admin.core.novo_produtor_unidade_produtiva.create') }}"
+                                href="{{ route('admin.core.produtor.create') }}"
                                 class="btn btn-primary px-5">
                                 Adicionar
                             </a>
