@@ -35,6 +35,11 @@
                 </tr>
 
                 <tr>
+                    <th>Produtores/as</th>
+                    <td>{{$caderno->produtora->nome}}</td>
+                </tr>
+
+                <tr>
                     <th>Status</th>
 
                     <td>

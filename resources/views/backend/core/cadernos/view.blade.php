@@ -47,6 +47,18 @@
                 </tr>
 
                 <tr>
+                    <th>Produtores/as</th>
+                    <td>
+                    @php
+                        foreach($caderno->produtoras as $produtora){
+                            $produtoras_str[] = $produtora->nome;
+                        }
+                        echo implode(", ", $produtoras_str);
+                    @endphp
+                    </td>
+                </tr>
+
+                <tr>
                     <th>Status</th>
 
                     <td>

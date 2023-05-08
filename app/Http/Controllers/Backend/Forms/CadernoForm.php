@@ -40,15 +40,25 @@ class CadernoForm extends Form
             'tag' => 'b',
             'value' => $unidadeProdutiva['nome']
         ])->add(
-            'tecnicas',
-            'select',
-            [
-                'label' => 'Técnicos/as',
-                'choices' => \App\Models\Auth\User::whereHas('roles', function($q){$q->where('name','=',RolesEnum::Tecnico);})->pluck('first_name', 'id')->toArray(),
-                'attr' => [
-                    'multiple' => 'multiple',
-                ]
-            ]
+          'tecnicas',
+          'select',
+          [
+              'label' => 'Técnicos/as',
+              'choices' => \App\Models\Auth\User::whereHas('roles', function($q){$q->where('name','=',RolesEnum::Tecnico);})->pluck('first_name', 'id')->toArray(),
+              'attr' => [
+                  'multiple' => 'multiple',
+              ]
+          ]
+        )->add(
+          'produtoras',
+          'select',
+          [
+              'label' => 'Produtores/as',
+              'choices' => \App\Models\Core\ProdutorModel::where('id', '!=', $produtor->id)->pluck('nome', 'id')->toArray(),
+              'attr' => [
+                  'multiple' => 'multiple',
+              ]
+          ]
         )->add('card-end-1', 'card-end', []);
 
 

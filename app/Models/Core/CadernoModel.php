@@ -9,6 +9,7 @@ use App\Models\Core\Traits\Scope\CadernoPermissionScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Auth\User;
+use App\Models\Core\ProdutorModel;
 use App\Models\Core\Traits\Attribute\RolesAppAttribute;
 use App\Models\Core\Traits\ImportFillableCreatedAt;
 use App\Models\Traits\DateFormat;
@@ -281,5 +282,16 @@ class CadernoModel extends Model
     public function tecnicas()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    /**
+     * Relação many to many com produtor 
+     *
+     *
+     * @return mixed
+     */
+    public function produtoras()
+    {
+        return $this->belongsToMany(ProdutorModel::class)->withTimestamps();
     }
 }

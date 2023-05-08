@@ -68,7 +68,7 @@ class CadernoController extends Controller
      */
     public function datatable(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name'])->select("cadernos.*");
+        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name', 'produtoras:nome'])->select("cadernos.*");
 
         $data = $produtor->id ? $model->where('produtor_id', $produtor->id) : $model;
         $data = $unidadeProdutiva->id ? $model->where('unidade_produtiva_id', $unidadeProdutiva->id) : $model;
@@ -83,7 +83,14 @@ class CadernoController extends Controller
                     $tecnicas[] = $tecnica->first_name;
                 }
                 return implode(", ", $tecnicas);
-            })            
+            }) 
+            ->editColumn('produtoras.nome', function ($row) {
+                $produtoras = [];
+                foreach($row->produtoras as $produtora){
+                    $produtoras[] = $produtora->nome;
+                }
+                return implode(", ", $produtoras);
+            })             
             ->editColumn('status', function ($row) {
                 $classBadge = @$row->status == CadernoStatusEnum::Rascunho ? 'text-danger' : 'text-primary';
 
@@ -238,6 +245,7 @@ class CadernoController extends Controller
 
         $data = $request->only(['template_id', 'produtor_id', 'unidade_produtiva_id', 'status', 'custom-redirect']);
         $tecnicas = $request->only(['tecnicas']);
+        $produtoras = $request->only(['produtoras']);
         $produtor = \App\Models\Core\ProdutorModel::where('id', $data['produtor_id'])->first();
         $unidadeProdutiva = \App\Models\Core\UnidadeProdutivaModel::where('id', $data['unidade_produtiva_id'])->first();
 
@@ -272,6 +280,13 @@ class CadernoController extends Controller
           $tecnicas = NULL;
         }
         $cadernoModel->tecnicas()->sync($tecnicas);
+
+        if( isset($produtoras['produtoras']) ){
+          $produtoras = $produtoras['produtoras'];
+        } else {
+          $produtoras = NULL;
+        }
+        $cadernoModel->produtoras()->sync($produtoras);
 
         /*Custom Redirect*/
         $redirect = route('admin.core.produtor.dashboard', ['produtor' => $data['produtor_id']]);
@@ -373,6 +388,7 @@ class CadernoController extends Controller
 
         $data = $request->only(['template_id', 'produtor_id', 'unidade_produtiva_id', 'status', 'custom-redirect']);
         $tecnicas = $request->only(['tecnicas']);
+        $produtoras = $request->only(['produtoras']);
 
         $produtor = \App\Models\Core\ProdutorModel::where('id', $data['produtor_id'])->first();
         $unidadeProdutiva = \App\Models\Core\UnidadeProdutivaModel::where('id', $data['unidade_produtiva_id'])->first();
@@ -401,6 +417,13 @@ class CadernoController extends Controller
           $tecnicas = NULL;
         }
         $cadernoModel->tecnicas()->sync($tecnicas);
+
+        if( isset($produtoras['produtoras']) ){
+          $produtoras = $produtoras['produtoras'];
+        } else {
+          $produtoras = NULL;
+        }
+        $cadernoModel->produtoras()->sync($produtoras);
 
         //Faz um touch no caderno, para atualizar a data de atualização (mesmo que não tenha nenhuma informação alterada)
         $cadernoModel->touch();
