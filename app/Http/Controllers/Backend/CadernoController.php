@@ -68,7 +68,7 @@ class CadernoController extends Controller
      */
     public function datatable(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name', 'produtoras:nome'])->select("cadernos.*");
+        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name'])->select("cadernos.*");
 
         $data = $produtor->id ? $model->where('produtor_id', $produtor->id) : $model;
         $data = $unidadeProdutiva->id ? $model->where('unidade_produtiva_id', $unidadeProdutiva->id) : $model;
@@ -83,14 +83,7 @@ class CadernoController extends Controller
                     $tecnicas[] = $tecnica->first_name;
                 }
                 return implode(", ", $tecnicas);
-            }) 
-            ->editColumn('produtoras.nome', function ($row) {
-                $produtoras = [];
-                foreach($row->produtoras as $produtora){
-                    $produtoras[] = $produtora->nome;
-                }
-                return implode(", ", $produtoras);
-            })             
+            })           
             ->editColumn('status', function ($row) {
                 $classBadge = @$row->status == CadernoStatusEnum::Rascunho ? 'text-danger' : 'text-primary';
 
