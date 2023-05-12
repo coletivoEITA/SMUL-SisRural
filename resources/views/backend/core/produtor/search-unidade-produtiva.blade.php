@@ -12,8 +12,13 @@
 
                 <div class="col-2 pull-right">
                     <div class="float-right">
-                        <a href="{{$addUrl}}" class="btn btn-primary px-5">
+                        <a href="{{$addUrlInline}}" class="btn btn-primary px-5">
                             Vincular
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{$addUrl}}" target="_blank" class="btn btn-primary px-5">
+                            Adicionar
                         </a>
                     </div>
                 </div>

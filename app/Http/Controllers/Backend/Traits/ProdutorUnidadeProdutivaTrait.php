@@ -45,12 +45,16 @@ trait ProdutorUnidadeProdutivaTrait
     public function storeUnidadeProdutiva(Request $request, ProdutorModel $produtor)
     {
         $data = $request->only(['unidade_produtiva_id', 'contato', 'tipo_posse_id']);
-
+        
         $unidade = $data['unidade_produtiva_id'];
         $tipo_posse_id = $data['tipo_posse_id'];
         $contato = @$data['contato'];
-
+        error_log('$contato');
+        error_log($contato);
+        error_log(print_r($data, true));
+        
         $return = $produtor->unidadesProdutivasWithTrashed()->syncWithoutDetaching([$unidade => ['contato' => !!$contato, 'tipo_posse_id' => $tipo_posse_id]]); // 'deleted_at' => null //não funciona
+        error_log(print_r($return, true));
         //Restaura o registro (softDelete) porque o deleted_at não funciona dentro do syncWithoutDetaching
         if (count($return['updated']) > 0) {
             ProdutorUnidadeProdutivaModel::withTrashed()->where('unidade_produtiva_id', $return['updated'][0])->where('produtor_id', $produtor->id)->restore();
@@ -111,10 +115,11 @@ trait ProdutorUnidadeProdutivaTrait
      */
     public function searchUnidadeProdutiva(ProdutorModel $produtor)
     {
-        $addUrl = route('admin.core.produtor.add-unidade-produtiva', ["produtor" => $produtor]);
+        $addUrlInline = route('admin.core.produtor.add-unidade-produtiva', ["produtor" => $produtor]);
+        $addUrl = route('admin.core.unidade_produtiva.create', ["produtor" => $produtor]);
         $urlDatatable = route('admin.core.produtor.datatable.unidade_produtiva', ["produtor" => $produtor]);
 
-        return view('backend.core.produtor.search-unidade-produtiva', compact('addUrl', 'urlDatatable'));
+        return view('backend.core.produtor.search-unidade-produtiva', compact('addUrlInline', 'addUrl', 'urlDatatable'));
     }
 
     /**
