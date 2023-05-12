@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Traits;
 
+use App\Http\Controllers\Backend\Forms\UnidadeProdutivaProdutorForm;
 use App\Models\Core\UnidadeProdutivaModel;
+use App\Models\Core\ProdutorUnidadeProdutivaModel;
 use DataTables;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -10,103 +12,54 @@ use Kris\LaravelFormBuilder\FormBuilder;
 trait UnidadeProdutivaProdutoraTrait
 {
     /**
-     * Cadastro - Adicionar unidade produtiva em um produtor
-     *
-     * @param  FormBuilder $formBuilder
-     * @param  ProdutorModel $produtor
-     * @return void
-     */
-    public function addUnidadeProdutiva(FormBuilder $formBuilder, ProdutorModel $produtor)
-    {
-        $form = $formBuilder->create(ProdutorUnidadeProdutivaForm::class, [
-            'id' => 'form-builder',
-            'method' => 'POST',
-            'url' => route('admin.core.produtor.store-unidade-produtiva', compact('produtor')),
-            'class' => 'needs-validation',
-            'novalidate' => true,
-        ]);
-
-        $title = 'Unidade Produtiva';
-
-        $back = route('admin.core.produtor.search-unidade-produtiva', compact('produtor'));
-
-        return view('backend.core.produtor.add-unidade-produtiva', compact('form', 'title', 'back'));
-    }
-
-    /**
-     * Cadastro - POST
-     *
-     * @param  Request $request
-     * @param  ProdutorModel $produtor
-     * @return void
-     */
-    public function storeUnidadeProdutiva(Request $request, ProdutorModel $produtor)
-    {
-        $data = $request->only(['unidade_produtiva_id', 'contato', 'tipo_posse_id']);
-        
-        $unidade = $data['unidade_produtiva_id'];
-        $tipo_posse_id = $data['tipo_posse_id'];
-        $contato = @$data['contato'];
-        
-        $return = $produtor->unidadesProdutivasWithTrashed()->syncWithoutDetaching([$unidade => ['contato' => !!$contato, 'tipo_posse_id' => $tipo_posse_id]]); // 'deleted_at' => null //não funciona
-
-        //Restaura o registro (softDelete) porque o deleted_at não funciona dentro do syncWithoutDetaching
-        if (count($return['updated']) > 0) {
-            ProdutorUnidadeProdutivaModel::withTrashed()->where('unidade_produtiva_id', $return['updated'][0])->where('produtor_id', $produtor->id)->restore();
-        }
-
-        return redirect()->route('admin.core.produtor.search-unidade-produtiva', compact('produtor'))->withFlashSuccess('Unidade Produtiva adicionada com sucesso!');
-    }
-
-    /**
      * Edição
      *
      * @param  FormBuilder $formBuilder
-     * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
      * @param  mixed $pivot é o registro de relacionamento entre "produtor" vs "unidade produtiva" (tabela produtor_unidade_produtiva)
      * @return void
      */
-    public function editUnidadeProdutiva(FormBuilder $formBuilder, ProdutorModel $produtor, $pivot)
+    public function editProdutor(FormBuilder $formBuilder, UnidadeProdutivaModel $unidadeProdutiva, $pivot)
     {
-        $form = $formBuilder->create(ProdutorUnidadeProdutivaForm::class, [
+        $form = $formBuilder->create(UnidadeProdutivaProdutorForm::class, [
             'id' => 'form-builder',
             'method' => 'POST',
-            'url' => route('admin.core.produtor.update-unidade-produtiva', compact('produtor', 'pivot')),
+            'url' => route('admin.core.unidade_produtiva.update-produtor', compact('unidadeProdutiva', 'pivot')),
             'class' => 'needs-validation',
             'novalidate' => true,
             'model' => ProdutorUnidadeProdutivaModel::find($pivot)
         ]);
 
-        $title = 'Editar Unidade Produtiva';
+        $title = 'Editar Produtor/a';
 
-        $back = route('admin.core.produtor.search-unidade-produtiva', compact('produtor'));
+        $back = route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'));
 
-        return view('backend.core.produtor.add-unidade-produtiva', compact('form', 'title', 'back'));
+        return view('backend.core.unidade_produtiva.add-produtor', compact('form', 'title', 'back'));
     }
 
     /**
      * Edição - POST
      *
      * @param  Request $request
-     * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
      * @param  mixed $pivot é o registro de relacionamento entre "produtor" vs "unidade produtiva" (tabela produtor_unidade_produtiva)
      * @return void
      */
-    public function updateUnidadeProdutiva(Request $request, ProdutorModel $produtor, $pivot)
+    public function updateProdutor(Request $request, UnidadeProdutivaModel $unidadeProdutiva, $pivot)
     {
-        $data = $request->only(['unidade_produtiva_id', 'contato', 'tipo_posse_id']);
+        $data = $request->only(['produtor_id', 'contato', 'tipo_posse_id']);
 
         try {
             ProdutorUnidadeProdutivaModel::find($pivot)->update($data);
         } catch (\Exception $e) {
-            return redirect()->route('admin.core.produtor.search-unidade-produtiva', compact('produtor'))->withFlashDanger('O Produtor já possuí a Unidade Produtiva selecionada!');
+            return redirect()->route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'))->withFlashDanger('A Produtora já possuí a Unidade Produtiva selecionada!');
         }
 
-        return redirect()->route('admin.core.produtor.search-unidade-produtiva', compact('produtor'))->withFlashSuccess('Unidade Produtiva atualizada com sucesso!');
+        return redirect()->route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'))->withFlashSuccess('Produtor/a atualizada com sucesso!');
     }
 
     /**
-     * Listagem de unidades produtivas vinculadas ao produtor
+     * Listagem de produtoras vinculadas a unidade produtiva
      */
     public function searchProdutora(UnidadeProdutivaModel $unidadeProdutiva)
     {
@@ -127,11 +80,11 @@ trait UnidadeProdutivaProdutoraTrait
         })->addColumn('tipoPosse', function ($row) {
             return @$row->pivot->tipoPosse->nome;
         })->addColumn('actions', function ($row) {
-            $params = ['pivot' => $row->pivot->id, 'produtor' => $row->pivot->produtor_id];
+            $params = ['pivot' => $row->pivot->id, 'unidadeProdutiva' => $row->pivot->unidade_produtiva_id];
             
-            $externalEditUrl = route('admin.core.unidade_produtiva.edit', $row->id);
-            $relationEditUrl = route('admin.core.produtor.edit-unidade-produtiva', $params);
-            $deleteUrl = route('admin.core.produtor.delete-unidade-produtiva', $params);
+            $externalEditUrl = route('admin.core.produtor.edit', $row->id);
+            $relationEditUrl = route('admin.core.unidade_produtiva.edit-produtor', $params);
+            $deleteUrl = route('admin.core.unidade_produtiva.delete-produtor', $params);
             return view('backend.components.form-actions.index', compact('externalEditUrl', 'relationEditUrl', 'deleteUrl', 'row'));
         })->make(true);
     }
@@ -139,18 +92,14 @@ trait UnidadeProdutivaProdutoraTrait
     /**
      * Desvincular/remover uma unidade produtiva vs produtor (tabela produtor_unidade_produtiva)
      */
-    public function deleteUnidadeProdutiva(ProdutorModel $produtor, $pivot)
+    public function deleteProdutor(UnidadeProdutivaModel $unidadeProdutiva, $pivot)
     {
         ProdutorUnidadeProdutivaModel::find($pivot)->delete();
 
-        if (ProdutorModel::where('id', $produtor->id)->first()) {
-            return redirect()->route('admin.core.produtor.search-unidade-produtiva', compact('produtor'))->withFlashSuccess('Unidade Produtiva removida com sucesso!');
+        if (UnidadeProdutivaModel::where('id', $unidadeProdutiva->id)->first()) {
+            return redirect()->route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'))->withFlashSuccess('Produtor/a removido/a com sucesso!');
         } else {
             return redirect()->route('admin.core.produtor.search-unidade-produtiva-redirect');
         }
-    }
-
-    public function searchUnidadeProdutivaRedirect() {
-        return view('backend.core.produtor.search-unidade-produtiva-redirect');
     }
 }

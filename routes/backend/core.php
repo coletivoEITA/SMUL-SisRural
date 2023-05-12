@@ -116,7 +116,6 @@ Route::middleware(['permission_report_restrict'])->group(function () {
 
             Route::get('produtor', [UnidadeProdutivaController::class, 'produtor'])->middleware('permission:view menu productive units')->name('produtor');
             Route::get('/datatableProdutor', [UnidadeProdutivaController::class, 'datatableProdutor'])->middleware('permission:view menu productive units')->name('datatableProdutor');
-            Route::get('/datatableSearchProdutor/{unidadeProdutiva}', [UnidadeProdutivaController::class, 'datatableSearchProdutora'])->middleware('permission:view menu productive units')->name('datatableSearchProdutor');
 
             Route::get('/datatable/{produtor?}', [UnidadeProdutivaController::class, 'datatable'])->middleware('permission:view menu productive units')->name('datatable');
             Route::get('/create/{produtor}', [UnidadeProdutivaController::class, 'create'])->middleware('can:create,App\Models\Core\UnidadeProdutivaModel')->name('create');
@@ -131,6 +130,10 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/{produtor?}', [UnidadeProdutivaController::class, 'index'])->middleware('permission:view menu productive units')->name('index');
             
             Route::get('/search-produtor/{unidadeProdutiva}', [UnidadeProdutivaController::class, 'searchProdutora'])->name('search-produtor');
+            Route::get('/edit-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'editProdutor'])->name('edit-produtor');
+            Route::post('/update-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'updateProdutor'])->name('update-produtor');
+            Route::delete('/delete-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'deleteProdutor'])->name('delete-produtor');
+            Route::get('/datatableSearchProdutor/{unidadeProdutiva}', [UnidadeProdutivaController::class, 'datatableSearchProdutora'])->middleware('permission:view menu productive units')->name('datatableSearchProdutor');
 
             /**
              * Pessoas / Colaborador vinculados a Unid. Prod.
