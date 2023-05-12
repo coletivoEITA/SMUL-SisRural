@@ -72,6 +72,12 @@
             @else
                 @include('backend.components.card-iframe-add.html', ["title"=>"Arquivos", "data"=>"a-arquivos", "label"=>"Cadastrar Arquivo"])
             @endif
+
+            @if (@$unidadeProdutiva)
+                    <div id="a-produtora">
+                        @include('backend.components.iframe.html', ["id"=>$containerId, "src"=>$containerSrc])
+                    </div>
+            @endif
         </div>
 
         <div class="card-footer-ater">

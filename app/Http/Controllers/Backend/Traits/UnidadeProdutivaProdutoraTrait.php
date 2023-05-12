@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Traits;
 
-use App\Http\Controllers\Backend\Forms\ProdutorUnidadeProdutivaForm;
-use App\Models\Core\ProdutorModel;
-use App\Models\Core\ProdutorUnidadeProdutivaModel;
+use App\Models\Core\UnidadeProdutivaModel;
 use DataTables;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-trait ProdutorUnidadeProdutivaTrait
+trait UnidadeProdutivaProdutoraTrait
 {
     /**
      * Cadastro - Adicionar unidade produtiva em um produtor
@@ -110,34 +108,32 @@ trait ProdutorUnidadeProdutivaTrait
     /**
      * Listagem de unidades produtivas vinculadas ao produtor
      */
-    public function searchUnidadeProdutiva(ProdutorModel $produtor)
+    public function searchProdutora(UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $addUrlInline = route('admin.core.produtor.add-unidade-produtiva', ["produtor" => $produtor]);
-        $addUrl = route('admin.core.unidade_produtiva.create', ["produtor" => $produtor]);
-        $urlDatatable = route('admin.core.produtor.datatable.unidade_produtiva', ["produtor" => $produtor]);
-
-        return view('backend.core.produtor.search-unidade-produtiva', compact('addUrlInline', 'addUrl', 'urlDatatable'));
+        $result=UnidadeProdutivaModel::find($unidadeProdutiva->id)->produtores()->get();
+        $urlDatatable = route('admin.core.unidade_produtiva.datatableSearchProdutor', ["unidadeProdutiva" => $unidadeProdutiva]);
+        return view('backend.core.unidade_produtiva.search-produtor', compact('urlDatatable'));
     }
 
     /**
-     * API Datatable "searchUnidadeProdutiva()"
+     * API Datatable "datatableSearchProdutora()"
      */
-    public function datatableUnidadeProdutiva(ProdutorModel $produtor)
+    public function datatableSearchProdutora(UnidadeProdutivaModel $unidadeProdutiva)
     {
-        return DataTables::of(ProdutorModel::find($produtor->id)->unidadesProdutivas()->get())
-            ->editColumn('uid', function ($row) {
-                return $row->uid;
-            })->addColumn('tipoPosse', function ($row) {
-                return @$row->pivot->tipoPosse->nome;
-            })->addColumn('actions', function ($row) {
-                $params = ['pivot' => $row->pivot->id, 'produtor' => $row->pivot->produtor_id];
-                
-                $externalEditUrl = route('admin.core.unidade_produtiva.edit', $row->id);
-                $relationEditUrl = route('admin.core.produtor.edit-unidade-produtiva', $params);
-                $deleteUrl = route('admin.core.produtor.delete-unidade-produtiva', $params);
-                return view('backend.components.form-actions.index', compact('externalEditUrl', 'relationEditUrl', 'deleteUrl', 'row'));
-            })
-            ->make(true);
+
+        return DataTables::of(UnidadeProdutivaModel::find($unidadeProdutiva->id)->produtores()->get())
+        ->editColumn('uid', function ($row) {
+            return $row->uid;
+        })->addColumn('tipoPosse', function ($row) {
+            return @$row->pivot->tipoPosse->nome;
+        })->addColumn('actions', function ($row) {
+            $params = ['pivot' => $row->pivot->id, 'produtor' => $row->pivot->produtor_id];
+            
+            $externalEditUrl = route('admin.core.unidade_produtiva.edit', $row->id);
+            $relationEditUrl = route('admin.core.produtor.edit-unidade-produtiva', $params);
+            $deleteUrl = route('admin.core.produtor.delete-unidade-produtiva', $params);
+            return view('backend.components.form-actions.index', compact('externalEditUrl', 'relationEditUrl', 'deleteUrl', 'row'));
+        })->make(true);
     }
 
     /**
