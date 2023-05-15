@@ -382,10 +382,10 @@ class UnidadeProdutivaController extends Controller
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.unidade_produtiva.arquivos.index', compact('unidadeProdutiva'));
 
-        $containerId = 'iframeProdutora';
-        $containerSrc = route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'));
+        $produtorasId = 'iframeProdutora';
+        $produtorasSrc = route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'));
 
-        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'containerId', 'containerSrc', 'colaboradoresId', 'colaboradoresSrc', 'infraFerramentasId', 'infraFerramentasSrc', 'culturasId', 'culturasSrc', 'arquivosId', 'arquivosSrc'));
+        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'produtorasId', 'produtorasSrc', 'colaboradoresId', 'colaboradoresSrc', 'infraFerramentasId', 'infraFerramentasSrc', 'culturasId', 'culturasSrc', 'arquivosId', 'arquivosSrc'));
     }
 
 

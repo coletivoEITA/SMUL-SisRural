@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-10">
                     <h1 class="card-title mb-0 mt-1 h4">
-                        Produtor/a
+                        {{ __('concepts.produtora.plural') }}
                     </h1>
                 </div>
             </div>
