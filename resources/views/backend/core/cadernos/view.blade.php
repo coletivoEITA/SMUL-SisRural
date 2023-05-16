@@ -50,6 +50,7 @@
                     <th>Produtores/as</th>
                     <td>
                     @php
+                        $produtoras_str = [];
                         foreach($caderno->produtoras as $produtora){
                             $produtoras_str[] = $produtora->nome;
                         }
