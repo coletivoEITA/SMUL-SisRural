@@ -74,6 +74,12 @@ class CadernoController extends Controller
         $data = $unidadeProdutiva->id ? $model->where('unidade_produtiva_id', $unidadeProdutiva->id) : $model;
 
         return DataTables::of($data)
+            ->editColumn('data_da_visita', function ($row) {
+                $caderno = CadernoModel::where('produtor_id', $row->produtor->id)->where('unidade_produtiva_id', $row->unidadeProdutiva->id)->first();
+                $date = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id',1)->first()->resposta;
+                $date = date_create($date);
+                return date_format($date, 'd\/m\/Y');
+            })        
             ->editColumn('usuario.first_name', function ($row) {
                 return @$row->usuario->full_name;
             })

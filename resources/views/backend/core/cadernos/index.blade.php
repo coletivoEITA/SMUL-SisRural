@@ -37,8 +37,7 @@
                 <thead>
                 <tr>
                     <th width="60">#</th>
-                    <th>Protocolo</th>
-                    <th>Modelo</th>
+                    <th>Data da Visita</th>                    
                     <th>Produtor/a</th>
                     <th>Unidade Produtiva</th>
                     <th>Status</th>
@@ -69,8 +68,7 @@
                 },
                 "columns": [
                     {"data": "uid"},
-                    {"data": "protocolo"},
-                    {"data": "template.nome"},
+                    {"data": "data_da_visita"},                    
                     {"data": "produtor.nome"},
                     {"data": "datatable_unidade_produtiva.nome"},
                     {"data": "status"},
