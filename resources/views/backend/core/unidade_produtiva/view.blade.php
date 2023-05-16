@@ -11,6 +11,25 @@
         @endcan
     @endcardater
 
+    @cardater(['title'=>__('concepts.produtora.plural'), 'titleTag'=>'h2'])
+    @slot('body')
+        <table class="table table-hover">
+            <tr>
+                <th width="20%">Nome</th>
+                <th>Tipo da Posse</th>
+            </tr>
+
+            @foreach ($unidadeProdutiva->produtores as $v)
+                <tr>
+                    <td>{{ $v->nome }}</td>
+                    <td>{{ $v->pivot->tipoPosse->nome }}</th>
+                </tr>
+            @endforeach
+
+        </table>
+    @endslot
+    @endcardater
+
     @cardater(['title'=>'Dados Básicos'])
          @slot('body')
             <table class="table table-hover">
