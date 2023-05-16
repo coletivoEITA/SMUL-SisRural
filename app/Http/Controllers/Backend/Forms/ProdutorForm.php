@@ -424,7 +424,7 @@ class ProdutorForm extends Form
          * Bloco Dados Checklist
          */
 
-         if( isset($this->data['checklist']) && $this->data['checklist'] ){
+        if( isset($this->data['checklist']) && $this->data['checklist'] ){
             ChecklistUnidadeProdutivaController::getForm( $this->data['checklist'], $this);
         }                    
         

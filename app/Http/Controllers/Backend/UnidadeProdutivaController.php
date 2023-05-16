@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\Traits\UnidadeProdutivaArquivosTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaCulturasTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaInfraFerramentasTrait;
 use App\Http\Controllers\Backend\Traits\UnidadeProdutivaColaboradoresTrait;
+use App\Http\Controllers\Backend\Traits\UnidadeProdutivaProdutoraTrait;
 use App\Http\Controllers\Controller;
 use App\Models\Core\ProdutorModel;
 use App\Models\Core\UnidadeProdutivaModel;
@@ -38,6 +39,7 @@ class UnidadeProdutivaController extends Controller
     use UnidadeProdutivaCulturasTrait;
     use UnidadeProdutivaArquivosTrait;
     use UnidadeProdutivaInfraFerramentasTrait;
+    use UnidadeProdutivaProdutoraTrait;
 
     /**
      * @var UnidadeProdutivaRepository
@@ -380,7 +382,10 @@ class UnidadeProdutivaController extends Controller
         $arquivosId = 'iframeArquivos';
         $arquivosSrc = route('admin.core.unidade_produtiva.arquivos.index', compact('unidadeProdutiva'));
 
-        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'colaboradoresId', 'colaboradoresSrc', 'infraFerramentasId', 'infraFerramentasSrc', 'culturasId', 'culturasSrc', 'arquivosId', 'arquivosSrc'));
+        $produtorasId = 'iframeProdutora';
+        $produtorasSrc = route('admin.core.unidade_produtiva.search-produtor', compact('unidadeProdutiva'));
+
+        return view('backend.core.unidade_produtiva.create_update', compact('form', 'title', 'unidadeProdutiva', 'produtor', 'produtorasId', 'produtorasSrc', 'colaboradoresId', 'colaboradoresSrc', 'infraFerramentasId', 'infraFerramentasSrc', 'culturasId', 'culturasSrc', 'arquivosId', 'arquivosSrc'));
     }
 
 

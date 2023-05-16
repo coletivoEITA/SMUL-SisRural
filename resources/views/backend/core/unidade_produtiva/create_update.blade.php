@@ -68,10 +68,14 @@
                     <div id="a-arquivos">
                         @include('backend.components.iframe.html', ["id"=>$arquivosId, "src"=>$arquivosSrc])
                     </div>
-                </div>
+                    <div id="a-produtora">
+                        @include('backend.components.iframe.html', ["id"=>$produtorasId, "src"=>$produtorasSrc])
+                    </div>
+                </div>                
             @else
                 @include('backend.components.card-iframe-add.html', ["title"=>"Arquivos", "data"=>"a-arquivos", "label"=>"Cadastrar Arquivo"])
             @endif
+
         </div>
 
         <div class="card-footer-ater">
@@ -96,6 +100,7 @@
         @include('backend.components.iframe.scripts', ["id"=>$culturasId, "src"=>$culturasSrc])
         @include('backend.components.iframe.scripts', ["id"=>$infraFerramentasId, "src"=>$infraFerramentasSrc])        
         @include('backend.components.iframe.scripts', ["id"=>$arquivosId, "src"=>$arquivosSrc])
+        @include('backend.components.iframe.scripts', ["id"=>$produtorasId, "src"=>$produtorasSrc])
     @endif
 
     @include('backend.core.unidade_produtiva.lat_lng.scripts', ['lat' => @$form->lat->getValue(), 'lng'=> @$form->lng->getValue()])

@@ -128,6 +128,12 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::get('/datatableInvalid', [UnidadeProdutivaController::class, 'datatableInvalid'])->middleware('permission:view menu productive units')->name('datatableInvalid');
 
             Route::get('/{produtor?}', [UnidadeProdutivaController::class, 'index'])->middleware('permission:view menu productive units')->name('index');
+            
+            Route::get('/search-produtor/{unidadeProdutiva}', [UnidadeProdutivaController::class, 'searchProdutora'])->name('search-produtor');
+            Route::get('/edit-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'editProdutor'])->name('edit-produtor');
+            Route::post('/update-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'updateProdutor'])->name('update-produtor');
+            Route::delete('/delete-produtor/{unidadeProdutiva}/{pivot}', [UnidadeProdutivaController::class, 'deleteProdutor'])->name('delete-produtor');
+            Route::get('/datatableSearchProdutor/{unidadeProdutiva}', [UnidadeProdutivaController::class, 'datatableSearchProdutora'])->middleware('permission:view menu productive units')->name('datatableSearchProdutor');
 
             /**
              * Pessoas / Colaborador vinculados a Unid. Prod.

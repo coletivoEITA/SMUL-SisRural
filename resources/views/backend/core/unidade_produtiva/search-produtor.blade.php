@@ -6,19 +6,8 @@
             <div class="row">
                 <div class="col-10">
                     <h1 class="card-title mb-0 mt-1 h4">
-                        Unidades Produtivas
+                        {{ __('concepts.produtora.plural') }}
                     </h1>
-                </div>
-
-                <div class="col-2 pull-right">
-                    <div class="float-right" style="display: grid;grid-template-columns: 1fr 1fr;grid-gap: 10px;">
-                        <a href="{{$addUrlInline}}" class="btn btn-primary px-5">
-                            Vincular
-                        </a>
-                        <a href="{{$addUrl}}" target="_blank" class="btn btn-primary px-5">
-                            Adicionar
-                        </a>
-                    </div>                    
                 </div>
             </div>
         </div>
