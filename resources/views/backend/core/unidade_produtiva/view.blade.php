@@ -212,6 +212,10 @@
                     <th>Outros Usos - Descrição</th>
                     <td>{{$unidadeProdutiva->outros_usos_descricao}}</td>
                 </tr>
+                <tr>
+                    <th>Características do Solo</th>
+                    <td>{{$unidadeProdutiva->caracteristica_solo}}</td>
+                </tr>                
             </table>
 
             @foreach ($unidadeProdutiva->caracterizacoes as $k=>$v)
