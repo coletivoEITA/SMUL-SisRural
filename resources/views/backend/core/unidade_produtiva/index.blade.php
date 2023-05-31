@@ -35,7 +35,7 @@
                     <th>Distrito</th>
                     <th>Bairro</th>
                     <th>Produtores/as</th>
-                    <!--<th>Coproprietários/as</th>-->
+                    <th>Última visita</th>
                     <th width="60">Ações</th>
                 </tr>
                 </thead>
@@ -64,7 +64,7 @@
                     {"data": "subprefeitura"},
                     {"data": "bairro"},
                     {"data": "produtores"},
-                    // {"data": "socios"},
+                    {"data": "ultima_visita"},
                     // {"data": "tags"},
                     {
                         "data": "actions",

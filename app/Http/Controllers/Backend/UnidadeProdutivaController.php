@@ -27,6 +27,7 @@ use App\Models\Core\ChecklistModel;
 use App\Models\Core\PlanoAcaoModel;
 use App\Models\Core\ChecklistUnidadeProdutivaModel;
 use \App\Models\Core\PlanoAcaoItemModel;
+use App\Models\Core\CadernoRespostaCadernoModel;
 use App\Repositories\Backend\Core\ChecklistUnidadeProdutivaRepository;
 use App\Repositories\Backend\Core\PlanoAcaoItemRepository;
 use App\Repositories\Backend\Core\PlanoAcaoRepository;
@@ -130,8 +131,22 @@ class UnidadeProdutivaController extends Controller
                 $viewUrl = route('admin.core.unidade_produtiva.view', $row->id);
 
                 return view('backend.components.form-actions.index', compact('dashUrl', 'editUrl', 'deleteUrl', 'viewUrl', 'row'));
-            })
-            ->filterColumn('produtores', function ($query, $keyword) {
+            })->addColumn('ultima_visita', function ($row) {
+                $cadernos = $row->cadernos;
+                $data_visita = 0;
+                foreach( $cadernos as $caderno ){
+                    $data_visita_caderno = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta;                    
+                    $data_visita_caderno = strtotime($data_visita_caderno);
+                    if($data_visita_caderno > $data_visita){
+                        $data_visita = $data_visita_caderno;
+                    }
+                }
+                if( $data_visita != 0 ){
+                    return date("d/m/Y",$data_visita);
+                } else {
+                    return "";
+                }                
+            })->filterColumn('produtores', function ($query, $keyword) {
                 if ($keyword) {
                     $query->whereHas('produtores', function ($q) use ($keyword) {
                         $q->where('produtores.nome', 'like', '%' . $keyword . '%');
