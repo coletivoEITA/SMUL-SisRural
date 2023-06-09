@@ -47,7 +47,12 @@ class NovoProdutorUnidadeProdutivaForm extends Form
             'select',
             [
                 'label' => 'Status',
-                'choices' => ProdutorStatusEnum::toSelectArray(),
+                // 'choices' => ProdutorStatusEnum::toSelectArray(),
+                'choices' => [                    
+                    "cadastro" => "Cadastro/1ª visita",
+                    "acompanhamento" => "Acompanhamento",
+                    "inativo" => "Inativo",
+                ],               
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Status']),

@@ -17,6 +17,16 @@ class ProdutorForm extends Form
     public function buildForm()
     {
 
+        if($this->model && $this->model->unidadesProdutivas->all()){
+            $status_choices = ProdutorStatusEnum::toSelectArray();
+        } else {
+            $status_choices = [
+                "agendar" => "A agendar 1ª visita",
+                "tentativa" => "Tentativa de agendamento 1ª visita",
+                "agendado" => "Agendado 1ª visita",                  
+            ];
+        }
+
         /**
          * Dados básicos do cadastro
          */
@@ -54,7 +64,8 @@ class ProdutorForm extends Form
             'select',
             [
                 'label' => 'Status',
-                'choices' => ProdutorStatusEnum::toSelectArray(),
+                // 'choices' => ProdutorStatusEnum::toSelectArray(),
+                'choices' => $status_choices,
                 'empty_value' => 'Selecione',
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Status']),

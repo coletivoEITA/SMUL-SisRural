@@ -95,12 +95,12 @@
                             </a>
                          </li> --}}
 
-                         <li class="c-sidebar-nav-item">
+                         {{-- <li class="c-sidebar-nav-item">
                             <a class="c-sidebar-nav-link" href="{{ route('admin.core.produtor.create') }}">
                                 <i class="c-sidebar-nav-icon c-icon cil-plus"></i>
                                 {{ __('concepts.produtora.add') }}
                             </a>
-                         </li>
+                         </li> --}}
                     </ul>
                 </li>
             @endcan
