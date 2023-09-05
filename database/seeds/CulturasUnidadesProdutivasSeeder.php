@@ -5,7 +5,7 @@ use App\Models\Core\UnidadeProdutivaCulturaModel;
 use App\Models\Core\UnidadeProdutivaModel;
 use Illuminate\Database\Seeder;
 
-class CulturaSeeder extends Seeder
+class CulturasUnidadesProdutivasSeeder extends Seeder
 {
     /**
      * Run the database seeds.

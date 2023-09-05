@@ -33,7 +33,8 @@ class NameExists implements Rule
         } elseif( $this->model == 'UnidadeProdutiva' ){
             $search = UnidadeProdutivaModel::where($attribute, $value)->get();
         }        
-        return count($search) > 0 ? false : true;
+	#return count($search) > 0 ? false : true;
+	return true;
     }
 
     /**
