@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Core\UnidadeProdutiva;
+namespace App\Http\Controllers\Api\Core;
 
 use App\Http\Controllers\Controller;
 use App\Models\Core\ProdutorModel;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Auth;
+namespace App\Models\Core\Rules\Auth;
 
 use App\Models\Auth\User;
 use App\Repositories\Backend\Auth\UserRepository as BackendUserRepository;
