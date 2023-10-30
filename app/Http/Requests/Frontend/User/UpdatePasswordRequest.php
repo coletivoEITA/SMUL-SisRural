@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Frontend\User;
 
-use App\Rules\Auth\UnusedPassword;
+use App\Models\Core\Rules\Auth\UnusedPassword;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Helpers\Auth\PasswordRulesHelper;
 
