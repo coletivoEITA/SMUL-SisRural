@@ -330,14 +330,14 @@
                 </a>
             </li>
 
-            <li class="c-sidebar-nav-item">
+            <!-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{
                     active_class(Route::is('admin.core.indicadores.index'), 'c-active')
                 }}" href="{{ route('admin.core.indicadores.index') }}">
                     <i class="c-sidebar-nav-icon c-icon cil-description"></i>
                     Indicadores
                 </a>
-            </li>
+            </li> -->
 
            <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link {{
