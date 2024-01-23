@@ -10,7 +10,7 @@
         @endcardaddview
     </div>
 
-    <div class="col-4">
+    <!-- <div class="col-4">
         @cardaddview(['title'=>'Painéis de indicadores', 'icon'=>'c-icon c-icon-lg cil-bar-chart', 'noPadding' => true])
             @slot('body')
                 <a href="{{route('admin.core.indicadores.index', ['dt_ini'=>date('Y-m-d', strtotime("-1 year")), 'dt_end'=>date('Y-m-d')])}}">
@@ -18,7 +18,7 @@
                 </a>
             @endslot
         @endcardaddview
-    </div>
+    </div> -->
 
     <div class="col-4">
         @cardaddview(['title'=>'Download de planilhas', 'icon'=>'c-icon c-icon-lg cil-notes', 'noPadding' => true])

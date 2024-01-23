@@ -23,20 +23,22 @@
                     @endcardaddview
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <!-- <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>'Formulários Aplicados', 'total'=>$totalFormulariosAplicados, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>'Aplicar Formulário', 'linkAdd'=>route('admin.core.checklist_unidade_produtiva.template'), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.checklist_unidade_produtiva.index'), 'permissionView'=>'view menu checklist_unidade_produtiva', 'permissionAdd'=>'create checklist_unidade_produtiva'])
                     @endcardaddview
-                </div>
+                </div> -->
 
-                <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <!-- <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>'Plano de Ação', 'total'=>$totalPlanoAcao, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>'Criar Plano de Ação - Individual', 'linkAdd'=>route('admin.core.plano_acao.produtor_unidade_produtiva'), 'labelAdd2'=>'Criar Plano de Ação - Formulário', 'linkAdd2'=>route('admin.core.plano_acao.checklist_unidade_produtiva'),  'labelView'=>'Visualizar', 'linkView'=>route('admin.core.plano_acao.index'), 'permissionView'=>'view menu plano_acao', 'permissionAdd'=>'create plano_acao'])
                     @endcardaddview
-                </div>
+                </div> -->
 
-                <div class="col-sm-6 col-md-4 col-lg-4">
+                <!-- <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>'Plano de Ação Coletivo', 'total'=>$totalPlanoAcaoColetivo, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>'Criar Plano de Ação', 'linkAdd'=>route('admin.core.plano_acao_coletivo.create'), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.plano_acao_coletivo.index'), 'permissionView'=>'view menu plano_acao', 'permissionAdd'=>'create plano_acao'])
                     @endcardaddview
-                </div>
+                </div> -->
             </div>
 
             @include('backend.core.dashboard.buttons_mapa_report_bi')
