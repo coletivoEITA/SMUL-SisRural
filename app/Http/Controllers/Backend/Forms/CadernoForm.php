@@ -25,7 +25,11 @@ class CadernoForm extends Form
          */
         $produtor = $this->data['produtor'];
         $unidadeProdutiva = $this->data['unidadeProdutiva'];
-
+        if($unidadeProdutiva['status_acompanhamento']){
+            $up_status = $unidadeProdutiva['status_acompanhamento']['nome'];
+        } else {
+            $up_status = "sem status de acompanhamento";
+        }
 
 
         $this->add('card-start-1', 'card-start', [
@@ -34,11 +38,21 @@ class CadernoForm extends Form
         ])->add('produtor', 'static', [
             'label' => 'Produtor/a',
             'tag' => 'b',
-            'value' => $produtor['nome']
+            'value' => $produtor['nome'] . " (Status: ". $produtor['status'] . ")",
+            'help_block' => [
+                'text' => "<a href='/admin/produtor/{$produtor['id']}/edit' target='blank'><i class='fa fa-pencil-alt'></i></a>",
+                'tag' => 'p',
+                'attr' => ['class' => 'help-block', 'style' => 'display: inline']
+            ],
         ])->add('unidadeProdutiva', 'static', [
             'label' => 'Unidade Produtiva',
             'tag' => 'b',
-            'value' => $unidadeProdutiva['nome']
+            'value' => "{$unidadeProdutiva['nome']} (Status: {$unidadeProdutiva['status']} - {$up_status})",
+            'help_block' => [
+                'text' => "<a href='/admin/unidade_produtiva/{$unidadeProdutiva['id']}/edit' target='blank'><i class='fa fa-pencil-alt'></i></a>",
+                'tag' => 'p',
+                'attr' => ['class' => 'help-block', 'style' => 'display: inline']
+            ],
         ])->add(
           'tecnicas',
           'select',
