@@ -153,6 +153,13 @@ class CadernoForm extends Form
                         ]
                     );
                 }
+                // Validação hardcoded: o certo seria ter a opção obrigatório na construção da pergunta #116
+                if(in_array($v['id'], [1, 11])){
+                    $this->modify($v['id'], $v['tipo'], [
+                        'rules' => 'required',
+                        'error' => __('validation.required', ['attribute' => $v['pergunta']])
+                    ]);
+                }
             }
         }
 
