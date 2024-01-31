@@ -98,7 +98,7 @@ Breadcrumbs::for('admin.core.dominio.edit', function ($trail, $id) {
  * Produtor
  */
 Breadcrumbs::for('admin.core.produtor.index', function ($trail) {
-    $trail->push('Produtor', route('admin.core.produtor.index'));
+    $trail->push(__('concepts.produtora.label'), route('admin.core.produtor.index'));
 });
 Breadcrumbs::for('admin.core.produtor.view', function ($trail, $produtor) {
     $trail->parent('admin.core.produtor.index');
@@ -110,11 +110,11 @@ Breadcrumbs::for('admin.core.produtor.dashboard', function ($trail, $produtor) {
 });
 Breadcrumbs::for('admin.core.produtor.create', function ($trail) {
     $trail->parent('admin.core.produtor.index');
-    $trail->push('Criar Produtor', route('admin.core.produtor.create'));
+    $trail->push(__('concepts.produtora.add'), route('admin.core.produtor.create'));
 });
 Breadcrumbs::for('admin.core.produtor.edit', function ($trail, $id) {
     $trail->parent('admin.core.produtor.index');
-    $trail->push('Editar Produtor', route('admin.core.produtor.edit', $id));
+    $trail->push(__('concepts.produtora.edit'), route('admin.core.produtor.edit', $id));
 });
 Breadcrumbs::for('admin.core.produtor.search-unidade-produtiva', $empty);
 Breadcrumbs::for('admin.core.produtor.add-unidade-produtiva', $empty);
@@ -234,7 +234,7 @@ Breadcrumbs::for('admin.core.cadernos.create', function ($trail) {
 });
 Breadcrumbs::for('admin.core.cadernos.edit', function ($trail, $id) {
     $trail->parent('admin.core.cadernos.index');
-    $trail->push('Editar Caderno de Campo', route('admin.core.cadernos.edit', $id));
+    $trail->push(__('concepts.caderno_de_campo.edit'), route('admin.core.cadernos.edit', $id));
 });
 Breadcrumbs::for('admin.core.cadernos.view', function ($trail, $id) {
     $trail->parent('admin.core.cadernos.index');
