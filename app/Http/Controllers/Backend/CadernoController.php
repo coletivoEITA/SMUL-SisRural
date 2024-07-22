@@ -49,7 +49,7 @@ class CadernoController extends Controller
             $datatableUrl = route('admin.core.cadernos.datatable', ['produtor' => $produtor]);
         } else {
             $datatableUrl = route('admin.core.cadernos.datatable_unidade_produtiva', ['unidadeProdutiva' => $unidadeProdutiva]);
-        }        
+        }
 
         $showLinkExcluidos = true;
 
@@ -75,10 +75,16 @@ class CadernoController extends Controller
 
         return DataTables::of($data)
             ->addColumn('data_da_visita', function ($row) {
-                $date = CadernoRespostaCadernoModel::where('caderno_id', $row->id)->where('template_pergunta_id',1)->first()->resposta;
-                $date = date_create($date);
-                return date_format($date, 'd\/m\/Y');
-            })        
+                if(isset(CadernoRespostaCadernoModel::where('caderno_id', $row->id)->where('template_pergunta_id',1)->first()->resposta)){
+                    $date = CadernoRespostaCadernoModel::where('caderno_id', $row->id)->where('template_pergunta_id',1)->first()->resposta;
+                    $date = date_create($date);
+                    return date_format($date, 'd\/m\/Y');
+                } else {
+                    return "";
+                }
+
+
+            })
             ->editColumn('usuario.first_name', function ($row) {
                 return @$row->usuario->full_name;
             })
@@ -88,7 +94,7 @@ class CadernoController extends Controller
                     $tecnicas[] = $tecnica->first_name;
                 }
                 return implode(", ", $tecnicas);
-            })           
+            })
             ->editColumn('status', function ($row) {
                 $classBadge = @$row->status == CadernoStatusEnum::Rascunho ? 'text-danger' : 'text-primary';
 
