@@ -6,7 +6,13 @@
     @cannot('report restricted')
         <div class="container-fluid">
             <h1 class="mb-3">Página inicial</h1>
-
+            <iframe
+                src="https://metabase.hortaemcasa.eita.coop.br/public/dashboard/301e8b4b-2e84-4c63-a2bf-274f937415ec"
+                frameborder="0"
+                width="100%"
+                height="500"
+                allowtransparency
+            ></iframe>
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>__('concepts.caderno_de_campo.label'), 'total'=>$totalCaderno, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>__('concepts.caderno_de_campo.add'), 'linkAdd'=>route('admin.core.cadernos.produtor_unidade_produtiva'), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.cadernos.index'), 'permissionView'=>'view menu caderno', 'permissionAdd'=>'create caderno'])
