@@ -69,14 +69,14 @@ class UnidadeProdutivaController extends Controller
      */
     public function view(UnidadeProdutivaModel $unidadeProdutiva)
     {
-        if(config('app.checklist_dados_adicionais_unidade_produtiva')){            
+        if(config('app.checklist_dados_adicionais_unidade_produtiva')){
             $checklistUnidadeProdutiva = ChecklistUnidadeProdutivaModel::where('unidade_produtiva_id', $unidadeProdutiva->id)->where('checklist_id', config('app.checklist_dados_adicionais_unidade_produtiva'))->first();
             if($checklistUnidadeProdutiva){
                 $categorias = $checklistUnidadeProdutiva->getCategoriasAndRespostasChecklist();
             } else {
-                $categorias = NULL;    
+                $categorias = NULL;
             }
-            
+
         } else {
             $categorias = NULL;
         }
@@ -135,17 +135,22 @@ class UnidadeProdutivaController extends Controller
                 $cadernos = $row->cadernos;
                 $data_visita = 0;
                 foreach( $cadernos as $caderno ){
-                    $data_visita_caderno = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta;                    
-                    $data_visita_caderno = strtotime($data_visita_caderno);
-                    if($data_visita_caderno > $data_visita){
-                        $data_visita = $data_visita_caderno;
+                    if(isset(CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta)){
+                        $data_visita_caderno = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta;
+                        $data_visita_caderno = strtotime($data_visita_caderno);
+                        if($data_visita_caderno > $data_visita){
+                            $data_visita = $data_visita_caderno;
+                        }
+                        if( $data_visita != 0 ){
+                            return date("d/m/Y",$data_visita);
+                        } else {
+                            return "";
+                        }
+                    } else {
+                        return "";
                     }
                 }
-                if( $data_visita != 0 ){
-                    return date("d/m/Y",$data_visita);
-                } else {
-                    return "";
-                }                
+
             })->filterColumn('produtores', function ($query, $keyword) {
                 if ($keyword) {
                     $query->whereHas('produtores', function ($q) use ($keyword) {
@@ -213,9 +218,9 @@ class UnidadeProdutivaController extends Controller
     {
 
         // Definição do checklist de dados adicionais da UP
-        if(config('app.checklist_dados_adicionais_unidade_produtiva')){            
+        if(config('app.checklist_dados_adicionais_unidade_produtiva')){
             $checklist_id = config('app.checklist_dados_adicionais_unidade_produtiva');
-            $checklist = ChecklistModel::find($checklist_id);         
+            $checklist = ChecklistModel::find($checklist_id);
         }
         // dd()
         $model['produtor_id'] = $produtor->id;
@@ -263,7 +268,7 @@ class UnidadeProdutivaController extends Controller
 
             if(config('app.checklist_dados_adicionais_unidade_produtiva')){
                 // Salvando dados das respostas do checklist. Para isso foi preciso longo caminho para
-                // instanciar o ChecklistUnidadeProdutivaRepository                
+                // instanciar o ChecklistUnidadeProdutivaRepository
                 $planoAcaoItem = new PlanoAcaoItemModel();
                 $planoAcaoItemRepository = new PlanoAcaoItemRepository($planoAcaoItem);
                 $planoAcao = new PlanoAcaoModel();
@@ -274,7 +279,7 @@ class UnidadeProdutivaController extends Controller
 
                 if($checklistUnidadeProdutiva){
                     // checklist existe e só precisa ser atualizado
-                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);                   
+                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);
                     $checklistUnidadeProdutivaRepository->update($checklistUnidadeProdutiva, $data);
                 } else {
                     // checklist a ser criado
@@ -310,7 +315,7 @@ class UnidadeProdutivaController extends Controller
         }
 
         /*Custom Redirect*/
-        $redirect = route('admin.core.unidade_produtiva.index'); 
+        $redirect = route('admin.core.unidade_produtiva.index');
         if (@$data['submit_action'] == 'edit_after') {
             $redirect = route('admin.core.unidade_produtiva.edit', [$unidadeProdutiva->id]);
         }
@@ -343,7 +348,7 @@ class UnidadeProdutivaController extends Controller
 
 
         // Definição do checklist de dados adicionais da UP
-        if(config('app.checklist_dados_adicionais_unidade_produtiva')){            
+        if(config('app.checklist_dados_adicionais_unidade_produtiva')){
             $checklist_id = config('app.checklist_dados_adicionais_unidade_produtiva');
             $checklist = ChecklistModel::find($checklist_id);
             $unidProdutivaRespostas = ChecklistUnidadeProdutivaController::getRespostas($checklist, NULL, $unidadeProdutiva);
@@ -351,7 +356,7 @@ class UnidadeProdutivaController extends Controller
             foreach($unidProdutivaRespostas as $k => $v){
                 $unidadeProdutiva->$k = $v;
             }
-            $model = $unidadeProdutiva; 
+            $model = $unidadeProdutiva;
         } else {
             $unidProdutivaRespostas = NULL;
             $checklist = NULL;
@@ -359,7 +364,7 @@ class UnidadeProdutivaController extends Controller
         }
 
         $produtores = $unidadeProdutiva->produtores();
-        
+
         $form = $formBuilder->create(UnidadeProdutivaForm::class, [
             'id' => 'form-builder',
             'method' => 'PATCH',
@@ -387,7 +392,7 @@ class UnidadeProdutivaController extends Controller
 
         //Iframe "Infra e Ferramentas" (ver UnidadeProdutivaInfraFerramentasTrait.php)
         $infraFerramentasId = 'iframeInfraFerramentas';
-        $infraFerramentasSrc = route('admin.core.unidade_produtiva.infra_ferramentas.index', compact('unidadeProdutiva'));        
+        $infraFerramentasSrc = route('admin.core.unidade_produtiva.infra_ferramentas.index', compact('unidadeProdutiva'));
 
         // Iframe "Uso do Solo" (ver UnidadeProdutivaCaracterizacoesTrait.php)
         // $caracterizacoesId = 'iframeCaracterizacoes';
@@ -426,7 +431,7 @@ class UnidadeProdutivaController extends Controller
 
             if(config('app.checklist_dados_adicionais_unidade_produtiva')){
                 // Salvando dados das respostas do checklist. Para isso foi preciso longo caminho para
-                // instanciar o ChecklistUnidadeProdutivaRepository                
+                // instanciar o ChecklistUnidadeProdutivaRepository
                 $planoAcaoItem = new PlanoAcaoItemModel();
                 $planoAcaoItemRepository = new PlanoAcaoItemRepository($planoAcaoItem);
                 $planoAcao = new PlanoAcaoModel();
@@ -437,17 +442,17 @@ class UnidadeProdutivaController extends Controller
 
                 if($checklistUnidadeProdutiva){
                     // checklist existe e só precisa ser atualizado
-                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);                   
+                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);
                     $checklistUnidadeProdutivaRepository->update($checklistUnidadeProdutiva, $data);
                 } else {
                     // checklist a ser criado
                     $checklistUnidadeProdutiva = new ChecklistUnidadeProdutivaModel();
-                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);                   
+                    $checklistUnidadeProdutivaRepository = new ChecklistUnidadeProdutivaRepository($checklistUnidadeProdutiva, $planoAcaoRepository);
                     $checklistUnidadeProdutivaRepository->create($data);
                 }
             }
 
-        } catch (Exception $e) {                
+        } catch (Exception $e) {
             return redirect()->back()->withErrors(__('validation.productive_unit_coverage_fails'))->withInput();
         }
 
