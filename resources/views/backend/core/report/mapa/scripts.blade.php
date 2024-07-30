@@ -23,6 +23,7 @@
 
     var lastPopup;
     function makeMarker(v) {
+
         var marker = L.marker([v.lat, v.lng], { icon:defaultIcon, draggable:false});
 
         if (v.nome) {
@@ -77,6 +78,11 @@
 
             if (isNaN(item.lat) || isNaN(item.lng)) {
                 console.log("Unidade produtiva inválida", item);
+                continue;
+            }
+
+            if (item.lat == -23.013089467789 && item.lng == -42.918983814658) {
+                // Unidade produtiva com localização padrão; não exibir
                 continue;
             }
 
