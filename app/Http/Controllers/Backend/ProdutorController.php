@@ -472,7 +472,7 @@ class ProdutorController extends Controller
                     }
                     return implode(", ", $bairros);
                 }else{
-                    return $row->subprefeitura;
+                    return $row->bairro;
                 }                  
             })->addColumn('actions', function ($row) use ($dashboard) {
                 if ($dashboard) {
