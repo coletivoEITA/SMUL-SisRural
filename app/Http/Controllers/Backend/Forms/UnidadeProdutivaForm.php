@@ -105,7 +105,7 @@ class UnidadeProdutivaForm extends Form
         ])->add('subprefeitura', 'select', [
             'label' => 'Distrito',
             'empty_value' => 'Selecione',
-            'choices' => ['Maricá' => 'Maricá', 'Ponta Negra' => 'Ponta Negra', 'Inoã' => 'Inoã', 'Itaipuaçu' => 'Itaipuaçu'],
+            'choices' => ['Sede - Centro' => 'Sede - Centro', 'Ponta Negra' => 'Ponta Negra', 'Inoã' => 'Inoã', 'Itaipuaçu' => 'Itaipuaçu'],
         ]);
         
         // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.
