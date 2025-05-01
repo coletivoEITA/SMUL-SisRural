@@ -16,6 +16,9 @@ $(document).ready(function() {
                 "data": "nome"
             },
             {
+                "data": "cpf"
+            },
+            {
                 "data": "subprefeitura"
             },
             {
@@ -26,9 +29,6 @@ $(document).ready(function() {
             },
             {
                 "data": "status"
-            },
-            {
-                "data": "status_observacao"
             },
             // {
             //     "data": "status_observacao"

@@ -37,12 +37,13 @@
                     <tr>
                         <th width="60">#</th>
                         <th>Nome</th>
+                        <th>CPF</th>
                         <th>Distrito</th>
                         <th>Bairro</th>
                         <th>Telefone</th>
                         <th>Status</th>
                         <!-- <th>Situação Atual</th> -->
-                        <th>Próximo Passo</th>
+                        <!-- th>Próximo Passo</th -->
                         <!-- <th>Coproprietários/as</th> -->
                         <!-- <th>Município</th>
                         <th>Estado</th> -->                        

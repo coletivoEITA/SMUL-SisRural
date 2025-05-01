@@ -32,6 +32,7 @@
                     <tr>
                         <th width="60">#</th>
                         <th>Nome</th>
+                        <th>CPF</th>
                         <th>Distrito</th>
                         <th>Bairro</th>
                         <th>Telefone</th>
