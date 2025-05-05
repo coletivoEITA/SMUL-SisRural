@@ -38,7 +38,7 @@
                         <th>Telefone</th>
                         <th>Status</th>
                         <!-- <th>Situação Atual</th> -->
-                        <th>Próximo Passo</th>
+                        <!-- th>Próximo Passo</th -->
                         <th width="60">Ações</th>
                     </tr>
                 </thead>
