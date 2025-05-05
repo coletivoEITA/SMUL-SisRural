@@ -390,8 +390,12 @@ class ProdutorForm extends Form
             'label' => 'Endereço',
         ])->add('bairro', 'text', [
             'label' => 'Bairro',
-        ])->add('subprefeitura', 'text', [
-            'label' => 'Distrito',            
+        // ])->add('subprefeitura', 'text', [
+        //     'label' => 'Distrito',
+        ])->add('subprefeitura', 'select', [
+          'label' => 'Distrito',
+          'empty_value' => 'Selecione',
+          'choices' => ['Sede - Centro' => 'Sede - Centro', 'Sede - São José' => 'Sede - São José', 'Ponta Negra' => 'Ponta Negra', 'Inoã' => 'Inoã', 'Itaipuaçu' => 'Itaipuaçu'],
         ])->add('card-endereco-end', 'fieldset-end', []);
 
         // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.
