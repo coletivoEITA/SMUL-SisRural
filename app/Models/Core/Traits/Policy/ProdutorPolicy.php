@@ -93,7 +93,7 @@ class ProdutorPolicy
      */
     public function delete(?User $user, ProdutorModel $farmer)
     {
-        return false;
+        // return false;
 
         if ($user === null) {
             return false;
