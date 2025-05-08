@@ -85,6 +85,17 @@ class CadernoController extends Controller
 
 
             })
+            ->addColumn('atividades_realizadas', function ($row) {
+              $atividades_realizadas = CadernoRespostaCadernoModel::leftJoin('template_perguntas','template_perguntas.id','=','caderno_resposta_caderno.template_pergunta_id')
+                ->leftJoin('template_respostas','template_respostas.id','=','caderno_resposta_caderno.template_resposta_id')
+                ->where('template_perguntas.pergunta','like','Atividades realizadas')
+                ->where('caderno_resposta_caderno.caderno_id','=',$row->id)
+                ->whereNull('caderno_resposta_caderno.deleted_at')
+                ->whereNull('template_perguntas.deleted_at')
+                ->whereNull('template_respostas.deleted_at');
+              return "<ul class='m-0 p-0 pl-2'><li>".implode("</li><li>", $atividades_realizadas->pluck('template_respostas.descricao')->toArray())."</li></ul>";
+            })
+            ->escapeColumns([])
             ->editColumn('usuario.first_name', function ($row) {
                 return @$row->usuario->full_name;
             })

@@ -42,6 +42,7 @@
                     <th>Unidade Produtiva</th>
                     <th>Status</th>
                     <th>Técnico/a</th>
+                    <th>Atividades realizadas</th>
                     <th>Criado em</th>
                     <th></th>
                     <th></th>
@@ -73,6 +74,7 @@
                     {"data": "datatable_unidade_produtiva.nome"},
                     {"data": "status"},
                     {"data": "tecnicas.first_name"},
+                    {"data": "atividades_realizadas"},
                     {"data": "created_at_formatted", "name": "created_at"},
                     {"data": 'created_at_formatted', "name":"created_at_formatted", visible:false},
                     {"data": "usuario.last_name", visible:false},
