@@ -48,8 +48,9 @@
 
             <tr>
                 <th>Criado por</th>
-                <td>{{ $produtor->usuario->full_name }}</td>
+                <td>@if($produtor->usuario) {{ $produtor->usuario->full_name }} @else - @endif</td>
             </tr>
+            
             <tr>
                 <th>Criado em</th>
                 <td>{{ $produtor->created_at_formatted }}</td>
