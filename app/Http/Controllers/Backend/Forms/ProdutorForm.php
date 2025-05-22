@@ -388,10 +388,6 @@ class ProdutorForm extends Form
             ],
         ])->add('endereco', 'text', [
             'label' => 'Endereço',
-        ])->add('bairro', 'text', [
-            'label' => 'Bairro',
-        // ])->add('subprefeitura', 'text', [
-        //     'label' => 'Distrito',
         ])->add('subprefeitura', 'select', [
           'label' => 'Distrito',
           'empty_value' => 'Selecione',
@@ -431,6 +427,8 @@ class ProdutorForm extends Form
                 'rules' => 'required',
                 'error' => __('validation.required', ['attribute' => 'Município']),
                 'attr' => ['municipio_selected' => $selected_municipio]
+        ])->add('bairro', 'text', [
+            'label' => 'Bairro',
         ])->add(
             'card-dados-end', 'card-end', [            
         ]);
