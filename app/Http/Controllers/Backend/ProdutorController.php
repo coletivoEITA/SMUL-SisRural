@@ -333,6 +333,15 @@ class ProdutorController extends Controller
         $data = $request->all();
         $this->repository->update($produtor, $data);
 
+        if ($data['status'] == "inativo") {
+
+          // selecionar unidades produtivas
+          $ProdutorUnidadesProdutivas = $produtor->unidadesProdutivas;
+          foreach($ProdutorUnidadesProdutivas as $pup) {
+            $pup->update(['status' => 'inativo']);
+          }
+        }
+
         if(config('app.checklist_dados_adicionais_produtora')){
             // Salvando dados das respostas do checklist. Para isso foi preciso longo caminho para
             // instanciar o ChecklistUnidadeProdutivaRepository                
