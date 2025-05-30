@@ -338,7 +338,10 @@ class ProdutorController extends Controller
           // selecionar unidades produtivas
           $ProdutorUnidadesProdutivas = $produtor->unidadesProdutivas;
           foreach($ProdutorUnidadesProdutivas as $pup) {
-            $pup->update(['status' => 'inativo']);
+            $pup->update([
+              'status' => 'inativo',
+              'status_observacao' => 'Desistência'
+            ]);
           }
         }
 
