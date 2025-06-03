@@ -109,9 +109,12 @@ class ProdutorController extends Controller
                     $distritos = [];
                     foreach($UPs as $UP){
                         $distritos[] = $UP->subprefeitura;
+                        // $row->update(['subprefeitura'=>$UP->subprefeitura]);
                     }
+
                     return implode(", ", $distritos);
                 }else{
+
                     return $row->subprefeitura;
                 }
             })->editColumn('bairro', function ($row) {
