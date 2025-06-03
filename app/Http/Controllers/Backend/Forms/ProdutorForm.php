@@ -378,10 +378,7 @@ class ProdutorForm extends Form
                 'label' => 'Reside na Unidade Produtiva?',
                 'choices' => CheckboxEnum::toSelectArray()
             ]
-        )->add('card-endereco-start', 'fieldset-start', [
-            'id' => 'card-endereco',
-            'title' => 'Endereço'
-        ])->add('cep', 'text', [
+        )->add('cep', 'text', [
             'label' => 'CEP (Código de Endereçamento Postal)',
             'attr' => [
                 '_mask' => '99999-999',
@@ -392,7 +389,7 @@ class ProdutorForm extends Form
           'label' => 'Distrito',
           'empty_value' => 'Selecione',
           'choices' => ['Sede - Centro' => 'Sede - Centro', 'Sede - São José' => 'Sede - São José', 'Ponta Negra' => 'Ponta Negra', 'Inoã' => 'Inoã', 'Itaipuaçu' => 'Itaipuaçu'],
-        ])->add('card-endereco-end', 'fieldset-end', []);
+        ]);
 
         // Caso não tenha UF/municipio, verifica se usuário está em apenas uma UF/Município. Caso sim, preenche campo UF/Municipio automaticamente.
         $selected_uf = [];
