@@ -22,6 +22,7 @@ use App\Models\Core\ChecklistModel;
 use App\Models\Core\PlanoAcaoModel;
 use App\Models\Core\ChecklistUnidadeProdutivaModel;
 use \App\Models\Core\PlanoAcaoItemModel;
+use App\Models\Core\StatusAcompanhamentoModel;
 use App\Repositories\Backend\Core\ChecklistUnidadeProdutivaRepository;
 use App\Repositories\Backend\Core\PlanoAcaoItemRepository;
 use App\Repositories\Backend\Core\PlanoAcaoRepository;
@@ -338,12 +339,15 @@ class ProdutorController extends Controller
 
         if ($data['status'] == "inativo") {
 
+          $status_acompanhamento_desistencia_id = StatusAcompanhamentoModel::withoutGlobalScopes()->where("nome", "Desistência")->first()->id;
+
           // selecionar unidades produtivas
           $ProdutorUnidadesProdutivas = $produtor->unidadesProdutivas;
           foreach($ProdutorUnidadesProdutivas as $pup) {
             $pup->update([
               'status' => 'inativo',
-              'status_observacao' => 'Desistência'
+              'status_observacao' => 'Desistência',
+              'status_acompanhamento_id' => $status_acompanhamento_desistencia_id
             ]);
           }
         }
