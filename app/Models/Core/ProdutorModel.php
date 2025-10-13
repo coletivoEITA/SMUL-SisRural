@@ -160,7 +160,11 @@ class ProdutorModel extends Model
      */
     public function unidadesProdutivas()
     {
-        return $this->belongsToMany(UnidadeProdutivaModel::class, 'produtor_unidade_produtiva', 'produtor_id', 'unidade_produtiva_id')->using(ProdutorUnidadeProdutivaModel::class)->whereNull('produtor_unidade_produtiva.deleted_at')->withPivot('id', 'tipo_posse_id')->withTimestamps();
+      return $this->belongsToMany(UnidadeProdutivaModel::class, 'produtor_unidade_produtiva', 'produtor_id', 'unidade_produtiva_id')
+                  ->using(ProdutorUnidadeProdutivaModel::class)
+                  ->whereNull('produtor_unidade_produtiva.deleted_at')
+                  ->withPivot('id', 'tipo_posse_id')
+                  ->withTimestamps();
     }
 
     /**

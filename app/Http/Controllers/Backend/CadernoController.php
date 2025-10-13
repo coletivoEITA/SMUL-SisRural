@@ -68,7 +68,7 @@ class CadernoController extends Controller
      */
     public function datatable(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
     {
-        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name'])->select("cadernos.*");
+        $model = CadernoModel::with(['template:id,nome', 'produtor:id,nome', 'datatable_unidade_produtiva:id,nome', 'usuario:id,first_name,last_name', 'tecnicas:first_name', 'produtoras:nome'])->select("cadernos.*");
 
         $data = $produtor->id ? $model->where('produtor_id', $produtor->id) : $model;
         $data = $unidadeProdutiva->id ? $model->where('unidade_produtiva_id', $unidadeProdutiva->id) : $model;
