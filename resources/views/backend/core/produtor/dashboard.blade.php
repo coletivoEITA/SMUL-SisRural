@@ -16,9 +16,18 @@
                                 </div>
 
                                 <div class="ml-2 my-auto">
-                                    <div>{{$produtor->nome}}</div>
+                                    <div>{{$produtor->uid}} - {{$produtor->nome}}</div>
                                     <div>{{$produtor->telefone_1}}</div>
                                     <div>{{$produtor->telefone_2}}</div>
+                                    <div>
+                                    @if ($produtor->tipo_parcerias_obs)
+                                      Participa do coletivo "{{$produtor->tipo_parcerias_obs}}"
+                                    @elseif ($produtor->fl_tipo_parceria > 0)
+                                      Participa de um coletivo mas não informou o nome.
+                                    @else
+                                      Não participa de nenhum coletivo.
+                                    @endif
+                                    </div>
 
                                     @php
                                         // $unidadeProdutiva = $produtor->unidadesProdutivas()->with('colaboradoresSocios')->get();
@@ -51,6 +60,7 @@
                             <h5>{{$v->nome}}</h5>
                             <div>{{$v->endereco}} {{$v->bairro}}</div>
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
+                            <div>Status: {{$v->status}}</div>
                         </a>
                         <hr/>
                     @endforeach
