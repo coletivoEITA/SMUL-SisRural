@@ -150,6 +150,7 @@ return [
         ProdutorStatusEnum::Agendado => 'Agendado 1ª visita',
         ProdutorStatusEnum::Cadastro => 'Cadastro/1ª visita',
         ProdutorStatusEnum::Acompanhamento => 'Acompanhamento',
+        ProdutorStatusEnum::Implantacao => 'Implantação',
         ProdutorStatusEnum::Inativo => 'Inativo',                        
     ],
 

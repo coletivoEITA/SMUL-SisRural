@@ -24,6 +24,7 @@ class ProdutorForm extends Form
                 "agendar" => "A agendar 1ª visita",
                 "tentativa" => "Tentativa de agendamento 1ª visita",
                 "agendado" => "Agendado 1ª visita",                  
+                "inativo" => "Inativo",
             ];
         }
 

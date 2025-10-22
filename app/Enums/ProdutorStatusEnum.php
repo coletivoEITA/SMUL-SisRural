@@ -12,5 +12,6 @@ final class ProdutorStatusEnum extends Enum implements LocalizedEnum
     const Agendado = 'agendado';
     const Cadastro = 'cadastro';
     const Acompanhamento = 'acompanhamento';
+    const Implantacao = 'implantacao';
     const Inativo = 'inativo';
 }
