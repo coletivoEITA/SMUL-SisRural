@@ -81,11 +81,19 @@
         <div class="row">
             @can('view menu caderno')
                 @php
-                    $totalCaderno = count($produtor->cadernos);
+                    $cadernos = $produtor->cadernos;
+                    $totalCaderno = count($cadernos);
+
+                    $ultimaVisita = $produtor->ultima_visita();
+
+                    $additionalTitleCaderno = '';
+                    if ($ultimaVisita) {
+                      $additionalTitleCaderno = 'Última visita: '.$ultimaVisita;
+                    }
                 @endphp
 
                 <div class="col-sm-6 col-md-4 col-lg-4">
-                    @cardaddview(['title'=>__('concepts.caderno_de_campo.label'), 'total'=>$totalCaderno, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=> __('concepts.caderno_de_campo.add'), 'linkAdd'=>route('admin.core.cadernos.produtor_unidade_produtiva', ['produtor'=>$produtor]), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.cadernos.index', ['produtor'=>$produtor]), 'permissionView'=>'view menu caderno', 'permissionAdd'=>'create caderno'])
+                  @cardaddview(['title'=>__('concepts.caderno_de_campo.label'), 'total'=>$totalCaderno, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=> __('concepts.caderno_de_campo.add'), 'linkAdd'=>route('admin.core.cadernos.produtor_unidade_produtiva', ['produtor'=>$produtor]), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.cadernos.index', ['produtor'=>$produtor]), 'permissionView'=>'view menu caderno', 'permissionAdd'=>'create caderno', 'additionalTitleView'=>$additionalTitleCaderno])
                     @endcardaddview
                 </div>
             @endcan

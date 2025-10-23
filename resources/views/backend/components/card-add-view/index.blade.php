@@ -7,6 +7,11 @@
         <div class="title ml-2">
             {{$title}}
         </div>
+            @if (@$additionalTitleView)
+              <small class="ml-5">
+                {{$additionalTitleView}}
+              </small>
+            @endif
     </div>
 
     <div class="card-body {{@$noPadding ? 'no-padding' : ''}}">

@@ -134,6 +134,7 @@ class UnidadeProdutivaController extends Controller
             })->addColumn('ultima_visita', function ($row) {
                 $cadernos = $row->cadernos;
                 $data_visita = 0;
+                $data_visita_ultima = "";
                 foreach( $cadernos as $caderno ){
                     if(isset(CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta)){
                         $data_visita_caderno = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta;
@@ -142,14 +143,15 @@ class UnidadeProdutivaController extends Controller
                             $data_visita = $data_visita_caderno;
                         }
                         if( $data_visita != 0 ){
-                            return date("d/m/Y",$data_visita);
+                            $data_visita_ultima = date("d/m/Y",$data_visita);
                         } else {
-                            return "";
+                            $data_visita_ultima = "";
                         }
                     } else {
-                        return "";
+                        $data_visita_ultima = "";
                     }
                 }
+                return $data_visita_ultima;
 
             })->filterColumn('produtores', function ($query, $keyword) {
                 if ($keyword) {

@@ -196,6 +196,43 @@ class ProdutorModel extends Model
     }
 
     /**
+     * Retorna a data da última visita
+     */
+    public function ultima_visita()
+    {
+      $ultimaVisitaUP = "";
+      $ultimaVisita = "";
+      $data_visita = 0;
+      $unidadesProdutivas = $this->unidadesProdutivas;
+      foreach( $unidadesProdutivas as $up ){
+        $cadernos = $up->cadernos;
+        foreach( $cadernos as $caderno ){
+          if(isset(CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta)){
+            $data_visita_caderno = CadernoRespostaCadernoModel::where('caderno_id', $caderno->id)->where('template_pergunta_id', 1)->first()->resposta;
+            $data_visita_caderno = strtotime($data_visita_caderno);
+            if($data_visita_caderno > $data_visita){
+              $data_visita = $data_visita_caderno;
+            }
+            if( $data_visita != 0 ){
+              $ultimaVisita = date("d/m/Y",$data_visita);
+            } else {
+              $ultimaVisita = "";
+            }
+          } else {
+            $ultimaVisita = "";
+          }
+        }
+
+        if ($ultimaVisita) {
+          if ($data_visita > $ultimaVisitaUP) {
+            $ultimaVisitaUP = $data_visita;
+          }
+        }
+      }
+      return date("d/m/Y",$ultimaVisitaUP);
+    }
+
+    /**
      * Retorna os formulários aplicados
      */
     public function checklists()
