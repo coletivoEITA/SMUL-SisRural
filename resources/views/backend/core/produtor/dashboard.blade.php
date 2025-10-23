@@ -60,6 +60,7 @@
                             <h5>{{$v->nome}}</h5>
                             <div>{{$v->endereco}} {{$v->bairro}}</div>
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
+                            <div>Unidade familiar: @if (count($v->colaboradores)) {{count($v->colaboradores)}} pessoas @else Nenhuma @endif</div>
                             <div>Status: {{$v->status}}</div>
                         </a>
                         <hr/>
