@@ -10,6 +10,7 @@ use App\Enums\ProdutorUnidadeProdutivaStatusEnum;
 use App\Enums\UnidadeProdutivaCarEnum;
 use App\Helpers\General\AppHelper;
 use App\Models\Core\CanalComercializacaoModel;
+use App\Models\Core\TipoHortaModel;
 use App\Models\Core\DestinacaoProducaoModel;
 use App\Models\Core\CertificacaoModel;
 use App\Models\Core\EsgotamentoSanitarioModel;
@@ -73,6 +74,15 @@ class UnidadeProdutivaForm extends Form
                 'label' => 'Produtores/as',
                 'tag' => 'b',
                 'value' => join(", ", $this->data['produtores']->pluck('nome')->toArray())
+            ])->add('tiposHorta', 'select', [
+              'label' => 'Tipo da Horta',
+              'choices' => TipoHortaModel::pluck('nome', 'id')->sort()->toArray(),
+              'attr' => [
+                'multiple' => 'multiple',
+              ],
+              'wrapper' => [
+                'class' => 'form-group row card-tipo_horta'
+              ],
             ]);
 
             $this->add('card-end-pr', 'card-end');

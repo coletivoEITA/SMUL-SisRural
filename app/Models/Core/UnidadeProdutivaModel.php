@@ -203,6 +203,26 @@ class UnidadeProdutivaModel extends Model
         return $this->hasMany(UnidadeProdutivaCanalComercializacaoModel::class, 'unidade_produtiva_id')->withTrashed();
     }
 
+    public function tiposHorta()
+    {
+        return $this->belongsToMany(TipoHortaModel::class, 'unidade_produtiva_tipo_horta', 'unidade_produtiva_id', 'tipo_horta_id')->using(UnidadeProdutivaTipoHortaModel::class)->whereNull('unidade_produtiva_tipo_horta.deleted_at')->withPivot('id')->withTimestamps();
+    }
+    /**
+     * Utilizado pelo método "syncSoftDelete"
+     */
+    public function tiposHortaWithTrashed()
+    {
+        return $this->belongsToMany(TipoHortaModel::class, 'unidade_produtiva_tipo_horta', 'unidade_produtiva_id', 'tipo_horta_id')->using(UnidadeProdutivaTipoHortaModel::class)->withPivot('id')->withTimestamps();
+    }
+
+    /**
+     * Métodos "offline" utilizados p/ o download de dados do APP
+     */
+    public function tiposHortaOffline()
+    {
+        return $this->hasMany(UnidadeProdutivaTipoHortaModel::class, 'unidade_produtiva_id')->withTrashed();
+    }
+
     public function destinacaoProducao()
     {
         return $this->belongsToMany(DestinacaoProducaoModel::class, 'unidade_produtiva_destinacao_producao', 'unidade_produtiva_id', 'destinacao_producao_id')->using(UnidadeProdutivaDestinacaoProducaoModel::class)->whereNull('unidade_produtiva_destinacao_producao.deleted_at')->withPivot('id')->withTimestamps();
