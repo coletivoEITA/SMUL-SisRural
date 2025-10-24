@@ -77,6 +77,13 @@
             @endcardater
         </div>
     </div>
+    @if (count($produtor->cadernos))
+      <div class="mt-5">
+        <div id="a-fichas">
+          @include('backend.components.iframe.html', ["id"=>$cadernosId, "src"=>$cadernosSrc])
+        </div>
+      </div>
+    @endif
 
     <div>
         <div class="row">

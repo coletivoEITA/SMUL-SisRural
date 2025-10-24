@@ -57,6 +57,26 @@ class CadernoController extends Controller
     }
 
     /**
+     * Listagem principal do Caderno de Campo de acordo com o CadernoPermissionScope (IFRAME)
+     *
+     * @param  ProdutorModel $produtor
+     * @param  UnidadeProdutivaModel $unidadeProdutiva
+     * @return void
+     */
+    public function iframe(ProdutorModel $produtor, UnidadeProdutivaModel $unidadeProdutiva)
+    {
+        if( !$unidadeProdutiva->id ){
+            $datatableUrl = route('admin.core.cadernos.datatable', ['produtor' => $produtor]);
+        } else {
+            $datatableUrl = route('admin.core.cadernos.datatable_unidade_produtiva', ['unidadeProdutiva' => $unidadeProdutiva]);
+        }
+
+        $showLinkExcluidos = true;
+
+        return view('backend.core.cadernos.iframe', compact('datatableUrl', 'showLinkExcluidos'));
+    }
+
+    /**
      * API Datatable "index()"
      *
      * Listagem principal do Caderno de Campo - Retorno dos dados p/ consumo - DataTable

@@ -73,7 +73,12 @@ class ProdutorController extends Controller
      */
     public function dashboard(ProdutorModel $produtor)
     {
-        return view('backend.core.produtor.dashboard', compact('produtor'));
+        // $colaboradoresId = 'iframeColaboradores';
+        // $colaboradoresSrc = route('admin.core.unidade_produtiva.colaboradores.index', compact('unidadeProdutiva'));
+        $cadernosId = 'iframeCadernos';
+        $cadernosSrc = route('admin.core.cadernos.iframe', compact('produtor'));
+
+        return view('backend.core.produtor.dashboard', compact('produtor', 'cadernosId', 'cadernosSrc'));
     }
 
     /**
