@@ -62,6 +62,13 @@
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
                             <div>Unidade familiar: @if (count($v->colaboradores)) {{count($v->colaboradores)}} pessoas @else Nenhuma @endif</div>
                             <div>Status: {{$v->status}}</div>
+                            <div>{{$v->carater}}</div>
+                            <div>
+                              @foreach ($v->tiposHorta as $y)
+                                {{$y->nome}}, 
+                              @endforeach
+                              {{$v->tipo_horta_outro}}
+                            </div>
                         </a>
                         <hr/>
                     @endforeach

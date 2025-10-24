@@ -42,6 +42,15 @@
                     <td>{{$unidadeProdutiva->carater}}</td>
                 </tr>
                 <tr>
+                    <th width="20%">Tipo de horta</th>
+                    <td>
+                      @foreach ($unidadeProdutiva->tiposHorta as $v)
+                        {{$v->nome}}, 
+                      @endforeach
+                      {{$unidadeProdutiva->tipo_horta_outro}}
+                    </td>
+                </tr>
+                <tr>
                     <th><abbr title="Código de Endereçamento Postal">CEP</abbr></th>
                     <td>{{$unidadeProdutiva->cep}}</td>
                 </tr>
