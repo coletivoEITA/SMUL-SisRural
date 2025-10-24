@@ -19,6 +19,7 @@
                                     <div>{{$unidadeProdutiva->nome}}</div>
                                     <div>{{$unidadeProdutiva->bairro}}</div>
                                     <div>{{$unidadeProdutiva->distrito}}</div>
+                                    <div>{{$unidadeProdutiva->carater}}</div>
 
                                     @php
                                         // $unidadeProdutiva = $produtor->unidadesProdutivas()->with('colaboradoresSocios')->get();

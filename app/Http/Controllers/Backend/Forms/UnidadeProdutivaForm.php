@@ -92,6 +92,10 @@ class UnidadeProdutivaForm extends Form
                 }
             ],
             'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
+        ])->add('carater', 'select', [
+            'choices' => ['Doméstica' => 'Doméstica', 'Institucional-Pública' => 'Institucional - Pública', 'Institucional-Privada' => 'Institucional - Privada', 'Comunitária' => 'Comunitária'],
+            'empty_value' => 'Selecione',
+            'label' => 'Caráter',
         ])->add('cep', 'text', [
             'label' => 'CEP (Código de Endereçamento Postal)',            
             'attr' => [
