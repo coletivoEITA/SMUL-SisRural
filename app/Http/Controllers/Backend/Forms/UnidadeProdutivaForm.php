@@ -66,7 +66,16 @@ class UnidadeProdutivaForm extends Form
             )->add(
                 'fl_fora_da_abrangencia_app',
                 'hidden'
-            )->add('card-end-dados-do-produtor', 'card-end', []);
+            )->add('tiposHorta', 'select', [
+              'label' => 'Tipo da Horta',
+              'choices' => TipoHortaModel::pluck('nome', 'id')->sort()->toArray(),
+              'attr' => [
+                'multiple' => 'multiple',
+              ],
+              'wrapper' => [
+                'class' => 'form-group row card-tipo_horta'
+              ],
+            ])->add('card-end-dados-do-produtor', 'card-end', []);
         } else if (isset($this->data['produtores']) && isset($this->data['produtores'])) {
             $this->add('card-start-pr', 'card-start', ['title' => 'Informações Gerais']);
 
