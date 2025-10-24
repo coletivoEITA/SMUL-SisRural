@@ -26,6 +26,12 @@
                                       @endforeach
                                       {{$unidadeProdutiva->tipo_horta_outro}}
                                     </div>
+                                    <div>
+                                      Destinação da produção:
+                                      @foreach ($unidadeProdutiva->destinacaoProducao as $y)
+                                        {{$y->nome}}, 
+                                      @endforeach
+                                    </div>
 
                                     @php
                                         // $unidadeProdutiva = $produtor->unidadesProdutivas()->with('colaboradoresSocios')->get();
