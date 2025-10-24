@@ -75,6 +75,11 @@ class UnidadeProdutivaForm extends Form
               'wrapper' => [
                 'class' => 'form-group row card-tipo_horta'
               ],
+            ])->add('tipo_horta_outro', 'text', [
+              'label' => 'Outro tipo de horta',
+              'help_block' => [
+                'text' => 'Informe os tipos de horta, caso não encontre na lista acima.'
+            ],
             ])->add('card-end-dados-do-produtor', 'card-end', []);
         } else if (isset($this->data['produtores']) && isset($this->data['produtores'])) {
             $this->add('card-start-pr', 'card-start', ['title' => 'Informações Gerais']);
@@ -92,6 +97,11 @@ class UnidadeProdutivaForm extends Form
               'wrapper' => [
                 'class' => 'form-group row card-tipo_horta'
               ],
+            ])->add('tipo_horta_outro', 'text', [
+              'label' => 'Outro tipo de horta',
+              'help_block' => [
+                'text' => 'Informe os tipos de horta, caso não encontre na lista acima.'
+            ],
             ]);
 
             $this->add('card-end-pr', 'card-end');
