@@ -229,6 +229,9 @@ class ProdutorModel extends Model
           }
         }
       }
+
+      if (!$ultimaVisitaUP)
+        return '';
       return date("d/m/Y",$ultimaVisitaUP);
     }
 
