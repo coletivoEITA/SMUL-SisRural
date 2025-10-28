@@ -60,6 +60,7 @@
                             <h5>{{$v->nome}}</h5>
                             <div>{{$v->endereco}} {{$v->bairro}}</div>
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
+                            <div>Área produtiva: @if ($v->area_produtiva) {{$v->area_produtiva}} m² @else Não informado @endif</div>
                             <div>Unidade familiar: @if (count($v->colaboradores)) {{count($v->colaboradores)}} pessoas @else Nenhuma @endif</div>
                             <div>
                               Destinação da produção:
