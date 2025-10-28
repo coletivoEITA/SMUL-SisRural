@@ -81,6 +81,7 @@
                         "searchable": false,
                         "orderable": false,
                         render: function (data) {
+                            $('a').attr('target', '_blank');
                             return htmlDecode(data);
                         }
                     }

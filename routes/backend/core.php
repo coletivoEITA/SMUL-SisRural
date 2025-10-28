@@ -322,7 +322,7 @@ Route::middleware(['permission_report_restrict'])->group(function () {
             Route::delete('/forceDelete/{caderno}', [CadernoController::class, 'forceDelete'])->middleware('can:forceDelete,caderno')->name('forceDelete');
 
             Route::get('/{produtor?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index');
-            Route::get('/iframe/{produtor?}', [CadernoController::class, 'iframe'])->middleware('permission:view menu caderno')->name('iframe');
+            Route::get('/cadernos_iframe/{produtor?}', [CadernoController::class, 'cadernosIframe'])->middleware('permission:view menu caderno')->name('cadernos_iframe');
             Route::get('/unidade_produtiva/{unidadeProdutiva?}', [CadernoController::class, 'index'])->middleware('permission:view menu caderno')->name('index_unidade_produtiva');
 
             /**

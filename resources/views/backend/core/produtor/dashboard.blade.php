@@ -91,13 +91,6 @@
             @endcardater
         </div>
     </div>
-    @if (count($produtor->cadernos))
-      <div class="mt-5">
-        <div id="a-fichas">
-          @include('backend.components.iframe.html', ["id"=>$cadernosId, "src"=>$cadernosSrc])
-        </div>
-      </div>
-    @endif
 
     <div>
         <div class="row">
@@ -200,6 +193,13 @@
             @endcan
         </div>
     </div>
+    @if (count($produtor->cadernos))
+      <div class="mt-2">
+        <div id="a-cadernos">
+          @include('backend.components.iframe.html', ["id"=>$cadernosId, "src"=>$cadernosSrc])
+        </div>
+      </div>
+    @endif
 @endsection
 
 @push('before-scripts')
@@ -232,4 +232,5 @@
 
 @push('after-scripts')
     @include('backend.components.unidades-produtivas-latlng.scripts', ["produtor"=>$produtor])
+    @include('backend.components.iframe.scripts', ["id"=>$cadernosId, "src"=>$cadernosSrc])
 @endpush

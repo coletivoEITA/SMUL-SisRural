@@ -76,7 +76,7 @@ class ProdutorController extends Controller
         // $colaboradoresId = 'iframeColaboradores';
         // $colaboradoresSrc = route('admin.core.unidade_produtiva.colaboradores.index', compact('unidadeProdutiva'));
         $cadernosId = 'iframeCadernos';
-        $cadernosSrc = route('admin.core.cadernos.iframe', compact('produtor'));
+        $cadernosSrc = route('admin.core.cadernos.cadernos_iframe', compact('produtor'));
 
         return view('backend.core.produtor.dashboard', compact('produtor', 'cadernosId', 'cadernosSrc'));
     }
