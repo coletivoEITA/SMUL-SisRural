@@ -8,12 +8,20 @@ use App\Models\Core\ChecklistUnidadeProdutivaModel;
 use App\Models\Core\PlanoAcaoModel;
 use App\Models\Core\ProdutorModel;
 use App\Models\Core\UnidadeProdutivaModel;
+use App\Services\ReportService;
 
 /**
  * Class DashboardController.
  */
 class DashboardController extends Controller
 {
+    private $service;
+
+    public function __construct(ReportService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Retorno do dashboard principal do CMS
      *
@@ -29,6 +37,10 @@ class DashboardController extends Controller
         $totalPlanoAcao = PlanoAcaoModel::individual()->count();
         $totalPlanoAcaoColetivo = PlanoAcaoModel::coletivo()->count();
 
-        return view('backend.dashboard', compact('totalCaderno', 'totalProdutor', 'totalUnidProdutiva', 'totalFormulariosAplicados', 'totalPlanoAcao', 'totalPlanoAcaoColetivo'));
+        $action = route('admin.core.mapa.data');
+
+        $viewFilter = $this->service->viewFilter($action, true, false, false);
+
+        return view('backend.dashboard', compact('totalCaderno', 'totalProdutor', 'totalUnidProdutiva', 'totalFormulariosAplicados', 'totalPlanoAcao', 'totalPlanoAcaoColetivo', 'action', 'viewFilter'));
     }
 }

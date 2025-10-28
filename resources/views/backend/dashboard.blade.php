@@ -13,6 +13,16 @@
                 height="930"
                 allowtransparency
             ></iframe>
+
+			{!!@$viewFilter!!}
+            <div class="map-lat-lng">
+                <div class="loading">
+                    <div class="spinner-border text-light" role="status"></div>
+                </div>
+
+                <div id="map-content"></div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>__('concepts.caderno_de_campo.label'), 'total'=>$totalCaderno, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>__('concepts.caderno_de_campo.add'), 'linkAdd'=>route('admin.core.cadernos.produtor_unidade_produtiva'), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.cadernos.index'), 'permissionView'=>'view menu caderno', 'permissionAdd'=>'create caderno'])
@@ -116,7 +126,25 @@
                 addAutoLink(function () {
                     debounceSearch('#table');
                 });
+
+			    $('#form-filter').hide();
             });
         </script>
     @endcan
+
+    <script type="text/javascript" src="{{ asset('js/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/leaflet.markercluster.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/leaflet-omnivore.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/leaflet.fullscreen.min.js') }}"></script>
+
+    @include('backend.core.report.mapa.scripts')
+@endpush
+
+@push('after-styles')
+    <link href="{{ asset('css/leaflet.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/MarkerCluster.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/MarkerCluster.Default.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/leaflet.fullscreen.css') }}" rel="stylesheet" />
+
+    @include('backend.core.report.mapa.styles')
 @endpush
