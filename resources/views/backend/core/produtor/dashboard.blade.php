@@ -60,7 +60,21 @@
                             <h5>{{$v->nome}}</h5>
                             <div>{{$v->endereco}} {{$v->bairro}}</div>
                             <div>{{$v->cidade->nome}} - {{$v->estado->uf}}</div>
+                            <div>Área produtiva: @if ($v->area_produtiva) {{$v->area_produtiva}} m² @else Não informado @endif</div>
                             <div>Unidade familiar: @if (count($v->colaboradores)) {{count($v->colaboradores)}} pessoas @else Nenhuma @endif</div>
+                            <div>
+                              Destinação da produção:
+                              @foreach ($v->destinacaoProducao as $y)
+                                {{$y->nome}}, 
+                              @endforeach
+                            </div>
+                            <div>{{$v->carater}}</div>
+                            <div>
+                              @foreach ($v->tiposHorta as $y)
+                                {{$y->nome}}, 
+                              @endforeach
+                              {{$v->tipo_horta_outro}}
+                            </div>
                             <div>Status: {{$v->status}}</div>
                         </a>
                         <hr/>

@@ -19,6 +19,19 @@
                                     <div>{{$unidadeProdutiva->nome}}</div>
                                     <div>{{$unidadeProdutiva->bairro}}</div>
                                     <div>{{$unidadeProdutiva->distrito}}</div>
+                                    <div>{{$unidadeProdutiva->carater}}</div>
+                                    <div>
+                                      @foreach ($unidadeProdutiva->tiposHorta as $v)
+                                        {{$v->nome}}, 
+                                      @endforeach
+                                      {{$unidadeProdutiva->tipo_horta_outro}}
+                                    </div>
+                                    <div>
+                                      Destinação da produção:
+                                      @foreach ($unidadeProdutiva->destinacaoProducao as $y)
+                                        {{$y->nome}}, 
+                                      @endforeach
+                                    </div>
 
                                     @php
                                         // $unidadeProdutiva = $produtor->unidadesProdutivas()->with('colaboradoresSocios')->get();

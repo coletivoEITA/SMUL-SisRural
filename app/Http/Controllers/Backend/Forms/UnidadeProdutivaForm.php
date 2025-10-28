@@ -10,6 +10,7 @@ use App\Enums\ProdutorUnidadeProdutivaStatusEnum;
 use App\Enums\UnidadeProdutivaCarEnum;
 use App\Helpers\General\AppHelper;
 use App\Models\Core\CanalComercializacaoModel;
+use App\Models\Core\TipoHortaModel;
 use App\Models\Core\DestinacaoProducaoModel;
 use App\Models\Core\CertificacaoModel;
 use App\Models\Core\EsgotamentoSanitarioModel;
@@ -65,7 +66,21 @@ class UnidadeProdutivaForm extends Form
             )->add(
                 'fl_fora_da_abrangencia_app',
                 'hidden'
-            )->add('card-end-dados-do-produtor', 'card-end', []);
+            )->add('tiposHorta', 'select', [
+              'label' => 'Tipo da Horta',
+              'choices' => TipoHortaModel::pluck('nome', 'id')->sort()->toArray(),
+              'attr' => [
+                'multiple' => 'multiple',
+              ],
+              'wrapper' => [
+                'class' => 'form-group row card-tipo_horta'
+              ],
+            ])->add('tipo_horta_outro', 'text', [
+              'label' => 'Outro tipo de horta',
+              'help_block' => [
+                'text' => 'Informe os tipos de horta, caso não encontre na lista acima.'
+            ],
+            ])->add('card-end-dados-do-produtor', 'card-end', []);
         } else if (isset($this->data['produtores']) && isset($this->data['produtores'])) {
             $this->add('card-start-pr', 'card-start', ['title' => 'Informações Gerais']);
 
@@ -73,6 +88,20 @@ class UnidadeProdutivaForm extends Form
                 'label' => 'Produtores/as',
                 'tag' => 'b',
                 'value' => join(", ", $this->data['produtores']->pluck('nome')->toArray())
+            ])->add('tiposHorta', 'select', [
+              'label' => 'Tipo da Horta',
+              'choices' => TipoHortaModel::pluck('nome', 'id')->sort()->toArray(),
+              'attr' => [
+                'multiple' => 'multiple',
+              ],
+              'wrapper' => [
+                'class' => 'form-group row card-tipo_horta'
+              ],
+            ])->add('tipo_horta_outro', 'text', [
+              'label' => 'Outro tipo de horta',
+              'help_block' => [
+                'text' => 'Informe os tipos de horta, caso não encontre na lista acima.'
+            ],
             ]);
 
             $this->add('card-end-pr', 'card-end');
@@ -92,6 +121,10 @@ class UnidadeProdutivaForm extends Form
                 }
             ],
             'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
+        ])->add('carater', 'select', [
+            'choices' => ['Doméstica' => 'Doméstica', 'Institucional-Pública' => 'Institucional - Pública', 'Institucional-Privada' => 'Institucional - Privada', 'Comunitária' => 'Comunitária'],
+            'empty_value' => 'Selecione',
+            'label' => 'Caráter',
         ])->add('cep', 'text', [
             'label' => 'CEP (Código de Endereçamento Postal)',            
             'attr' => [

@@ -27,7 +27,7 @@ class UnidadeProdutivaModel extends Model
 
     protected $table = 'unidade_produtivas';
 
-    protected $fillable = ['id', 'nome', 'cep', 'endereco', 'bairro', 'subprefeitura', 'cidade_id', 'estado_id', 'car', 'ccir', 'itr', 'matricula', 'upa', 'gargalos', 'outorga_id', 'agua_qualidade', 'agua_disponibilidade', 'fl_risco_contaminacao', 'risco_contaminacao_observacoes', 'irrigacao', 'irrigacao_area_coberta', 'instalacao_maquinas_observacao', 'croqui_propriedade', 'fl_certificacoes', 'fl_car', 'fl_ccir', 'fl_itr', 'fl_matricula', 'fl_comercializacao', 'outros_usos_descricao', 'fl_producao_processa', 'producao_processa_descricao', 'area_total_solo', 'area_total_solo_lado1', 'area_total_solo_lado2', 'area_produtiva', 'area_produtiva_lado1',  'area_produtiva_lado2', 'area_disponivel_expansao', 'area_disponivel_expansao_lado1', 'area_disponivel_expansao_lado2', 'caracteristica_solo', 'observacoes_sobre_area', 'lat', 'lng', 'certificacoes_descricao', 'pressao_social_descricao', 'fl_pressao_social', 'owner_id', 'fl_fora_da_abrangencia_app', 'bacia_hidrografica', 'status', 'status_observacao', 'user_id', 'tags', 'historico', 'status_acompanhamento_id', 'forma_comprova_comercializacao', 'frequencia_comercializacao', 'fl_comprova_origem_comercializacao', 'rendimento_comercializacao_id'];
+    protected $fillable = ['id', 'nome', 'cep', 'endereco', 'bairro', 'subprefeitura', 'cidade_id', 'estado_id', 'car', 'ccir', 'itr', 'matricula', 'upa', 'gargalos', 'outorga_id', 'agua_qualidade', 'agua_disponibilidade', 'fl_risco_contaminacao', 'risco_contaminacao_observacoes', 'irrigacao', 'irrigacao_area_coberta', 'instalacao_maquinas_observacao', 'croqui_propriedade', 'fl_certificacoes', 'fl_car', 'fl_ccir', 'fl_itr', 'fl_matricula', 'fl_comercializacao', 'outros_usos_descricao', 'fl_producao_processa', 'producao_processa_descricao', 'area_total_solo', 'area_total_solo_lado1', 'area_total_solo_lado2', 'area_produtiva', 'area_produtiva_lado1',  'area_produtiva_lado2', 'area_disponivel_expansao', 'area_disponivel_expansao_lado1', 'area_disponivel_expansao_lado2', 'caracteristica_solo', 'observacoes_sobre_area', 'lat', 'lng', 'certificacoes_descricao', 'pressao_social_descricao', 'fl_pressao_social', 'owner_id', 'fl_fora_da_abrangencia_app', 'bacia_hidrografica', 'status', 'status_observacao', 'user_id', 'tags', 'historico', 'status_acompanhamento_id', 'forma_comprova_comercializacao', 'frequencia_comercializacao', 'fl_comprova_origem_comercializacao', 'rendimento_comercializacao_id', 'carater', 'tipo_horta', 'tipo_horta_outro'];
 
     protected $keyType = 'string';
 
@@ -201,6 +201,26 @@ class UnidadeProdutivaModel extends Model
     public function canaisComercializacaoOffline()
     {
         return $this->hasMany(UnidadeProdutivaCanalComercializacaoModel::class, 'unidade_produtiva_id')->withTrashed();
+    }
+
+    public function tiposHorta()
+    {
+        return $this->belongsToMany(TipoHortaModel::class, 'unidade_produtiva_tipo_horta', 'unidade_produtiva_id', 'tipo_horta_id')->using(UnidadeProdutivaTipoHortaModel::class)->whereNull('unidade_produtiva_tipo_horta.deleted_at')->withPivot('id')->withTimestamps();
+    }
+    /**
+     * Utilizado pelo método "syncSoftDelete"
+     */
+    public function tiposHortaWithTrashed()
+    {
+        return $this->belongsToMany(TipoHortaModel::class, 'unidade_produtiva_tipo_horta', 'unidade_produtiva_id', 'tipo_horta_id')->using(UnidadeProdutivaTipoHortaModel::class)->withPivot('id')->withTimestamps();
+    }
+
+    /**
+     * Métodos "offline" utilizados p/ o download de dados do APP
+     */
+    public function tiposHortaOffline()
+    {
+        return $this->hasMany(UnidadeProdutivaTipoHortaModel::class, 'unidade_produtiva_id')->withTrashed();
     }
 
     public function destinacaoProducao()
