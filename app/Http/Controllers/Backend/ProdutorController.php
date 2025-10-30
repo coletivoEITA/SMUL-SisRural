@@ -99,7 +99,7 @@ class ProdutorController extends Controller
      */
     public function datatable(bool $dashboard = false)
     {
-        return DataTables::of(ProdutorModel::whereIn('status', ['cadastro', 'acompanhamento', 'inativo'])->with([
+        return DataTables::of(ProdutorModel::whereIn('status', ['cadastro', 'acompanhamento', 'inativo', 'implantacao'])->with([
             'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:unidade_produtivas.id,socios,tags'
         ])->select("produtores.*"))
             ->editColumn('tags', function ($row) {
@@ -466,7 +466,7 @@ class ProdutorController extends Controller
      */
     public function datatableContato(bool $dashboard = false)
     {
-        return DataTables::of(ProdutorModel::whereIn('status', ['agendar', 'tentativa', 'agendado'])->with([
+        return DataTables::of(ProdutorModel::whereIn('status', ['agendar', 'tentativa', 'agendado', 'implantacao'])->with([
             'estado:id,nome', 'cidade:id,nome', 'unidadesProdutivas:unidade_produtivas.id,socios,tags'
         ])->select("produtores.*"))
             ->editColumn('tags', function ($row) {
