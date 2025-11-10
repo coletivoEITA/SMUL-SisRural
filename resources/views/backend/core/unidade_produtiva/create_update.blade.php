@@ -119,6 +119,7 @@
             $("select[name='residuoOrganicos[]']").select2();
             $("select[name='esgotamentoSanitarios[]']").select2();
             $("select[name='destinacaoProducao[]']").select2();
+            $("select[name='tiposHorta[]']").select2();
             $("select[name='formaProcessamento[]']").select2();
 
             selectAutoComboSim('#fl_car', '#card-car');
@@ -132,6 +133,7 @@
             selectAutoYesNo("#solosCategoria input", '#card-outros-usos');
             
             multiSelectAuto("select[name='destinacaoProducao[]']", "Comercialização", ".card-comercializacao")
+            // multiSelectAuto("select[name='tiposHorta[]']", "Comercialização", ".card-tipo_horta")
             selectAutoYesNo("#fl_comprova_origem_comercializacao", '#card-forma-comprova-comerc');
 
             function submitProdutorForm(action) {
