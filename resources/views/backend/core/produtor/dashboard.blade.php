@@ -140,7 +140,7 @@
 
             @can('view menu checklist_unidade_produtiva')
                 @php
-                    $totalFormulariosAplicados = count($produtor->checklists);
+                  $totalFormulariosAplicados = $totalFormulariosAplicados->count();
                 @endphp
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     @cardaddview(['title'=>'Formulários Aplicados', 'total'=>$totalFormulariosAplicados, 'icon'=>'c-icon c-icon-lg cil-clipboard', 'labelAdd'=>'Aplicar Formulário', 'linkAdd'=>route('admin.core.checklist_unidade_produtiva.template', ['produtor'=>$produtor]), 'labelView'=>'Visualizar', 'linkView'=>route('admin.core.checklist_unidade_produtiva.index', ['produtor'=>$produtor]), 'permissionView'=>'view menu checklist_unidade_produtiva', 'permissionAdd'=>'create checklist_unidade_produtiva'])

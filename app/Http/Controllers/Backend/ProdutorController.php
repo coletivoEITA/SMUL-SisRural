@@ -78,7 +78,17 @@ class ProdutorController extends Controller
         $cadernosId = 'iframeCadernos';
         $cadernosSrc = route('admin.core.cadernos.cadernos_iframe', compact('produtor'));
 
-        return view('backend.core.produtor.dashboard', compact('produtor', 'cadernosId', 'cadernosSrc'));
+        $totalFormulariosAplicados = ChecklistUnidadeProdutivaModel::with(['checklist:id,nome', 'produtor:id,nome', 'unidade_produtiva:id,nome,socios', 'usuario:id,first_name,last_name', 'plano_acao:id,checklist_unidade_produtiva_id,nome,created_at'])
+          ->select("checklist_unidade_produtivas.*")
+          ->where('produtor_id', $produtor->id);
+        if(config('app.checklist_dados_adicionais_unidade_produtiva')){
+            $totalFormulariosAplicados->where('checklist_id', '!=', config('app.checklist_dados_adicionais_unidade_produtiva'));
+        }
+        if(config('app.checklist_dados_adicionais_produtora')){
+            $totalFormulariosAplicados->where('checklist_id', '!=', config('app.checklist_dados_adicionais_produtora'));
+        }
+
+        return view('backend.core.produtor.dashboard', compact('produtor', 'cadernosId', 'cadernosSrc', 'totalFormulariosAplicados'));
     }
 
     /**
