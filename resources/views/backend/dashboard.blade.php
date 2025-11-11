@@ -10,7 +10,7 @@
                 src="https://metabase.hortaemcasa.eita.coop.br/public/dashboard/301e8b4b-2e84-4c63-a2bf-274f937415ec"
                 frameborder="0"
                 width="100%"
-                height="930"
+                height="750"
                 allowtransparency
             ></iframe>
 
