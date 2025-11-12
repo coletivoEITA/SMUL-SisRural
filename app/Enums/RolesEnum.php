@@ -12,4 +12,5 @@ final class RolesEnum extends Enum implements LocalizedEnum
     const UnidOperacional = 'Unidade Operacional';
     const Tecnico = 'Técnico/a';
     const TecnicoExterno = 'Técnico/a Externo/a';
+    const TecnicoObservador = 'Técnico/a Observador/a';
 }

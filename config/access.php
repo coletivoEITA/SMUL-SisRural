@@ -32,6 +32,7 @@ return [
         'operational_unit_role' => 'Unidade Operacional',
         'technician_role' => 'Técnico/a',
         'ext_technician_role' => 'Técnico/a Externo/a',
+        'obs_technician_role' => 'Técnico/a Observador/a',
 
         /*
          * Whether or not new users need to be approved by an administrator before logging in
