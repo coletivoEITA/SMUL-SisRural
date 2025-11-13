@@ -17,6 +17,7 @@
 
                                 <div class="ml-2 my-auto">
                                     <div>{{$produtor->uid}} - {{$produtor->nome}}</div>
+                                    <div>Status: {{@App\Enums\ProdutorStatusEnum::toSelectArray()[$produtor->status]}}</div>
                                     <div>{{$produtor->telefone_1}}</div>
                                     <div>{{$produtor->telefone_2}}</div>
                                     <div>
