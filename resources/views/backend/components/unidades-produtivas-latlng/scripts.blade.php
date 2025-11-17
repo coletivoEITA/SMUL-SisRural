@@ -11,7 +11,7 @@
 
 <script>
     try {
-        var unidadesProdutivas = JSON.parse('{!!json_encode($produtor->unidadesProdutivas->toArray())!!}'.replace("'", "`"));
+        var unidadesProdutivas = JSON.parse(`{!!json_encode($produtor->unidadesProdutivas->toArray())!!}`);
         if (unidadesProdutivas.length > 0 ){
             var map = L.map('map-content').setView([unidadesProdutivas[0].lat, unidadesProdutivas[0].lng], 13);
 
