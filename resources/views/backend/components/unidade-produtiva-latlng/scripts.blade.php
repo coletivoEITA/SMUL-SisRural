@@ -20,7 +20,7 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            L.marker([unidadeProdutiva.lat, unidadeProdutiva.lng], { title: unidadeProdutiva.nome, draggable:false }).addTo(map);
+            L.marker([unidadeProdutiva.lat, unidadeProdutiva.lng], { title: unidadeProdutiva.nome.replace('(', '').replace(')', ''), draggable:false }).addTo(map);
         }
     } catch(e) {
 
