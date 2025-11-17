@@ -122,7 +122,13 @@ class UnidadeProdutivaForm extends Form
             ],
             'error' => __('validation.required', ['attribute' => 'Nome da Unidade Produtiva'])
         ])->add('carater', 'select', [
-            'choices' => ['Doméstica' => 'Doméstica', 'Institucional-Pública' => 'Institucional - Pública', 'Institucional-Privada' => 'Institucional - Privada', 'Comunitária' => 'Comunitária'],
+            'choices' => [
+              'Doméstica' => 'Doméstica',
+              'Institucional-Pública' => 'Institucional - Pública',
+              'Institucional-Privada' => 'Institucional - Privada',
+              'Comunitária' => 'Comunitária',
+              'Comunidade tradicional' => 'Comunidade tradicional'
+            ],
             'empty_value' => 'Selecione',
             'label' => 'Caráter',
         ])->add('cep', 'text', [
